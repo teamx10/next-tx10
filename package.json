@@ -11,7 +11,14 @@
   "dependencies": {
     "next": "16.0.3",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "@mui/material": "^6.1.0",
+    "@mui/icons-material": "^6.1.0",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "firebase": "^11.0.0",
+    "stripe": "^17.0.0",
+    "@stripe/stripe-js": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
