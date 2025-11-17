@@ -1,20 +1,19 @@
 export interface User {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
-  photoURL: string | null;
-  emailVerified: boolean;
   createdAt?: Date;
+  displayName: null | string;
+  email: null | string;
+  emailVerified: boolean;
+  photoURL: null | string;
+  uid: string;
   updatedAt?: Date;
 }
 
 export interface UserProfile {
-  uid: string;
-  email: string;
+  createdAt: Date;
   displayName?: string;
+  email: string;
   photoURL?: string;
   purchasedProducts?: string[];
-  createdAt: Date;
+  uid: string;
   updatedAt: Date;
 }
-

@@ -1,11 +1,12 @@
-import { Container, Box, Typography, CircularProgress } from '@mui/material';
+import { Box, CircularProgress, Container, Typography } from '@mui/material';
+
 import { generateMetadata } from '@/utils/seo';
 
 export const metadata = generateMetadata({
-  title: 'Processing',
   description: 'Processing authentication',
-  url: '/sign-in/process',
   noindex: true,
+  title: 'Processing',
+  url: '/sign-in/process'
 });
 
 export const dynamic = 'force-dynamic';
@@ -15,21 +16,20 @@ export default function AuthProcessPage() {
     <Container maxWidth="sm">
       <Box
         sx={{
+          alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '50vh',
           gap: 2,
+          justifyContent: 'center',
+          minHeight: '50vh'
         }}
       >
         <CircularProgress size={48} />
         <Typography variant="h6">Processing...</Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography color="text.secondary" variant="body2">
           Please wait while we process your request.
         </Typography>
       </Box>
     </Container>
   );
 }
-

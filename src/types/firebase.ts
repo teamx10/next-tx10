@@ -4,23 +4,23 @@ import { DocumentData, Timestamp } from 'firebase/firestore';
 export type { FirebaseUser };
 
 export interface FirestoreTimestamp {
-  seconds: number;
   nanoseconds: number;
+  seconds: number;
 }
 
-export function convertTimestamp(timestamp: Timestamp | FirestoreTimestamp): Date {
+export function convertTimestamp(timestamp: FirestoreTimestamp | Timestamp): Date {
   if (timestamp instanceof Timestamp) {
     return timestamp.toDate();
   }
   if ('seconds' in timestamp) {
     return new Date(timestamp.seconds * 1000);
   }
+
   return new Date();
 }
 
 export interface FirestoreDocument extends DocumentData {
+  createdAt?: FirestoreTimestamp | Timestamp;
   id: string;
-  createdAt?: Timestamp | FirestoreTimestamp;
-  updatedAt?: Timestamp | FirestoreTimestamp;
+  updatedAt?: FirestoreTimestamp | Timestamp;
 }
-

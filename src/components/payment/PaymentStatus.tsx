@@ -1,43 +1,44 @@
 'use client';
 
-import React from 'react';
-import { Box, Typography, Alert, Button } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
-import { PaymentStatus as PaymentStatusType } from '@/types/payment';
+import { Alert, Box, Button, Typography } from '@mui/material';
 import Link from 'next/link';
+import React from 'react';
+
 import { ROUTES } from '@/constants/routes';
+import { PaymentStatus as PaymentStatusType } from '@/types/payment';
 
 interface PaymentStatusProps {
-  status: PaymentStatusType;
   message?: string;
+  status: PaymentStatusType;
 }
 
-export function PaymentStatus({ status, message }: PaymentStatusProps) {
+export function PaymentStatus({ message, status }: PaymentStatusProps) {
   const isSuccess = status === 'succeeded';
   const isFailed = status === 'failed' || status === 'canceled';
 
   return (
     <Box
       sx={{
+        alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        gap: 3,
         justifyContent: 'center',
         minHeight: '50vh',
-        gap: 3,
-        textAlign: 'center',
+        textAlign: 'center'
       }}
     >
-      {isSuccess && <CheckCircleIcon sx={{ fontSize: 64, color: 'success.main' }} />}
-      {isFailed && <ErrorIcon sx={{ fontSize: 64, color: 'error.main' }} />}
+      {isSuccess && <CheckCircleIcon sx={{ color: 'success.main', fontSize: 64 }} />}
+      {isFailed && <ErrorIcon sx={{ color: 'error.main', fontSize: 64 }} />}
 
       <Typography variant="h4">
         {isSuccess ? 'Payment Successful!' : isFailed ? 'Payment Failed' : 'Processing Payment'}
       </Typography>
 
       {message && (
-        <Alert severity={isSuccess ? 'success' : isFailed ? 'error' : 'info'} sx={{ width: '100%', maxWidth: 500 }}>
+        <Alert severity={isSuccess ? 'success' : isFailed ? 'error' : 'info'} sx={{ maxWidth: 500, width: '100%' }}>
           {message}
         </Alert>
       )}
@@ -66,4 +67,3 @@ export function PaymentStatus({ status, message }: PaymentStatusProps) {
     </Box>
   );
 }
-

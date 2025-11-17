@@ -1,26 +1,19 @@
 import { Metadata } from 'next';
+
 import { Product } from '@/types/product';
 
 export interface SEOConfig {
-  title: string;
   description: string;
-  keywords?: string[];
   image?: string;
-  url?: string;
-  type?: 'website' | 'article' | 'product';
+  keywords?: string[];
   noindex?: boolean;
+  title: string;
+  type?: 'article' | 'product' | 'website';
+  url?: string;
 }
 
 export function generateMetadata(config: SEOConfig): Metadata {
-  const {
-    title,
-    description,
-    keywords = [],
-    image,
-    url,
-    type = 'website',
-    noindex = false,
-  } = config;
+  const { description, image, keywords = [], noindex = false, title, type = 'website', url } = config;
 
   const fullTitle = title.includes('TeamX10') ? title : `${title} | TeamX10`;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://teamx10.com';
@@ -28,44 +21,44 @@ export function generateMetadata(config: SEOConfig): Metadata {
   const ogImage = image || `${siteUrl}/images/tx10-logo-256.png`;
 
   return {
-    title: fullTitle,
+    alternates: {
+      canonical: fullUrl
+    },
     description,
     keywords: keywords.length > 0 ? keywords.join(', ') : undefined,
-    robots: noindex ? 'noindex, nofollow' : 'index, follow',
     openGraph: {
-      title: fullTitle,
       description,
-      url: fullUrl,
-      siteName: 'TeamX10',
       images: [
         {
-          url: ogImage,
-          width: 1200,
-          height: 630,
           alt: title,
-        },
+          height: 630,
+          url: ogImage,
+          width: 1200
+        }
       ],
+      siteName: 'TeamX10',
+      title: fullTitle,
       type: type === 'product' ? 'website' : type,
+      url: fullUrl
     },
+    robots: noindex ? 'noindex, nofollow' : 'index, follow',
+    title: fullTitle,
     twitter: {
       card: 'summary_large_image',
-      title: fullTitle,
       description,
       images: [ogImage],
-    },
-    alternates: {
-      canonical: fullUrl,
-    },
+      title: fullTitle
+    }
   };
 }
 
 export function generateProductMetadata(product: Product): Metadata {
   return generateMetadata({
-    title: product.name,
     description: product.description,
     keywords: ['poker', product.category, 'training', 'guide'],
+    title: product.name,
     type: 'product',
-    url: `/products/${product.slug}`,
+    url: `/products/${product.slug}`
   });
 }
 
@@ -73,17 +66,14 @@ export function generateStructuredData(product: Product) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: product.name,
     description: product.description,
     image: product.imageUrl,
+    name: product.name,
     offers: {
       '@type': 'Offer',
+      availability: product.isActive ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       price: product.price,
-      priceCurrency: product.currency,
-      availability: product.isActive
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock',
-    },
+      priceCurrency: product.currency
+    }
   };
 }
-

@@ -1,14 +1,15 @@
-import { Container, Box, Typography, Button, Alert } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { generateMetadata } from '@/utils/seo';
+import { Alert, Box, Button, Container, Typography } from '@mui/material';
 import Link from 'next/link';
+
 import { ROUTES } from '@/constants/routes';
+import { generateMetadata } from '@/utils/seo';
 
 export const metadata = generateMetadata({
-  title: 'Success',
   description: 'Authentication successful',
-  url: '/sign-in/success',
   noindex: true,
+  title: 'Success',
+  url: '/sign-in/success'
 });
 
 export const dynamic = 'force-dynamic';
@@ -18,16 +19,16 @@ export default function AuthSuccessPage() {
     <Container maxWidth="sm">
       <Box
         sx={{
+          alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          gap: 3,
           justifyContent: 'center',
           minHeight: '50vh',
-          gap: 3,
-          textAlign: 'center',
+          textAlign: 'center'
         }}
       >
-        <CheckCircleIcon sx={{ fontSize: 64, color: 'success.main' }} />
+        <CheckCircleIcon sx={{ color: 'success.main', fontSize: 64 }} />
         <Typography variant="h4">Success!</Typography>
         <Alert severity="success" sx={{ width: '100%' }}>
           Your account has been successfully authenticated.
@@ -44,4 +45,3 @@ export default function AuthSuccessPage() {
     </Container>
   );
 }
-

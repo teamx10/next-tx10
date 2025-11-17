@@ -1,5 +1,6 @@
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   return emailRegex.test(email);
 }
 
@@ -7,30 +8,35 @@ export function isValidPassword(password: string, minLength: number = 6): boolea
   return password.length >= minLength;
 }
 
-export function validateEmail(email: string): { isValid: boolean; error?: string } {
+export function validateEmail(email: string): { error?: string; isValid: boolean } {
   if (!email) {
-    return { isValid: false, error: 'Email is required' };
+    return { error: 'Email is required', isValid: false };
   }
   if (!isValidEmail(email)) {
-    return { isValid: false, error: 'Please enter a valid email address' };
+    return { error: 'Please enter a valid email address', isValid: false };
   }
+
   return { isValid: true };
 }
 
-export function validatePassword(password: string, minLength: number = 6): { isValid: boolean; error?: string } {
+export function validatePassword(password: string, minLength: number = 6): { error?: string; isValid: boolean } {
   if (!password) {
-    return { isValid: false, error: 'Password is required' };
+    return { error: 'Password is required', isValid: false };
   }
   if (!isValidPassword(password, minLength)) {
-    return { isValid: false, error: `Password must be at least ${minLength} characters` };
+    return { error: `Password must be at least ${minLength} characters`, isValid: false };
   }
+
   return { isValid: true };
 }
 
-export function validateConfirmPassword(password: string, confirmPassword: string): { isValid: boolean; error?: string } {
+export function validateConfirmPassword(
+  password: string,
+  confirmPassword: string
+): { error?: string; isValid: boolean } {
   if (password !== confirmPassword) {
-    return { isValid: false, error: 'Passwords do not match' };
+    return { error: 'Passwords do not match', isValid: false };
   }
+
   return { isValid: true };
 }
-

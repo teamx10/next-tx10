@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
-import { Container, Box, Typography, CircularProgress } from '@mui/material';
-import { signOut } from '@/lib/firebase/auth';
+import { Box, CircularProgress, Container, Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
 import { ROUTES } from '@/constants/routes';
+import { signOut } from '@/lib/firebase/auth';
 
 export default function SignOutPage() {
   const router = useRouter();
@@ -27,12 +28,12 @@ export default function SignOutPage() {
     <Container maxWidth="sm">
       <Box
         sx={{
+          alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '50vh',
           gap: 2,
+          justifyContent: 'center',
+          minHeight: '50vh'
         }}
       >
         <CircularProgress />
@@ -41,4 +42,3 @@ export default function SignOutPage() {
     </Container>
   );
 }
-

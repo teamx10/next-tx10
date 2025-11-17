@@ -1,35 +1,41 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { Container, Box, Typography, CircularProgress } from '@mui/material';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { getProductById } from '@/constants/products';
-import { Product } from '@/types/product';
+import { Box, CircularProgress, Container, Typography } from '@mui/material';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 import { PaymentForm } from '@/components/payment/PaymentForm';
+import { getProductById } from '@/constants/products';
 import { ROUTES } from '@/constants/routes';
+import { Product } from '@/types/product';
 
 export default function PaymentProcessPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<null | Product>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const productId = searchParams.get('productId');
-    
+
     if (!productId) {
       router.push(ROUTES.PAYMENT.SELECT);
+
       return;
     }
 
     const foundProduct = getProductById(productId);
     if (!foundProduct) {
       router.push(ROUTES.PAYMENT.SELECT);
+
       return;
     }
 
-    setProduct(foundProduct);
-    setLoading(false);
+    // Use setTimeout to avoid synchronous setState in effect
+    setTimeout(() => {
+      setProduct(foundProduct);
+      setLoading(false);
+    }, 0);
   }, [searchParams, router]);
 
   if (loading) {
@@ -37,12 +43,12 @@ export default function PaymentProcessPage() {
       <Container maxWidth="md">
         <Box
           sx={{
+            alignItems: 'center',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '50vh',
             gap: 2,
+            justifyContent: 'center',
+            minHeight: '50vh'
           }}
         >
           <CircularProgress />
@@ -58,7 +64,7 @@ export default function PaymentProcessPage() {
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
+      <Typography component="h1" variant="h4" gutterBottom>
         Complete Your Purchase
       </Typography>
       <Box sx={{ mt: 4 }}>
@@ -67,4 +73,3 @@ export default function PaymentProcessPage() {
     </Container>
   );
 }
-

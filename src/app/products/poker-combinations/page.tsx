@@ -1,12 +1,14 @@
 import { Container } from '@mui/material';
+import { notFound } from 'next/navigation';
+
 import { ProductDetail } from '@/components/products/ProductDetail';
 import { getProductBySlug } from '@/constants/products';
 import { generateProductMetadata } from '@/utils/seo';
-import { notFound } from 'next/navigation';
 
-export async function generateMetadata() {
+export function generateMetadata() {
   const product = getProductBySlug('poker-combinations');
   if (!product) return {};
+
   return generateProductMetadata(product);
 }
 
@@ -23,4 +25,3 @@ export default function PokerCombinationsPage() {
     </Container>
   );
 }
-

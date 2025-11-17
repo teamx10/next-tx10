@@ -1,13 +1,12 @@
-import { CheckoutSessionData } from '@/types/payment';
-import { Product } from '@/types/product';
+import { CheckoutSessionData, PaymentSession } from '@/types/payment';
 
-export async function createCheckoutSession(data: CheckoutSessionData): Promise<{ sessionId: string; url: string }> {
+export async function createCheckoutSession(data: CheckoutSessionData): Promise<PaymentSession> {
   const response = await fetch('/api/stripe/create-checkout-session', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST'
   });
 
   if (!response.ok) {
@@ -18,7 +17,7 @@ export async function createCheckoutSession(data: CheckoutSessionData): Promise<
   return response.json();
 }
 
-export async function getCheckoutSession(sessionId: string): Promise<any> {
+export async function getCheckoutSession(sessionId: string): Promise<unknown> {
   const response = await fetch(`/api/stripe/checkout-session?sessionId=${sessionId}`);
 
   if (!response.ok) {
@@ -31,14 +30,13 @@ export async function getCheckoutSession(sessionId: string): Promise<any> {
 
 // API route handlers (to be created in app/api)
 export interface CreateCheckoutSessionRequest {
-  productId: string;
-  userId: string;
-  successUrl: string;
   cancelUrl: string;
+  productId: string;
+  successUrl: string;
+  userId: string;
 }
 
 export interface CreateCheckoutSessionResponse {
   sessionId: string;
   url: string;
 }
-

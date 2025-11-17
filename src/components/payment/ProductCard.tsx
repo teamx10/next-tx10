@@ -1,27 +1,20 @@
 'use client';
 
+import { Box, Button, Card, CardActions, CardContent, Chip, Typography } from '@mui/material';
+import Link from 'next/link';
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-  Box,
-  Chip,
-} from '@mui/material';
+
+import { ROUTES } from '@/constants/routes';
 import { Product } from '@/types/product';
 import { formatCurrency } from '@/utils/format';
-import { ROUTES } from '@/constants/routes';
-import Link from 'next/link';
 
 interface ProductCardProps {
-  product: Product;
   onSelect?: (product: Product) => void;
+  product: Product;
   showSelectButton?: boolean;
 }
 
-export function ProductCard({ product, onSelect, showSelectButton = true }: ProductCardProps) {
+export function ProductCard({ onSelect, product, showSelectButton = true }: ProductCardProps) {
   const handleSelect = () => {
     if (onSelect) {
       onSelect(product);
@@ -31,64 +24,49 @@ export function ProductCard({ product, onSelect, showSelectButton = true }: Prod
   return (
     <Card
       sx={{
-        height: '100%',
+        '&:hover': {
+          boxShadow: 4,
+          transform: 'translateY(-4px)'
+        },
         display: 'flex',
         flexDirection: 'column',
-        transition: 'transform 0.2s, box-shadow 0.2s',
-        '&:hover': {
-          transform: 'translateY(-4px)',
-          boxShadow: 4,
-        },
+        height: '100%',
+        transition: 'transform 0.2s, box-shadow 0.2s'
       }}
     >
       <CardContent sx={{ flexGrow: 1 }}>
         <Box sx={{ mb: 2 }}>
-          <Typography variant="h5" component="h3" gutterBottom>
+          <Typography component="h3" variant="h5" gutterBottom>
             {product.name}
           </Typography>
-          <Chip
-            label={product.category.replace('-', ' ')}
-            size="small"
-            color="primary"
-            sx={{ mb: 1 }}
-          />
+          <Chip color="primary" label={product.category.replace('-', ' ')} size="small" sx={{ mb: 1 }} />
         </Box>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+        <Typography color="text.secondary" sx={{ mb: 2 }} variant="body2">
           {product.description}
         </Typography>
         {product.features && product.features.length > 0 && (
           <Box sx={{ mb: 2 }}>
-            <Typography variant="body2" fontWeight="bold" sx={{ mb: 0.5 }}>
+            <Typography fontWeight="bold" sx={{ mb: 0.5 }} variant="body2">
               Features:
             </Typography>
-            <Typography variant="body2" color="text.secondary" component="ul" sx={{ pl: 2, m: 0 }}>
+            <Typography color="text.secondary" component="ul" sx={{ m: 0, pl: 2 }} variant="body2">
               {product.features.slice(0, 3).map((feature, index) => (
                 <li key={index}>{feature}</li>
               ))}
             </Typography>
           </Box>
         )}
-        <Typography variant="h5" color="primary" fontWeight="bold">
+        <Typography color="primary" fontWeight="bold" variant="h5">
           {formatCurrency(product.price, product.currency)}
         </Typography>
       </CardContent>
       <CardActions sx={{ p: 2, pt: 0 }}>
         {showSelectButton ? (
-          <Button
-            variant="contained"
-            fullWidth
-            onClick={handleSelect}
-            disabled={!product.isActive}
-          >
+          <Button disabled={!product.isActive} onClick={handleSelect} variant="contained" fullWidth>
             {product.isActive ? 'Select Product' : 'Unavailable'}
           </Button>
         ) : (
-          <Button
-            component={Link}
-            href={`${ROUTES.PRODUCTS}/${product.slug}`}
-            variant="outlined"
-            fullWidth
-          >
+          <Button component={Link} href={`${ROUTES.PRODUCTS}/${product.slug}`} variant="outlined" fullWidth>
             View Details
           </Button>
         )}
@@ -96,4 +74,3 @@ export function ProductCard({ product, onSelect, showSelectButton = true }: Prod
     </Card>
   );
 }
-

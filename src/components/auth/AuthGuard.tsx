@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { Box, CircularProgress, Typography, Button } from '@mui/material';
-import { useAuth } from '@/hooks/useAuth';
-import { useRouter } from 'next/navigation';
-import { ROUTES } from '@/constants/routes';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
+
+import { ROUTES } from '@/constants/routes';
+import { useAuth } from '@/hooks/useAuth';
 
 interface AuthGuardProps {
   children: React.ReactNode;
@@ -26,16 +27,16 @@ export function AuthGuard({ children, requireAuth = true }: AuthGuardProps) {
     return (
       <Box
         sx={{
+          alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '50vh',
           gap: 2,
+          justifyContent: 'center',
+          minHeight: '50vh'
         }}
       >
         <CircularProgress />
-        <Typography variant="body2" color="text.secondary">
+        <Typography color="text.secondary" variant="body2">
           Loading...
         </Typography>
       </Box>
@@ -46,18 +47,18 @@ export function AuthGuard({ children, requireAuth = true }: AuthGuardProps) {
     return (
       <Box
         sx={{
+          alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '50vh',
           gap: 2,
+          justifyContent: 'center',
+          minHeight: '50vh'
         }}
       >
         <Typography variant="h5" gutterBottom>
           Authentication Required
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+        <Typography color="text.secondary" sx={{ mb: 2 }} variant="body2">
           You must be signed in to access this page.
         </Typography>
         <Button component={Link} href={ROUTES.AUTH.SIGN_IN} variant="contained">
@@ -69,4 +70,3 @@ export function AuthGuard({ children, requireAuth = true }: AuthGuardProps) {
 
   return <>{children}</>;
 }
-

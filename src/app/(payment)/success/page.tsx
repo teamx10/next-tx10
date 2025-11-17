@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 import { PaymentStatus } from '@/components/payment/PaymentStatus';
-import { PaymentStatus as PaymentStatusType } from '@/types/payment';
 import { MESSAGES } from '@/constants/messages';
+import { PaymentStatus as PaymentStatusType } from '@/types/payment';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,15 +20,17 @@ export default function PaymentSuccessPage() {
     // TODO: Verify payment with Stripe session
     // For now, just show success
     if (sessionId) {
-      setStatus('succeeded');
-      setMessage(MESSAGES.PAYMENT.SUCCESS);
+      // Use setTimeout to avoid synchronous setState in effect
+      setTimeout(() => {
+        setStatus('succeeded');
+        setMessage(MESSAGES.PAYMENT.SUCCESS);
+      }, 0);
     }
   }, [searchParams]);
 
   return (
     <Container maxWidth="md">
-      <PaymentStatus status={status} message={message} />
+      <PaymentStatus message={message} status={status} />
     </Container>
   );
 }
-

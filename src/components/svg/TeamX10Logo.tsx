@@ -1,14 +1,9 @@
 import { FC } from 'react';
-import {SvgIconProps} from "@/components/svg/SvgIconProps";
 
-export const TeamX10Logo: FC<SvgIconProps> = (props) => (
-  <svg
-    fill="currentColor"
-    height={22}
-    width={120}
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+import { SvgIconProps } from '@/components/svg/SvgIconProps';
+
+export const TeamX10Logo: FC<SvgIconProps> = props => (
+  <svg fill="currentColor" height={22} width={120} xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       clipRule="evenodd"
       d="M10.548 21.096c5.826 0 10.548-4.722 10.548-10.548C21.096 4.723 16.374 0 10.548 0 4.723 0 0 4.723 0 10.548c0 5.826 4.723 10.548 10.548 10.548Zm0-.824c5.37 0 9.724-4.353 9.724-9.724 0-5.37-4.353-9.724-9.724-9.724-5.37 0-9.724 4.354-9.724 9.724s4.354 9.724 9.724 9.724Z"

@@ -1,33 +1,37 @@
 import type { Metadata } from 'next';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { theme } from '@/lib/mui/theme';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+
 import { Box } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
+import { theme } from '@/lib/mui/theme';
+
 import './globals.css';
 import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
 
 const seoConfig = {
-  title: 'TeamX10 - Poker Training & Games',
-  description: 'Master poker with our comprehensive guides, training programs, and games. Learn poker strategies, combinations, and improve your skills.',
+  description:
+    'Master poker with our comprehensive guides, training programs, and games. Learn poker strategies, combinations, and improve your skills.',
   keywords: ['poker', 'poker training', 'poker guide', 'poker strategy', 'poker combinations', 'solitaire'],
-  url: '/',
+  title: 'TeamX10 - Poker Training & Games',
+  url: '/'
 };
 
 export const metadata: Metadata = generateSEOMetadata(seoConfig);
 export const dynamic = 'force-dynamic';
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <link href="/favicon.ico" rel="icon" />
       </head>
       <body>
         <ThemeProvider theme={theme}>
@@ -36,7 +40,7 @@ export default function RootLayout({
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              minHeight: '100vh',
+              minHeight: '100vh'
             }}
           >
             <Header />

@@ -1,25 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import {
-  getUserProfile,
-  getProduct,
-  getProducts,
-  getUserPayments,
-  createUserProfile,
-  updateUserProfile,
-  createPayment,
-  updatePayment,
-} from '@/lib/firebase/firestore';
-import { FirestoreDocument } from '@/types/firebase';
-import { UserProfile } from '@/types/user';
-import { Product } from '@/types/product';
-import { Payment } from '@/types/payment';
-import { convertTimestamp } from '@/types/firebase';
 import { Timestamp } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 
-export function useUserProfile(userId: string | null) {
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+import { getProduct, getProducts, getUserPayments, getUserProfile } from '@/lib/firebase/firestore';
+import { convertTimestamp } from '@/types/firebase';
+import { Payment } from '@/types/payment';
+import { Product } from '@/types/product';
+import { UserProfile } from '@/types/user';
+
+export function useUserProfile(userId: null | string) {
+  const [profile, setProfile] = useState<null | UserProfile>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -27,6 +18,7 @@ export function useUserProfile(userId: string | null) {
     if (!userId) {
       setProfile(null);
       setLoading(false);
+
       return;
     }
 
@@ -36,20 +28,20 @@ export function useUserProfile(userId: string | null) {
       try {
         setLoading(true);
         const data = await getUserProfile(userId as string);
-        
+
         if (cancelled) return;
 
         if (data) {
-          const profile: UserProfile = {
-            uid: data.id,
-            email: data.email || '',
+          const userProfile: UserProfile = {
+            createdAt: data.createdAt ? convertTimestamp(data.createdAt as Timestamp) : new Date(),
             displayName: data.displayName,
+            email: data.email || '',
             photoURL: data.photoURL,
             purchasedProducts: data.purchasedProducts || [],
-            createdAt: data.createdAt ? convertTimestamp(data.createdAt as Timestamp) : new Date(),
-            updatedAt: data.updatedAt ? convertTimestamp(data.updatedAt as Timestamp) : new Date(),
+            uid: data.id,
+            updatedAt: data.updatedAt ? convertTimestamp(data.updatedAt as Timestamp) : new Date()
           };
-          setProfile(profile);
+          setProfile(userProfile);
         } else {
           setProfile(null);
         }
@@ -72,11 +64,11 @@ export function useUserProfile(userId: string | null) {
     };
   }, [userId]);
 
-  return { profile, loading, error };
+  return { error, loading, profile };
 }
 
-export function useProduct(productId: string | null) {
-  const [product, setProduct] = useState<Product | null>(null);
+export function useProduct(productId: null | string) {
+  const [product, setProduct] = useState<null | Product>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -84,6 +76,7 @@ export function useProduct(productId: string | null) {
     if (!productId) {
       setProduct(null);
       setLoading(false);
+
       return;
     }
 
@@ -93,27 +86,27 @@ export function useProduct(productId: string | null) {
       try {
         setLoading(true);
         const data = await getProduct(productId as string);
-        
+
         if (cancelled) return;
 
         if (data) {
-          const product: Product = {
-            id: data.id,
-            name: data.name,
-            slug: data.slug,
-            description: data.description,
-            longDescription: data.longDescription,
-            price: data.price,
-            currency: data.currency,
-            imageUrl: data.imageUrl,
+          const productData: Product = {
             category: data.category,
-            features: data.features,
-            stripePriceId: data.stripePriceId,
-            isActive: data.isActive,
             createdAt: data.createdAt ? convertTimestamp(data.createdAt as Timestamp) : new Date(),
-            updatedAt: data.updatedAt ? convertTimestamp(data.updatedAt as Timestamp) : new Date(),
+            currency: data.currency,
+            description: data.description,
+            features: data.features,
+            id: data.id,
+            imageUrl: data.imageUrl,
+            isActive: data.isActive,
+            longDescription: data.longDescription,
+            name: data.name,
+            price: data.price,
+            slug: data.slug,
+            stripePriceId: data.stripePriceId,
+            updatedAt: data.updatedAt ? convertTimestamp(data.updatedAt as Timestamp) : new Date()
           };
-          setProduct(product);
+          setProduct(productData);
         } else {
           setProduct(null);
         }
@@ -136,7 +129,7 @@ export function useProduct(productId: string | null) {
     };
   }, [productId]);
 
-  return { product, loading, error };
+  return { error, loading, product };
 }
 
 export function useProducts() {
@@ -151,26 +144,26 @@ export function useProducts() {
       try {
         setLoading(true);
         const data = await getProducts();
-        
+
         if (cancelled) return;
 
-        const productsList: Product[] = data.map((item) => ({
-          id: item.id,
-          name: item.name,
-          slug: item.slug,
-          description: item.description,
-          longDescription: item.longDescription,
-          price: item.price,
-          currency: item.currency,
-          imageUrl: item.imageUrl,
+        const productsList: Product[] = data.map(item => ({
           category: item.category,
-          features: item.features,
-          stripePriceId: item.stripePriceId,
-          isActive: item.isActive,
           createdAt: item.createdAt ? convertTimestamp(item.createdAt as Timestamp) : new Date(),
-          updatedAt: item.updatedAt ? convertTimestamp(item.updatedAt as Timestamp) : new Date(),
+          currency: item.currency,
+          description: item.description,
+          features: item.features,
+          id: item.id,
+          imageUrl: item.imageUrl,
+          isActive: item.isActive,
+          longDescription: item.longDescription,
+          name: item.name,
+          price: item.price,
+          slug: item.slug,
+          stripePriceId: item.stripePriceId,
+          updatedAt: item.updatedAt ? convertTimestamp(item.updatedAt as Timestamp) : new Date()
         }));
-        
+
         setProducts(productsList);
         setError(null);
       } catch (err) {
@@ -191,10 +184,10 @@ export function useProducts() {
     };
   }, []);
 
-  return { products, loading, error };
+  return { error, loading, products };
 }
 
-export function useUserPayments(userId: string | null) {
+export function useUserPayments(userId: null | string) {
   const [payments, setPayments] = useState<Payment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -203,6 +196,7 @@ export function useUserPayments(userId: string | null) {
     if (!userId) {
       setPayments([]);
       setLoading(false);
+
       return;
     }
 
@@ -212,22 +206,22 @@ export function useUserPayments(userId: string | null) {
       try {
         setLoading(true);
         const data = await getUserPayments(userId as string);
-        
+
         if (cancelled) return;
 
-        const paymentsList: Payment[] = data.map((item) => ({
-          id: item.id,
-          userId: item.userId,
-          productId: item.productId,
+        const paymentsList: Payment[] = data.map(item => ({
           amount: item.amount,
-          currency: item.currency,
-          status: item.status,
-          stripeSessionId: item.stripeSessionId,
-          stripePaymentIntentId: item.stripePaymentIntentId,
           createdAt: item.createdAt ? convertTimestamp(item.createdAt as Timestamp) : new Date(),
+          currency: item.currency,
+          id: item.id,
+          productId: item.productId,
+          status: item.status,
+          stripePaymentIntentId: item.stripePaymentIntentId,
+          stripeSessionId: item.stripeSessionId,
           updatedAt: item.updatedAt ? convertTimestamp(item.updatedAt as Timestamp) : new Date(),
+          userId: item.userId
         }));
-        
+
         setPayments(paymentsList);
         setError(null);
       } catch (err) {
@@ -248,6 +242,5 @@ export function useUserPayments(userId: string | null) {
     };
   }, [userId]);
 
-  return { payments, loading, error };
+  return { error, loading, payments };
 }
-

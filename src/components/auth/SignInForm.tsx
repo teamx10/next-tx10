@@ -1,27 +1,20 @@
 'use client';
 
+import { Alert, Box, Button, Link as MuiLink, Stack, TextField, Typography } from '@mui/material';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-  Link as MuiLink,
-  Stack,
-} from '@mui/material';
+
+import { MESSAGES } from '@/constants/messages';
+import { ROUTES } from '@/constants/routes';
 import { signIn } from '@/lib/firebase/auth';
 import { validateEmail, validatePassword } from '@/utils/validation';
-import { MESSAGES } from '@/constants/messages';
-import Link from 'next/link';
-import { ROUTES } from '@/constants/routes';
-import { useRouter } from 'next/navigation';
 
 export function SignInForm() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
+  const [errors, setErrors] = useState<{ email?: string; general?: string; password?: string }>({});
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,8 +28,9 @@ export function SignInForm() {
     if (!emailValidation.isValid || !passwordValidation.isValid) {
       setErrors({
         email: emailValidation.error,
-        password: passwordValidation.error,
+        password: passwordValidation.error
       });
+
       return;
     }
 
@@ -45,9 +39,10 @@ export function SignInForm() {
     try {
       await signIn(email, password);
       router.push(ROUTES.AUTH.SUCCESS);
-    } catch (error: any) {
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : MESSAGES.AUTH.SIGN_IN_FAILED;
       setErrors({
-        general: error.message || MESSAGES.AUTH.SIGN_IN_FAILED,
+        general: errorMessage
       });
     } finally {
       setLoading(false);
@@ -55,11 +50,11 @@ export function SignInForm() {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mt: 4, mx: 'auto' }}>
       <Typography variant="h4" gutterBottom>
         Sign In
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+      <Typography color="text.secondary" sx={{ mb: 3 }} variant="body2">
         Sign in to your account to access your products
       </Typography>
 
@@ -71,51 +66,39 @@ export function SignInForm() {
 
       <Stack spacing={2}>
         <TextField
-          label="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
           error={!!errors.email}
           helperText={errors.email}
-          required
+          label="Email"
+          onChange={e => setEmail(e.target.value)}
+          type="email"
+          value={email}
           fullWidth
-          autoComplete="email"
+          required
         />
 
         <TextField
-          label="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="current-password"
           error={!!errors.password}
           helperText={errors.password}
-          required
+          label="Password"
+          onChange={e => setPassword(e.target.value)}
+          type="password"
+          value={password}
           fullWidth
-          autoComplete="current-password"
+          required
         />
 
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          size="large"
-          disabled={loading}
-        >
+        <Button disabled={loading} size="large" type="submit" variant="contained" fullWidth>
           {loading ? 'Signing in...' : 'Sign In'}
         </Button>
 
-        <Box sx={{ textAlign: 'center', mt: 2 }}>
-          <MuiLink
-            component={Link}
-            href={ROUTES.AUTH.SIGN_UP}
-            variant="body2"
-            underline="hover"
-          >
-            Don't have an account? Sign up
+        <Box sx={{ mt: 2, textAlign: 'center' }}>
+          <MuiLink component={Link} href={ROUTES.AUTH.SIGN_UP} underline="hover" variant="body2">
+            Don&apos;t have an account? Sign up
           </MuiLink>
         </Box>
       </Stack>
     </Box>
   );
 }
-

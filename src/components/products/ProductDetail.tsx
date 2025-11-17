@@ -1,23 +1,11 @@
 'use client';
 
+import { Box, Card, CardContent, Chip, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Chip,
-  Divider,
-} from '@mui/material';
+
+import { PaymentForm } from '@/components/payment/PaymentForm';
 import { Product } from '@/types/product';
 import { formatCurrency } from '@/utils/format';
-import { ROUTES } from '@/constants/routes';
-import Link from 'next/link';
-import { PaymentForm } from '@/components/payment/PaymentForm';
 
 interface ProductDetailProps {
   product: Product;
@@ -27,22 +15,18 @@ export function ProductDetail({ product }: ProductDetailProps) {
   return (
     <Box>
       <Box sx={{ mb: 4 }}>
-        <Chip
-          label={product.category.replace('-', ' ')}
-          color="primary"
-          sx={{ mb: 2 }}
-        />
-        <Typography variant="h3" component="h1" gutterBottom>
+        <Chip color="primary" label={product.category.replace('-', ' ')} sx={{ mb: 2 }} />
+        <Typography component="h1" variant="h3" gutterBottom>
           {product.name}
         </Typography>
-        <Typography variant="h5" color="primary" fontWeight="bold" sx={{ mb: 2 }}>
+        <Typography color="primary" fontWeight="bold" sx={{ mb: 2 }} variant="h5">
           {formatCurrency(product.price, product.currency)}
         </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+        <Typography color="text.secondary" sx={{ mb: 3 }} variant="body1">
           {product.description}
         </Typography>
         {product.longDescription && (
-          <Typography variant="body1" sx={{ mb: 3 }}>
+          <Typography sx={{ mb: 3 }} variant="body1">
             {product.longDescription}
           </Typography>
         )}
@@ -76,4 +60,3 @@ export function ProductDetail({ product }: ProductDetailProps) {
     </Box>
   );
 }
-

@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
+import React from 'react';
 
 interface LoadingSpinnerProps {
   message?: string;
@@ -12,21 +12,20 @@ export function LoadingSpinner({ message, size = 40 }: LoadingSpinnerProps) {
   return (
     <Box
       sx={{
+        alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
         gap: 2,
-        py: 4,
+        justifyContent: 'center',
+        py: 4
       }}
     >
       <CircularProgress size={size} />
       {message && (
-        <Typography variant="body2" color="text.secondary">
+        <Typography color="text.secondary" variant="body2">
           {message}
         </Typography>
       )}
     </Box>
   );
 }
-

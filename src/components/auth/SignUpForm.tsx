@@ -1,21 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-  Link as MuiLink,
-  Stack,
-} from '@mui/material';
-import { signUp } from '@/lib/firebase/auth';
-import { validateEmail, validatePassword, validateConfirmPassword } from '@/utils/validation';
-import { MESSAGES } from '@/constants/messages';
+import { Alert, Box, Button, Link as MuiLink, Stack, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
-import { ROUTES } from '@/constants/routes';
 import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+
+import { MESSAGES } from '@/constants/messages';
+import { ROUTES } from '@/constants/routes';
+import { signUp } from '@/lib/firebase/auth';
+import { validateConfirmPassword, validateEmail, validatePassword } from '@/utils/validation';
 
 export function SignUpForm() {
   const router = useRouter();
@@ -24,10 +17,10 @@ export function SignUpForm() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [errors, setErrors] = useState<{
-    email?: string;
-    password?: string;
     confirmPassword?: string;
+    email?: string;
     general?: string;
+    password?: string;
   }>({});
   const [loading, setLoading] = useState(false);
 
@@ -42,10 +35,11 @@ export function SignUpForm() {
 
     if (!emailValidation.isValid || !passwordValidation.isValid || !confirmPasswordValidation.isValid) {
       setErrors({
-        email: emailValidation.error,
-        password: passwordValidation.error,
         confirmPassword: confirmPasswordValidation.error,
+        email: emailValidation.error,
+        password: passwordValidation.error
       });
+
       return;
     }
 
@@ -54,9 +48,10 @@ export function SignUpForm() {
     try {
       await signUp(email, password, displayName || undefined);
       router.push(ROUTES.AUTH.SUCCESS);
-    } catch (error: any) {
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : MESSAGES.AUTH.SIGN_UP_FAILED;
       setErrors({
-        general: error.message || MESSAGES.AUTH.SIGN_UP_FAILED,
+        general: errorMessage
       });
     } finally {
       setLoading(false);
@@ -64,11 +59,11 @@ export function SignUpForm() {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mt: 4, mx: 'auto' }}>
       <Typography variant="h4" gutterBottom>
         Sign Up
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+      <Typography color="text.secondary" sx={{ mb: 3 }} variant="body2">
         Create an account to get started
       </Typography>
 
@@ -80,67 +75,56 @@ export function SignUpForm() {
 
       <Stack spacing={2}>
         <TextField
+          autoComplete="name"
           label="Display Name (Optional)"
+          onChange={e => setDisplayName(e.target.value)}
           type="text"
           value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
           fullWidth
-          autoComplete="name"
         />
 
         <TextField
-          label="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
           error={!!errors.email}
           helperText={errors.email}
-          required
+          label="Email"
+          onChange={e => setEmail(e.target.value)}
+          type="email"
+          value={email}
           fullWidth
-          autoComplete="email"
+          required
         />
 
         <TextField
-          label="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
           error={!!errors.password}
           helperText={errors.password}
-          required
+          label="Password"
+          onChange={e => setPassword(e.target.value)}
+          type="password"
+          value={password}
           fullWidth
-          autoComplete="new-password"
+          required
         />
 
         <TextField
-          label="Confirm Password"
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          autoComplete="new-password"
           error={!!errors.confirmPassword}
           helperText={errors.confirmPassword}
-          required
+          label="Confirm Password"
+          onChange={e => setConfirmPassword(e.target.value)}
+          type="password"
+          value={confirmPassword}
           fullWidth
-          autoComplete="new-password"
+          required
         />
 
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          size="large"
-          disabled={loading}
-        >
+        <Button disabled={loading} size="large" type="submit" variant="contained" fullWidth>
           {loading ? 'Creating account...' : 'Sign Up'}
         </Button>
 
-        <Box sx={{ textAlign: 'center', mt: 2 }}>
-          <MuiLink
-            component={Link}
-            href={ROUTES.AUTH.SIGN_IN}
-            variant="body2"
-            underline="hover"
-          >
+        <Box sx={{ mt: 2, textAlign: 'center' }}>
+          <MuiLink component={Link} href={ROUTES.AUTH.SIGN_IN} underline="hover" variant="body2">
             Already have an account? Sign in
           </MuiLink>
         </Box>
@@ -148,4 +132,3 @@ export function SignUpForm() {
     </Box>
   );
 }
-

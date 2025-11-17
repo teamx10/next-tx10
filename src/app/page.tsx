@@ -1,19 +1,21 @@
-import { Container, Typography, Box, Button, Grid, Card, CardContent, CardActions } from '@mui/material';
+import { Box, Button, Card, CardContent, Container, Grid, Typography } from '@mui/material';
+import Link from 'next/link';
+
 import { ProductList } from '@/components/products/ProductList';
 import { PRODUCTS } from '@/constants/products';
 import { ROUTES } from '@/constants/routes';
-import { generateMetadata } from '@/utils/seo';
-import Link from 'next/link';
 import { gradients } from '@/lib/mui/theme';
+import { generateMetadata } from '@/utils/seo';
 
 export const metadata = generateMetadata({
+  description:
+    'Master poker with our comprehensive guides, training programs, and games. Learn poker strategies, combinations, and improve your skills.',
   title: 'TeamX10 - Poker Training & Games',
-  description: 'Master poker with our comprehensive guides, training programs, and games. Learn poker strategies, combinations, and improve your skills.',
-  url: '/',
+  url: '/'
 });
 
 export default function HomePage() {
-  const featuredProducts = PRODUCTS.filter((p) => p.isActive).slice(0, 3);
+  const featuredProducts = PRODUCTS.filter(p => p.isActive).slice(0, 3);
 
   return (
     <>
@@ -21,45 +23,32 @@ export default function HomePage() {
       <Box
         sx={{
           background: gradients.background,
-          py: { xs: 6, md: 10 },
           mb: 6,
+          py: { md: 10, xs: 6 }
         }}
       >
         <Container maxWidth="lg">
-          <Box sx={{ textAlign: 'center', maxWidth: 800, mx: 'auto' }}>
+          <Box sx={{ maxWidth: 800, mx: 'auto', textAlign: 'center' }}>
             <Typography
-              variant="h2"
-              component="h1"
-              gutterBottom
               sx={{
                 fontWeight: 700,
-                mb: 3,
+                mb: 3
               }}
+              component="h1"
+              variant="h2"
+              gutterBottom
             >
               Master Poker with TeamX10
             </Typography>
-            <Typography
-              variant="h5"
-              color="text.secondary"
-              sx={{ mb: 4 }}
-            >
-              Comprehensive poker training products and games designed to help you improve your skills and become a better player.
+            <Typography color="text.secondary" sx={{ mb: 4 }} variant="h5">
+              Comprehensive poker training products and games designed to help you improve your skills and become a
+              better player.
             </Typography>
-            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Button
-                component={Link}
-                href={ROUTES.PRODUCTS}
-                variant="contained"
-                size="large"
-              >
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
+              <Button component={Link} href={ROUTES.PRODUCTS} size="large" variant="contained">
                 Browse Products
               </Button>
-              <Button
-                component={Link}
-                href={ROUTES.FAQ}
-                variant="outlined"
-                size="large"
-              >
+              <Button component={Link} href={ROUTES.FAQ} size="large" variant="outlined">
                 Learn More
               </Button>
             </Box>
@@ -69,17 +58,12 @@ export default function HomePage() {
 
       {/* Featured Products */}
       <Container maxWidth="lg" sx={{ mb: 8 }}>
-        <Typography variant="h3" component="h2" gutterBottom sx={{ textAlign: 'center', mb: 4 }}>
+        <Typography component="h2" sx={{ mb: 4, textAlign: 'center' }} variant="h3" gutterBottom>
           Featured Products
         </Typography>
         <ProductList products={featuredProducts} />
-        <Box sx={{ textAlign: 'center', mt: 4 }}>
-          <Button
-            component={Link}
-            href={ROUTES.PRODUCTS}
-            variant="outlined"
-            size="large"
-          >
+        <Box sx={{ mt: 4, textAlign: 'center' }}>
+          <Button component={Link} href={ROUTES.PRODUCTS} size="large" variant="outlined">
             View All Products
           </Button>
         </Box>
@@ -89,46 +73,49 @@ export default function HomePage() {
       <Box
         sx={{
           background: 'background.paper',
-          py: 6,
+          py: 6
         }}
       >
         <Container maxWidth="lg">
-          <Typography variant="h3" component="h2" gutterBottom sx={{ textAlign: 'center', mb: 4 }}>
+          <Typography component="h2" sx={{ mb: 4, textAlign: 'center' }} variant="h3" gutterBottom>
             Why Choose TeamX10?
           </Typography>
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={4}>
+          <Grid spacing={4} container>
+            <Grid md={4} xs={12} item>
               <Card>
                 <CardContent>
                   <Typography variant="h5" gutterBottom>
                     Comprehensive Training
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Our products cover everything from basic poker rules to advanced strategies, suitable for players of all skill levels.
+                  <Typography color="text.secondary" variant="body2">
+                    Our products cover everything from basic poker rules to advanced strategies, suitable for players of
+                    all skill levels.
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid md={4} xs={12} item>
               <Card>
                 <CardContent>
                   <Typography variant="h5" gutterBottom>
                     Interactive Learning
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Learn through interactive exercises, practice quizzes, and hands-on training that makes learning poker fun and engaging.
+                  <Typography color="text.secondary" variant="body2">
+                    Learn through interactive exercises, practice quizzes, and hands-on training that makes learning
+                    poker fun and engaging.
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid md={4} xs={12} item>
               <Card>
                 <CardContent>
                   <Typography variant="h5" gutterBottom>
                     Mobile-First Design
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Access your training materials anywhere, anytime. Our mobile-first design ensures a great experience on all devices.
+                  <Typography color="text.secondary" variant="body2">
+                    Access your training materials anywhere, anytime. Our mobile-first design ensures a great experience
+                    on all devices.
                   </Typography>
                 </CardContent>
               </Card>

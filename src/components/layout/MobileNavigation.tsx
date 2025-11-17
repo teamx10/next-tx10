@@ -1,56 +1,45 @@
 'use client';
 
-import React from 'react';
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Box,
-  IconButton,
-} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import Link from 'next/link';
+import React from 'react';
+
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
 import { ROUTES } from '@/constants/routes';
-import Link from 'next/link';
 
 interface MobileNavigationProps {
-  open: boolean;
   onClose: () => void;
+  open: boolean;
 }
 
-export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
+export function MobileNavigation({ onClose, open }: MobileNavigationProps) {
   const navigationItems = [
     { label: 'Home', path: ROUTES.HOME },
     { label: 'Products', path: ROUTES.PRODUCTS },
-    { label: 'FAQ', path: ROUTES.FAQ },
+    { label: 'FAQ', path: ROUTES.FAQ }
   ];
 
   return (
     <Drawer
-      anchor="left"
-      open={open}
-      onClose={onClose}
       ModalProps={{
-        keepMounted: true,
+        keepMounted: true
       }}
+      anchor="left"
+      onClose={onClose}
+      open={open}
     >
       <Box sx={{ width: 250 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
+        <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', p: 2 }}>
           <TeamX10Logo />
           <IconButton onClick={onClose}>
             <CloseIcon />
           </IconButton>
         </Box>
         <List>
-          {navigationItems.map((item) => (
+          {navigationItems.map(item => (
             <ListItem key={item.path} disablePadding>
-              <ListItemButton
-                component={Link}
-                href={item.path}
-                onClick={onClose}
-              >
+              <ListItemButton component={Link} href={item.path} onClick={onClose}>
                 <ListItemText primary={item.label} />
               </ListItemButton>
             </ListItem>
@@ -60,4 +49,3 @@ export function MobileNavigation({ open, onClose }: MobileNavigationProps) {
     </Drawer>
   );
 }
-

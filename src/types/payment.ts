@@ -1,17 +1,17 @@
 export interface Payment {
-  id: string;
-  userId: string;
-  productId: string;
   amount: number;
-  currency: string;
-  status: PaymentStatus;
-  stripeSessionId?: string;
-  stripePaymentIntentId?: string;
   createdAt: Date;
+  currency: string;
+  id: string;
+  productId: string;
+  status: PaymentStatus;
+  stripePaymentIntentId?: string;
+  stripeSessionId?: string;
   updatedAt: Date;
+  userId: string;
 }
 
-export type PaymentStatus = 'pending' | 'processing' | 'succeeded' | 'failed' | 'canceled';
+export type PaymentStatus = 'canceled' | 'failed' | 'pending' | 'processing' | 'succeeded';
 
 export interface PaymentSession {
   sessionId: string;
@@ -19,9 +19,8 @@ export interface PaymentSession {
 }
 
 export interface CheckoutSessionData {
-  productId: string;
-  userId: string;
-  successUrl: string;
   cancelUrl: string;
+  productId: string;
+  successUrl: string;
+  userId: string;
 }
-

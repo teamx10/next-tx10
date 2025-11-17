@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { User as FirebaseUser, onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+
 import { auth } from '@/lib/firebase/config';
 import { User } from '@/types/user';
 
@@ -12,19 +13,23 @@ export function useAuth() {
 
   useEffect(() => {
     if (!auth) {
-      setLoading(false);
-      setError(new Error('Firebase is not configured'));
+      // Use setTimeout to avoid synchronous setState in effect
+      setTimeout(() => {
+        setLoading(false);
+        setError(new Error('Firebase is not configured'));
+      }, 0);
+
       return;
     }
 
     const unsubscribe = onAuthStateChanged(
       auth,
-      (firebaseUser) => {
+      firebaseUser => {
         setUser(firebaseUser);
         setLoading(false);
         setError(null);
       },
-      (err) => {
+      err => {
         setError(err);
         setLoading(false);
       }
@@ -33,22 +38,21 @@ export function useAuth() {
     return () => unsubscribe();
   }, []);
 
-  const userData: User | null = user
+  const userData: null | User = user
     ? {
-        uid: user.uid,
-        email: user.email,
         displayName: user.displayName,
-        photoURL: user.photoURL,
+        email: user.email,
         emailVerified: user.emailVerified,
+        photoURL: user.photoURL,
+        uid: user.uid
       }
     : null;
 
   return {
-    user: userData,
-    firebaseUser: user,
-    loading,
     error,
+    firebaseUser: user,
     isAuthenticated: !!user,
+    loading,
+    user: userData
   };
 }
-

@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
 import { Grid } from '@mui/material';
-import { Product } from '@/types/product';
+import React from 'react';
+
 import { ProductCard } from '@/components/payment/ProductCard';
+import { Product } from '@/types/product';
 
 interface ProductListProps {
   products: Product[];
@@ -11,13 +12,12 @@ interface ProductListProps {
 
 export function ProductList({ products }: ProductListProps) {
   return (
-    <Grid container spacing={3}>
-      {products.map((product) => (
-        <Grid item xs={12} sm={6} md={4} key={product.id}>
+    <Grid spacing={3} container>
+      {products.map(product => (
+        <Grid key={product.id} md={4} sm={6} xs={12} item>
           <ProductCard product={product} showSelectButton={false} />
         </Grid>
       ))}
     </Grid>
   );
 }
-

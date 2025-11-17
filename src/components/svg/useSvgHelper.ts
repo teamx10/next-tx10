@@ -1,7 +1,9 @@
 import { useRef } from 'react';
 
+let globalCounter = 0;
+
 export const useSvgHelper = (svgName: string) => {
-  const iconId = useRef(`${Math.random()}`);
+  const iconId = useRef(`${globalCounter++}`);
   const id = iconId.current;
 
   const getId = (name: string) => `${svgName}-${id}-${name}`;
@@ -9,9 +11,9 @@ export const useSvgHelper = (svgName: string) => {
   const getUrl = (name: string) => `url(${getHash(name)})`;
 
   return {
-    id,
-    getId,
     getHash,
+    getId,
     getUrl,
+    id
   };
 };
