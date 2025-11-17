@@ -1,7 +1,6 @@
 'use client';
 
 import { Grid } from '@mui/material';
-import React from 'react';
 
 import { ProductCard } from '@/components/payment/ProductCard';
 import { Product } from '@/types/product';

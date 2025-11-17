@@ -1,12 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Box } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-
-import { Footer } from '@/components/layout/Footer';
-import { Header } from '@/components/layout/Header';
-import { theme } from '@/lib/mui/theme';
+import { ThemeProviderWrapper } from '@/components/layout/ThemeProviderWrapper';
 
 import './globals.css';
 import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
@@ -34,22 +28,7 @@ export default function RootLayout({
         <link href="/favicon.ico" rel="icon" />
       </head>
       <body>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              minHeight: '100vh'
-            }}
-          >
-            <Header />
-            <Box component="main" sx={{ flexGrow: 1 }}>
-              {children}
-            </Box>
-            <Footer />
-          </Box>
-        </ThemeProvider>
+        <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
       </body>
     </html>
   );
