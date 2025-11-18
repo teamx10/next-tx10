@@ -4,6 +4,7 @@ import { Box, Button, Card, CardContent, Container, Grid, Typography } from '@mu
 import Link from 'next/link';
 
 import { ProductList } from '@/components/products/ProductList';
+import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
 import { PRODUCTS } from '@/constants/products';
 import { ROUTES } from '@/constants/routes';
 import { gradients } from '@/lib/mui/theme';
@@ -23,6 +24,9 @@ export function HomePageContent() {
       >
         <Container maxWidth="lg">
           <Box sx={{ maxWidth: 800, mx: 'auto', textAlign: 'center' }}>
+            <Box sx={{ mb: 8 }}>
+              <TeamX10Logo color="orange" width={500} />
+            </Box>
             <Typography
               sx={{
                 fontWeight: 700,

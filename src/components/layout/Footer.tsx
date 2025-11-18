@@ -4,6 +4,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { Box, Container, Link as MuiLink, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 
+import { Tx10Logo } from '@/components/svg/Tx10Logo';
 import { ROUTES } from '@/constants/routes';
 
 const APP_VERSION = 'v1.1.3';
@@ -70,6 +71,9 @@ export function Footer() {
             </Typography>
           </Box>
         </Stack>
+        <Box sx={{ mt: 2, textAlign: 'center' }}>
+          <Tx10Logo size={128} />
+        </Box>
       </Container>
     </Box>
   );

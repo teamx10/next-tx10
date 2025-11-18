@@ -42,7 +42,7 @@ export function Header() {
   const drawer = (
     <Box sx={{ width: 250 }}>
       <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', p: 2 }}>
-        <TeamX10Logo />
+        <TeamX10Logo width={140} />
         <IconButton onClick={handleDrawerToggle}>
           <CloseIcon />
         </IconButton>
@@ -97,7 +97,7 @@ export function Header() {
               </IconButton>
             )}
             <Link href={ROUTES.HOME} style={{ alignItems: 'center', display: 'flex', textDecoration: 'none' }}>
-              <TeamX10Logo />
+              <TeamX10Logo width={200} />
             </Link>
           </Box>
 
@@ -117,7 +117,15 @@ export function Header() {
                 {isAuthenticated ? (
                   <>
                     {user?.email && (
-                      <Box sx={{ color: theme.palette.text.secondary, fontSize: '0.875rem', mr: 2 }}>{user.email}</Box>
+                      <Box
+                        sx={{
+                          color: theme.palette.text.secondary,
+                          fontSize: '0.875rem',
+                          mr: 2
+                        }}
+                      >
+                        {user.email}
+                      </Box>
                     )}
                     <Button component={Link} href={ROUTES.AUTH.SIGN_OUT} size="small" variant="outlined">
                       Sign Out
