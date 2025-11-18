@@ -6,13 +6,17 @@ import { ThemeProvider } from '@mui/material/styles';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
-import { theme } from '@/lib/mui/theme';
+import { ThemeContextProvider, useThemeMode } from '@/contexts/ThemeContext';
+import { createAppTheme } from '@/lib/mui/theme';
 
 interface ThemeProviderWrapperProps {
   children: React.ReactNode;
 }
 
-export function ThemeProviderWrapper({ children }: ThemeProviderWrapperProps) {
+const ThemeContent = ({ children }: ThemeProviderWrapperProps) => {
+  const { mode } = useThemeMode();
+  const theme = createAppTheme(mode);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -30,5 +34,13 @@ export function ThemeProviderWrapper({ children }: ThemeProviderWrapperProps) {
         <Footer />
       </Box>
     </ThemeProvider>
+  );
+};
+
+export function ThemeProviderWrapper({ children }: ThemeProviderWrapperProps) {
+  return (
+    <ThemeContextProvider>
+      <ThemeContent>{children}</ThemeContent>
+    </ThemeContextProvider>
   );
 }

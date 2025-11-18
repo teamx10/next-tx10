@@ -5,12 +5,15 @@ import Link from 'next/link';
 
 import { ProductList } from '@/components/products/ProductList';
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
+import { useThemeMode } from '@/contexts/ThemeContext';
 import { PRODUCTS } from '@/constants/products';
 import { ROUTES } from '@/constants/routes';
-import { gradients } from '@/lib/mui/theme';
+import { getGradients } from '@/lib/mui/theme';
 
 export function HomePageContent() {
   const featuredProducts = PRODUCTS.filter(p => p.isActive).slice(0, 3);
+  const { mode } = useThemeMode();
+  const gradients = getGradients(mode);
 
   return (
     <>

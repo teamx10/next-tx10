@@ -1,7 +1,7 @@
-import { createTheme, ThemeOptions } from '@mui/material/styles';
+import { createTheme, PaletteMode, ThemeOptions } from '@mui/material/styles';
 
-// Color palette inspired by the green/teal gradient from the reference image
-const colors = {
+// Light mode color palette
+const lightPalette = {
   background: {
     default: '#F5F5F5',
     paper: '#FFFFFF'
@@ -16,6 +16,7 @@ const colors = {
     light: '#64B5F6',
     main: '#2196F3'
   },
+  mode: 'light' as PaletteMode,
   primary: {
     contrastText: '#FFFFFF',
     dark: '#388E3C',
@@ -44,7 +45,52 @@ const colors = {
   }
 };
 
-const themeOptions: ThemeOptions = {
+// Dark mode color palette
+const darkPalette = {
+  background: {
+    default: '#121212',
+    paper: '#1E1E1E'
+  },
+  error: {
+    dark: '#D32F2F',
+    light: '#E57373',
+    main: '#F44336'
+  },
+  info: {
+    dark: '#1976D2',
+    light: '#64B5F6',
+    main: '#2196F3'
+  },
+  mode: 'dark' as PaletteMode,
+  primary: {
+    contrastText: '#000000',
+    dark: '#388E3C',
+    light: '#A5D6A7',
+    main: '#66BB6A' // Lighter green for dark background
+  },
+  secondary: {
+    contrastText: '#000000',
+    dark: '#00796B',
+    light: '#80DEEA',
+    main: '#4DD0E1' // Lighter teal for dark background
+  },
+  success: {
+    dark: '#388E3C',
+    light: '#A5D6A7',
+    main: '#66BB6A'
+  },
+  text: {
+    primary: '#FFFFFF',
+    secondary: '#B0B0B0'
+  },
+  warning: {
+    dark: '#F57C00',
+    light: '#FFB74D',
+    main: '#FF9800'
+  }
+};
+
+const getThemeOptions = (mode: 'light' | 'dark'): ThemeOptions => ({
   breakpoints: {
     values: {
       lg: 1280,
@@ -58,7 +104,9 @@ const themeOptions: ThemeOptions = {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          boxShadow: mode === 'dark'
+            ? '0 2px 4px rgba(0,0,0,0.3)'
+            : '0 2px 4px rgba(0,0,0,0.1)'
         }
       }
     },
@@ -66,9 +114,13 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         contained: {
           '&:hover': {
-            boxShadow: '0 4px 8px rgba(0,0,0,0.15)'
+            boxShadow: mode === 'dark'
+              ? '0 4px 8px rgba(0,0,0,0.4)'
+              : '0 4px 8px rgba(0,0,0,0.15)'
           },
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          boxShadow: mode === 'dark'
+            ? '0 2px 4px rgba(0,0,0,0.3)'
+            : '0 2px 4px rgba(0,0,0,0.1)'
         },
         root: {
           borderRadius: 8,
@@ -81,7 +133,9 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           borderRadius: 12,
-          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+          boxShadow: mode === 'dark'
+            ? '0 2px 8px rgba(0,0,0,0.4)'
+            : '0 2px 8px rgba(0,0,0,0.1)'
         }
       }
     },
@@ -95,7 +149,7 @@ const themeOptions: ThemeOptions = {
       }
     }
   },
-  palette: colors,
+  palette: mode === 'dark' ? darkPalette : lightPalette,
   shape: {
     borderRadius: 8
   },
@@ -152,13 +206,20 @@ const themeOptions: ThemeOptions = {
       lineHeight: 1.5
     }
   }
-};
+});
 
-export const theme = createTheme(themeOptions);
+// Export theme creator function
+export const createAppTheme = (mode: 'light' | 'dark') => createTheme(getThemeOptions(mode));
 
-// Gradient utilities
-export const gradients = {
-  background: 'linear-gradient(135deg, #E8F5E9 0%, #E0F2F1 100%)',
-  primary: 'linear-gradient(135deg, #4CAF50 0%, #009688 100%)',
-  secondary: 'linear-gradient(135deg, #81C784 0%, #4DB6AC 100%)'
-};
+// Gradient utilities that adapt to theme mode
+export const getGradients = (mode: 'light' | 'dark') => ({
+  background: mode === 'dark'
+    ? 'linear-gradient(135deg, #1E1E1E 0%, #2C2C2C 100%)'
+    : 'linear-gradient(135deg, #E8F5E9 0%, #E0F2F1 100%)',
+  primary: mode === 'dark'
+    ? 'linear-gradient(135deg, #66BB6A 0%, #4DD0E1 100%)'
+    : 'linear-gradient(135deg, #4CAF50 0%, #009688 100%)',
+  secondary: mode === 'dark'
+    ? 'linear-gradient(135deg, #A5D6A7 0%, #80DEEA 100%)'
+    : 'linear-gradient(135deg, #81C784 0%, #4DB6AC 100%)'
+});
