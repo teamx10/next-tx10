@@ -10,7 +10,7 @@ function getStripeInstance() {
   }
 
   return new Stripe(STRIPE_CONFIG.secretKey, {
-    apiVersion: '2025-02-24.acacia'
+    apiVersion: '2025-10-29.clover'
   });
 }
 

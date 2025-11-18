@@ -23,10 +23,16 @@ export default function PaymentSelectPage() {
       <Typography color="text.secondary" sx={{ mb: 4 }} variant="body1">
         Choose from our selection of poker training products and games
       </Typography>
-
       <Grid spacing={3} container>
         {PRODUCTS.filter(p => p.isActive).map(product => (
-          <Grid key={product.id} md={4} sm={6} xs={12} item>
+          <Grid
+            size={{
+              md: 4,
+              sm: 6,
+              xs: 12
+            }}
+            key={product.id}
+          >
             <ProductCard onSelect={handleSelectProduct} product={product} showSelectButton={true} />
           </Grid>
         ))}

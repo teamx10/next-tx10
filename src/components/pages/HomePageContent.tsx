@@ -49,7 +49,6 @@ export function HomePageContent() {
           </Box>
         </Container>
       </Box>
-
       {/* Featured Products */}
       <Container maxWidth="lg" sx={{ mb: 8 }}>
         <Typography component="h2" sx={{ mb: 4, textAlign: 'center' }} variant="h3" gutterBottom>
@@ -62,7 +61,6 @@ export function HomePageContent() {
           </Button>
         </Box>
       </Container>
-
       {/* Features Section */}
       <Box
         sx={{
@@ -75,7 +73,12 @@ export function HomePageContent() {
             Why Choose TeamX10?
           </Typography>
           <Grid spacing={4} container>
-            <Grid md={4} xs={12} item>
+            <Grid
+              size={{
+                md: 4,
+                xs: 12
+              }}
+            >
               <Card>
                 <CardContent>
                   <Typography variant="h5" gutterBottom>
@@ -88,7 +91,12 @@ export function HomePageContent() {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid md={4} xs={12} item>
+            <Grid
+              size={{
+                md: 4,
+                xs: 12
+              }}
+            >
               <Card>
                 <CardContent>
                   <Typography variant="h5" gutterBottom>
@@ -101,7 +109,12 @@ export function HomePageContent() {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid md={4} xs={12} item>
+            <Grid
+              size={{
+                md: 4,
+                xs: 12
+              }}
+            >
               <Card>
                 <CardContent>
                   <Typography variant="h5" gutterBottom>
