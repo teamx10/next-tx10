@@ -4,7 +4,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import { Alert, Box, Button, Typography } from '@mui/material';
 import Link from 'next/link';
-import React from 'react';
 
 import { ROUTES } from '@/constants/routes';
 import { PaymentStatus as PaymentStatusType } from '@/types/payment';

@@ -1,7 +1,7 @@
 'use client';
 
 import { Alert, Box, Button, Card, CardContent, CircularProgress, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { ROUTES } from '@/constants/routes';
 import { useAuth } from '@/hooks/useAuth';

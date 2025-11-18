@@ -3,7 +3,7 @@
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { ROUTES } from '@/constants/routes';
 import { useAuth } from '@/hooks/useAuth';

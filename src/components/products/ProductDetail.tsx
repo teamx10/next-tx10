@@ -1,7 +1,6 @@
 'use client';
 
 import { Box, Card, CardContent, Chip, Divider, List, ListItem, ListItemText, Typography } from '@mui/material';
-import React from 'react';
 
 import { PaymentForm } from '@/components/payment/PaymentForm';
 import { Product } from '@/types/product';

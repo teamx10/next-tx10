@@ -2,7 +2,6 @@
 
 import { Box, Button } from '@mui/material';
 import Link from 'next/link';
-import React from 'react';
 
 import { ROUTES } from '@/constants/routes';
 

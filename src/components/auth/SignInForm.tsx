@@ -3,7 +3,7 @@
 import { Alert, Box, Button, Link as MuiLink, Stack, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { MESSAGES } from '@/constants/messages';
 import { ROUTES } from '@/constants/routes';

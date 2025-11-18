@@ -3,7 +3,6 @@
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { Box, Container, Link as MuiLink, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
-import React from 'react';
 
 import { ROUTES } from '@/constants/routes';
 

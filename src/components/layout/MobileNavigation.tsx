@@ -3,7 +3,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import Link from 'next/link';
-import React from 'react';
 
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
 import { ROUTES } from '@/constants/routes';

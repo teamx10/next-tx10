@@ -17,7 +17,7 @@ import {
   useTheme
 } from '@mui/material';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
 import { ROUTES } from '@/constants/routes';
