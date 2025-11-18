@@ -153,17 +153,6 @@ export function Header() {
               </>
             )}
             <ThemeToggle />
-            <Button
-              onClick={() => {
-                // TODO: Implement feedback functionality
-                console.log('Feedback clicked');
-              }}
-              size="small"
-              sx={{ ml: 1 }}
-              variant="outlined"
-            >
-              FEEDBACK
-            </Button>
           </Box>
         </Toolbar>
       </AppBar>
