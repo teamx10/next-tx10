@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 import { ProductList } from '@/components/products/ProductList';
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
-import { useThemeMode } from '@/contexts/ThemeContext';
 import { PRODUCTS } from '@/constants/products';
 import { ROUTES } from '@/constants/routes';
+import { useThemeMode } from '@/contexts/ThemeContext';
 import { getGradients } from '@/lib/mui/theme';
 
 export function HomePageContent() {

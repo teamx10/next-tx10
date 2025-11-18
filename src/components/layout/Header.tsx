@@ -22,18 +22,13 @@ import { useState } from 'react';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
 import { ROUTES } from '@/constants/routes';
-import { useThemeMode } from '@/contexts/ThemeContext';
 import { useAuth } from '@/hooks/useAuth';
 
 export function Header() {
   const theme = useTheme();
-  const { mode } = useThemeMode();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isAuthenticated, user } = useAuth();
-
-  // Logo color based on theme mode
-  const logoColor = mode === 'dark' ? '#eee' : '#333';
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -48,7 +43,7 @@ export function Header() {
   const drawer = (
     <Box sx={{ width: 250 }}>
       <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'space-between', p: 2 }}>
-        <TeamX10Logo color={logoColor} width={140} />
+        <TeamX10Logo color="orange" width={140} />
         <Box sx={{ alignItems: 'center', display: 'flex' }}>
           <ThemeToggle />
           <IconButton onClick={handleDrawerToggle}>
@@ -106,7 +101,7 @@ export function Header() {
               </IconButton>
             )}
             <Link href={ROUTES.HOME} style={{ alignItems: 'center', display: 'flex', textDecoration: 'none' }}>
-              <TeamX10Logo color={logoColor} width={200} />
+              <TeamX10Logo color="orange" width={200} />
             </Link>
           </Box>
 
