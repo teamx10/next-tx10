@@ -1,4 +1,7 @@
+export type AuthProvider = 'email-link' | 'google';
+
 export interface User {
+  authProvider?: AuthProvider;
   createdAt?: Date;
   displayName: null | string;
   email: null | string;
