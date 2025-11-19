@@ -5,7 +5,8 @@ export const ROUTES = {
     SIGN_IN: '/sign-in',
     SIGN_OUT: '/sign-out',
     SIGN_UP: '/sign-up',
-    SUCCESS: '/sign-in/success'
+    SUCCESS: '/sign-in/success',
+    VERIFY: '/sign-in/verify'
   },
   FAQ: '/faq',
   HOME: '/',

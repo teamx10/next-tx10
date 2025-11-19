@@ -1,26 +1,25 @@
 import { Container, Paper, Typography } from '@mui/material';
 
-import UnifiedAuthForm from '@/components/auth/UnifiedAuthForm';
+import EmailLinkVerifyForm from '@/components/auth/EmailLinkVerifyForm';
 import { generateMetadata } from '@/utils/seo';
 
 export const metadata = generateMetadata({
-  description:
-    'Sign in to your TeamX10 account with email link or Google to access your poker training products and games.',
-  title: 'Sign In',
-  url: '/sign-in'
+  description: 'Complete your passwordless sign-in by verifying your email address.',
+  title: 'Verify Sign-In',
+  url: '/sign-in/verify'
 });
 
-export default function SignInPage() {
+export default function SignInVerifyPage() {
   return (
     <Container maxWidth="sm" sx={{ py: 8 }}>
       <Paper elevation={3} sx={{ p: 4 }}>
         <Typography align="center" component="h1" variant="h4" gutterBottom>
-          Sign In
+          Complete Sign-In
         </Typography>
         <Typography align="center" color="text.secondary" sx={{ mb: 4 }} variant="body2" gutterBottom>
-          Welcome back! Choose your preferred sign-in method.
+          You&apos;re almost there! Confirm your email to complete sign-in.
         </Typography>
-        <UnifiedAuthForm />
+        <EmailLinkVerifyForm />
       </Paper>
     </Container>
   );
