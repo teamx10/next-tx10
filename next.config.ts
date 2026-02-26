@@ -1,8 +1,12 @@
+import { resolve } from 'path';
+
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true
+  reactCompiler: true,
+  turbopack: {
+    root: resolve(__dirname)
+  }
 };
 
 export default nextConfig;
