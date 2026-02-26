@@ -4,189 +4,100 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Next.js 16 application for TeamX10, a poker training and games platform. The app uses React 19, TypeScript, Material-UI for components, Firebase for authentication and data storage, and Stripe for payment processing.
-
-## Key Technologies
-
-- **Framework**: Next.js 16.0.3 with App Router and React Server Components
-- **React**: Version 19.2.0 with React Compiler enabled (`babel-plugin-react-compiler`)
-- **TypeScript**: Strict mode enabled with comprehensive type checking
-- **UI**: Material-UI v6 with custom theme (`@mui/material`, `@emotion/react`)
-- **Authentication**: Firebase Authentication with email/password
-- **Database**: Firebase Firestore
-- **Payments**: Stripe integration with checkout sessions
-- **Styling**: CSS Modules + Material-UI theming system
+Next.js 16 application for TeamX10, a poker training and games platform. Uses React 19, TypeScript, Material-UI v7, Firebase (auth + Firestore), and Stripe for payments.
 
 ## Development Commands
 
 ```bash
-# Start development server (runs on http://localhost:3000)
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-# Run linter (uses ESLint 9 with flat config)
-npm run lint
+npm run dev       # Dev server on http://localhost:3333
+npm run build     # Production build
+npm start         # Production server
+npm run lint      # ESLint 9 flat config with Prettier
 ```
 
-## Project Architecture
+No test framework is currently configured.
 
-### Directory Structure
+## Architecture
+
+### Directory Layout
 
 ```
 src/
-├── app/              # Next.js App Router pages and API routes
-│   ├── (auth)/      # Authentication flow routes (route group)
-│   ├── (payment)/   # Payment flow routes (route group)
-│   ├── (legal)/     # Legal pages (route group)
-│   ├── products/    # Product pages
-│   ├── api/         # API routes (Stripe endpoints)
-│   └── layout.tsx   # Root layout with SEO and theme provider
-├── components/      # React components
-│   ├── layout/      # Layout components (Header, Footer, Navigation, ThemeProviderWrapper)
-│   ├── pages/       # Page-specific components
-│   ├── products/    # Product-related components
-│   ├── payment/     # Payment-related components
-│   ├── auth/        # Authentication components
-│   └── ui/          # Reusable UI components
-├── lib/             # External service configurations
-│   ├── firebase/    # Firebase config, auth, firestore utilities
-│   ├── stripe/      # Stripe config and checkout utilities
-│   └── mui/         # Material-UI theme configuration
-├── hooks/           # Custom React hooks
-│   ├── useAuth.ts        # Firebase authentication state
-│   ├── useFirestore.ts   # Firestore CRUD operations
-│   ├── useStripe.ts      # Stripe checkout handling
-│   └── useMediaQuery.ts  # Responsive breakpoint detection
-├── types/           # TypeScript type definitions
-│   ├── user.ts           # User-related types
-│   ├── product.ts        # Product and ProductCategory types
-│   ├── payment.ts        # Payment-related types
-│   └── firebase.ts       # Firebase-specific types
-├── constants/       # Application constants
-│   ├── routes.ts         # Route constants (ROUTES object)
-│   ├── products.ts       # Product data and helper functions
-│   └── messages.ts       # User-facing messages
-└── utils/           # Utility functions
-    ├── seo.ts            # SEO metadata generation
-    ├── validation.ts     # Input validation utilities
-    └── format.ts         # Data formatting utilities
+├── app/              # Next.js App Router (pages + API routes)
+├── components/       # React components (layout/, pages/, products/, payment/, auth/, svg/, ui/)
+├── contexts/         # React contexts (ThemeContext for dark/light mode)
+├── lib/              # Service configs (firebase/, stripe/, mui/)
+├── hooks/            # Custom hooks (useAuth, useFirestore, useStripe, useMediaQuery)
+├── types/            # TypeScript interfaces
+├── constants/        # Static data (routes, products, messages)
+└── utils/            # Helpers (seo, validation, format)
 ```
 
 ### Route Groups
 
-The application uses Next.js route groups (folders wrapped in parentheses) to organize routes without affecting the URL structure:
+URL structure is independent of folder names due to Next.js route groups:
 
-- `(auth)` - Authentication pages: sign-in, sign-up, sign-out, with process/success/failed states
-- `(payment)` - Payment flow: select, process, success, failed
-- `(legal)` - Legal pages: privacy policy, terms of service
+- `(auth)` — sign-in (with process/success/failed/verify sub-routes), sign-up, sign-out
+- `(payment)` — select, process, success, failed
+- `(legal)` — privacy, terms
+- `products/` — product listing + individual product pages (poker-guide, poker-combinations, poker-strategy, solitaire)
+- `api/stripe/` — checkout-session and create-checkout-session API routes
 
-### Key Architectural Patterns
+### Key Patterns
 
-**Authentication Flow**: Multi-step authentication process handled through route groups with dedicated process/success/failed pages. The `useAuth` hook provides centralized authentication state management.
+**Authentication**: Passwordless email link + Google sign-in (popup with redirect fallback). `lib/firebase/config.ts` exports `auth` and `db` as nullable — returns `null` if env vars are missing. `lib/firebase/auth.ts` throws at module level if Firebase is unconfigured (hard failure for auth-dependent code). Email link flow stores email in localStorage with 24h expiry.
 
-**Payment Integration**: Stripe checkout uses API routes (`api/stripe/create-checkout-session`) to create server-side checkout sessions. Client-side redirects to Stripe-hosted checkout, then returns to success/failed pages.
+**Theme System**: `ThemeContextProvider` in `contexts/ThemeContext.tsx` wraps the app with dark/light mode state. `createAppTheme(mode)` in `lib/mui/theme.ts` generates the MUI theme. `getGradients(mode)` provides mode-aware gradient strings. The wrapper lives in `components/layout/ThemeProviderWrapper.tsx` which also renders Header/Footer.
 
-**Firebase Services**: Firebase initialization is conditional (checks for environment variables) and exports `null` if not configured, preventing errors in development environments without Firebase setup.
+**Payment Flow**: Client calls `api/stripe/create-checkout-session` → gets Stripe session → redirects to Stripe-hosted checkout → returns to success/failed pages.
 
-**SEO Management**: Centralized SEO utilities in `utils/seo.ts` generate metadata for all pages. Uses structured data (schema.org) for product pages.
+**Routes**: All routes centralized in `constants/routes.ts` as `ROUTES` const object. Always use these instead of hardcoded strings.
 
-**Component Organization**:
-- `layout/` - App-wide layout components (Header, Footer, Navigation)
-- `pages/` - Page-specific components (HomePageContent, AuthSuccessPageContent)
-- Feature folders (`products/`, `payment/`, `auth/`) - Domain-specific components
+**Products**: Defined in `constants/products.ts` with lookup helpers `getProductBySlug()` and `getProductById()`.
 
-**Type Safety**: All external data (products, routes, messages) are strongly typed with TypeScript interfaces and `as const` assertions for literal types.
+**SEO**: `utils/seo.ts` generates metadata for all pages. Product pages use schema.org structured data.
 
-## Configuration Details
+**Component Organization**: `pages/` contains page-specific content components (e.g., `HomePageContent`). Feature folders (`auth/`, `payment/`, `products/`) group domain components. `layout/` has Header, Footer, Navigation, MobileNavigation, ThemeToggle.
 
-### TypeScript Configuration
+**Auth Guard**: `components/auth/AuthGuard.tsx` protects routes — wraps children, redirects to sign-in when `requireAuth` is true and user is unauthenticated.
 
-- Path alias: `@/*` maps to `./src/*`
-- Strict mode enabled with comprehensive checks
-- Unused locals and parameters are errors
-- No implicit any or returns allowed
-- Target: ES5 for maximum compatibility
+## Code Style (enforced by ESLint + Prettier)
 
-### ESLint Configuration
+**Prettier**: Single quotes, no trailing commas, arrow parens avoid, 120 char width.
 
-Uses ESLint 9 flat config (`eslint.config.mjs`) with:
-- **Import ordering**: Enforced alphabetical sorting via `perfectionist/sort-imports`
-- **Import groups**: type imports, external, internal (`@/`), relative
-- **No explicit any**: TypeScript's `any` type is an error
-- **Arrow functions**: Prefer arrow functions with implicit returns (`arrow-body-style: as-needed`)
-- **Padding**: Blank line required before return statements
-- **Object/interface sorting**: Alphabetical sorting enforced for consistency
-- **React hooks**: Exhaustive deps checking enabled
+**Import ordering** (perfectionist plugin): type imports → external → internal (`@/`) → relative, alphabetically sorted within groups, with blank lines between groups.
 
-### Material-UI Theme
+**Sorting enforced everywhere**: imports, named imports, object keys, JSX props, interfaces, union types — all alphabetical via perfectionist.
 
-Custom theme located in `src/lib/mui/theme.ts`:
-- Primary color: Light green (`#4CAF50`)
-- Secondary color: Teal (`#009688`)
-- Custom gradient utilities exported (`gradients.primary`, `gradients.secondary`)
-- Component overrides for Button, Card, TextField, AppBar
-- Typography system with custom font stack
+**Notable rules**:
+- `@typescript-eslint/no-explicit-any` — error (relaxed in test files)
+- `@typescript-eslint/no-unnecessary-condition` — error
+- `import/no-cycle` — error
+- `require-await` — error (no empty async functions)
+- `no-shadow` — error (hoist all)
+- `arrow-body-style: as-needed` — implicit returns required where possible
+- `padding-line-between-statements` — blank line before `return`, blank line after directives
+- Prefer `interface` over `type` for object shapes
+- Use `'use client'` directive for components with hooks or interactivity
 
-### Environment Variables
+### Path Alias
 
-The application expects these environment variables:
+`@/*` maps to `./src/*`
 
-**Firebase** (all prefixed with `NEXT_PUBLIC_`):
-- `NEXT_PUBLIC_FIREBASE_API_KEY`
-- `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
-- `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
-- `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
-- `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
-- `NEXT_PUBLIC_FIREBASE_APP_ID`
+## Environment Variables
 
-**Stripe**:
-- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (client-side)
-- `STRIPE_SECRET_KEY` (server-side only)
+**Firebase** (all `NEXT_PUBLIC_`): `FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`, `FIREBASE_STORAGE_BUCKET`, `FIREBASE_MESSAGING_SENDER_ID`, `FIREBASE_APP_ID`
 
-**Site**:
-- `NEXT_PUBLIC_SITE_URL` (for SEO, defaults to `https://teamx10.com`)
+**Stripe**: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (client), `STRIPE_SECRET_KEY` (server only)
 
-## Custom Hooks
+**Site**: `NEXT_PUBLIC_SITE_URL` (defaults to `https://teamx10.com`)
 
-### useAuth
-Manages Firebase authentication state with loading, error, and user data. Returns both raw Firebase user and transformed user data object.
+## Tech Stack Versions
 
-### useFirestore
-Generic Firestore CRUD operations with TypeScript generics. Supports creating, reading, updating, deleting documents with real-time listeners.
-
-### useStripe
-Handles Stripe checkout redirects. Creates checkout session via API route and redirects to Stripe-hosted checkout page.
-
-### useMediaQuery
-Responsive breakpoint detection using Material-UI breakpoints. Supports `up`, `down`, and `between` queries.
-
-## Products System
-
-Products are defined in `src/constants/products.ts` as an array of `Product` objects with categories: `poker-guide`, `poker-combinations`, `poker-strategy`, `solitaire`.
-
-Helper functions:
-- `getProductBySlug(slug)` - Find product by URL slug
-- `getProductById(id)` - Find product by ID
-
-## Routes System
-
-All routes are centralized in `src/constants/routes.ts` as the `ROUTES` constant object. Use these constants instead of hardcoded strings for type safety and maintainability.
-
-## Code Style Preferences
-
-- **Variable declarations**: Always use `const`, use `let` only when reassignment is needed, never use `var`
-- **Functions**: Prefer arrow functions with implicit returns when possible
-- **Imports**: Must be alphabetically sorted with type imports first, then external, then internal (`@/`)
-- **Components**: Use `'use client'` directive for client components (hooks, interactivity)
-- **TypeScript**: Prefer `interface` over `type` for object shapes
-- **Async/await**: Always use async/await over `.then()` chains
-- **Error handling**: Use try/catch blocks and set error state in components
-
-## Testing Notes
-
-No test framework is currently configured. When adding tests, consider Jest or Vitest with React Testing Library to match the Next.js ecosystem.
+- Next.js 16.0.3 with React Compiler (`babel-plugin-react-compiler`)
+- React 19.2.0
+- MUI 7.3.5 (`@mui/material`, `@emotion/react`, `@emotion/styled`)
+- Firebase 12.6.0
+- Stripe 19.3.1 / @stripe/stripe-js 8.5.1
+- TypeScript 5.x (strict mode, noUnusedLocals, noUnusedParameters)
+- ESLint 9 flat config
