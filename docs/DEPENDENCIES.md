@@ -1,0 +1,40 @@
+# Dependencies
+
+## Production
+
+| Package | Version |
+|---------|---------|
+| @emotion/react | ^11.13.0 |
+| @emotion/styled | ^11.13.0 |
+| @mui/icons-material | ^7.3.5 |
+| @mui/material | ^7.3.5 |
+| @mui/material-nextjs | ^7.3.5 |
+| @mui/system | ^7.3.5 |
+| @stripe/stripe-js | ^8.5.1 |
+| firebase | ^12.6.0 |
+| next | 16.0.3 |
+| react | 19.2.0 |
+| react-dom | 19.2.0 |
+| stripe | ^19.3.1 |
+
+## Development
+
+| Package | Version |
+|---------|---------|
+| @eslint/js | ^9.39.1 |
+| @types/node | ^24.10.1 |
+| @types/react | ^19.2.6 |
+| @types/react-dom | ^19 |
+| @typescript-eslint/eslint-plugin | ^8.47.0 |
+| @typescript-eslint/parser | ^8.47.0 |
+| babel-plugin-react-compiler | 1.0.0 |
+| eslint | ^9 |
+| eslint-config-next | 16.0.3 |
+| eslint-import-resolver-typescript | ^4.4.4 |
+| eslint-plugin-import | ^2.32.0 |
+| eslint-plugin-perfectionist | ^4.15.1 |
+| eslint-plugin-prettier | ^5.5.4 |
+| eslint-plugin-react | ^7.37.5 |
+| eslint-plugin-react-hooks | ^7.0.1 |
+| prettier | ^3.6.2 |
+| typescript | ^5 |

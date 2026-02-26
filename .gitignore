@@ -62,3 +62,9 @@ test-results.json
 
 *storybook.log
 storybook-static
+
+# AI agent temp files
+agents/temp/
+agents/init-state.md
+agents/memory.md
+plans/
