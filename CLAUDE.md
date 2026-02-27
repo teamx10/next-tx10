@@ -94,7 +94,7 @@ URL structure is independent of folder names due to Next.js route groups:
 
 ## Tech Stack Versions
 
-- Next.js 16.0.3 with React Compiler (`babel-plugin-react-compiler`)
+- Next.js 16.1.6 with React Compiler (`babel-plugin-react-compiler`)
 - React 19.2.0
 - MUI 7.3.5 (`@mui/material`, `@emotion/react`, `@emotion/styled`)
 - Firebase 12.6.0
