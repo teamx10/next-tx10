@@ -6,7 +6,7 @@ interface AnimatedGradientBackgroundProps extends BoxProps {
   children?: React.ReactNode;
 }
 
-export function AnimatedGradientBackground({ children, sx, ...props }: AnimatedGradientBackgroundProps) {
+export function AnimatedGradientBackground({ children, className, sx, ...props }: AnimatedGradientBackgroundProps) {
   return (
     <Box
       sx={{
@@ -15,7 +15,7 @@ export function AnimatedGradientBackground({ children, sx, ...props }: AnimatedG
         backgroundSize: '400% 400%',
         ...sx
       }}
-      className="animated-gradient"
+      className={`animated-gradient${className ? ` ${className}` : ''}`}
       {...props}
     >
       {children}
