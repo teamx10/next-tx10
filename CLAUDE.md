@@ -17,6 +17,10 @@ npm run lint      # ESLint 9 flat config with Prettier
 
 No test framework is currently configured.
 
+## Site Status
+
+**The site is currently in maintenance mode.** `src/middleware.ts` rewrites all requests to `/_closed` (under-construction page). To re-open the site, remove or update the rewrite in `middleware.ts`.
+
 ## Architecture
 
 ### Directory Layout
@@ -61,6 +65,12 @@ URL structure is independent of folder names due to Next.js route groups:
 
 **Auth Guard**: `components/auth/AuthGuard.tsx` protects routes — wraps children, redirects to sign-in when `requireAuth` is true and user is unauthenticated.
 
+**`useAuth` return shape**: `{ user, firebaseUser, isAuthenticated, loading, error }` — `user` is the simplified `User` type from `types/user.ts`, `firebaseUser` is the raw Firebase `User` object.
+
+**Rendering**: Root layout exports `dynamic = 'force-dynamic'` — the entire app is server-side rendered dynamically. Adding `export const dynamic = 'force-static'` to a page will not work without removing this from the layout.
+
+**React Compiler**: `babel-plugin-react-compiler` is enabled. Do **not** add manual `React.memo`, `useMemo`, or `useCallback` for render optimization — the compiler handles this automatically. Only use these hooks for semantic (non-performance) reasons.
+
 ## Code Style (enforced by ESLint + Prettier)
 
 **Prettier**: Single quotes, no trailing commas, arrow parens avoid, 120 char width.
@@ -86,11 +96,17 @@ URL structure is independent of folder names due to Next.js route groups:
 
 ## Environment Variables
 
-**Firebase** (all `NEXT_PUBLIC_`): `FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`, `FIREBASE_STORAGE_BUCKET`, `FIREBASE_MESSAGING_SENDER_ID`, `FIREBASE_APP_ID`
+**Firebase**: `NEXT_PUBLIC_FIREBASE_API_KEY`, `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, `NEXT_PUBLIC_FIREBASE_PROJECT_ID`, `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`, `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`, `NEXT_PUBLIC_FIREBASE_APP_ID`
 
 **Stripe**: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (client), `STRIPE_SECRET_KEY` (server only)
 
 **Site**: `NEXT_PUBLIC_SITE_URL` (defaults to `https://teamx10.com`)
+
+## Additional Rules
+
+Project-specific rules live in `.claude/rules/`:
+- `react.md` — applies to `**/*.tsx` files
+- `typescript.md` — TypeScript conventions
 
 ## Tech Stack Versions
 

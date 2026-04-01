@@ -10,11 +10,7 @@ interface NavigationProps {
 }
 
 export function Navigation({ onItemClick }: NavigationProps) {
-  const navigationItems = [
-    { label: 'Home', path: ROUTES.HOME },
-    { label: 'Products', path: ROUTES.PRODUCTS },
-    { label: 'FAQ', path: ROUTES.FAQ }
-  ];
+  const navigationItems = [{ label: 'Home', path: ROUTES.HOME }];
 
   return (
     <Box sx={{ display: 'flex', gap: 2 }}>

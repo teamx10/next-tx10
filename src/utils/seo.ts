@@ -1,14 +1,12 @@
 import { Metadata } from 'next';
 
-import { Product } from '@/types/product';
-
 export interface SEOConfig {
   description: string;
   image?: string;
   keywords?: string[];
   noindex?: boolean;
   title: string;
-  type?: 'article' | 'product' | 'website';
+  type?: 'article' | 'website';
   url?: string;
 }
 
@@ -38,7 +36,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
       ],
       siteName: 'TeamX10',
       title: fullTitle,
-      type: type === 'product' ? 'website' : type,
+      type,
       url: fullUrl
     },
     robots: noindex ? 'noindex, nofollow' : 'index, follow',
@@ -48,32 +46,6 @@ export function generateMetadata(config: SEOConfig): Metadata {
       description,
       images: [ogImage],
       title: fullTitle
-    }
-  };
-}
-
-export function generateProductMetadata(product: Product): Metadata {
-  return generateMetadata({
-    description: product.description,
-    keywords: ['poker', product.category, 'training', 'guide'],
-    title: product.name,
-    type: 'product',
-    url: `/products/${product.slug}`
-  });
-}
-
-export function generateStructuredData(product: Product) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    description: product.description,
-    image: product.imageUrl,
-    name: product.name,
-    offers: {
-      '@type': 'Offer',
-      availability: product.isActive ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      price: product.price,
-      priceCurrency: product.currency
     }
   };
 }

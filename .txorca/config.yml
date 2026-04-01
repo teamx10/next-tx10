@@ -1,0 +1,60 @@
+project:
+  name: next-tx10
+  repo: teamx10/next-tx10
+
+workflow:
+  stages:
+    brainstorm: true
+    requirements: true
+    planning: true
+    implementation: true
+    machine_review: true
+    pr_creation: true
+    pr_review: true
+    delivery: true
+
+gates:
+  - stage: requirements
+    mode: human
+  - stage: planning
+    mode: human
+  - stage: machine_review
+    mode: human
+  - stage: pr_review
+    mode: human
+
+repair:
+  max_iterations: 3
+  escalate_to: human
+
+agents:
+  - role: planner
+    model: claude-opus-4-6
+  - role: critic
+    model: claude-opus-4-6
+  - role: spec-writer
+    model: claude-opus-4-6
+  - role: builder
+    model: claude-sonnet-4-6
+  - role: code-reviewer
+    model: claude-opus-4-6
+  - role: repair-agent
+    model: claude-sonnet-4-6
+
+git:
+  worktree_root: .worktrees
+  branch_prefix: task
+
+commands:
+  test: "echo 'No test framework configured'"
+  lint: npm run lint
+  build: npm run build
+  typecheck: npx tsc --noEmit
+
+labels:
+  prefix: tx/
+
+knowledge:
+  - CLAUDE.md
+  - .txorca/agents/
+  - .txorca/rubrics/

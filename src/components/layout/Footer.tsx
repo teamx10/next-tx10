@@ -59,9 +59,6 @@ export function Footer() {
               >
                 Privacy Policy
               </MuiLink>
-              <MuiLink color="text.secondary" component={Link} href={ROUTES.FAQ} underline="hover" variant="body2">
-                FAQ
-              </MuiLink>
             </Stack>
           </Box>
           <Box sx={{ alignItems: 'center', display: 'flex', gap: 1 }}>

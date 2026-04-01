@@ -13,11 +13,7 @@ interface MobileNavigationProps {
 }
 
 export function MobileNavigation({ onClose, open }: MobileNavigationProps) {
-  const navigationItems = [
-    { label: 'Home', path: ROUTES.HOME },
-    { label: 'Products', path: ROUTES.PRODUCTS },
-    { label: 'FAQ', path: ROUTES.FAQ }
-  ];
+  const navigationItems = [{ label: 'Home', path: ROUTES.HOME }];
 
   return (
     <Drawer

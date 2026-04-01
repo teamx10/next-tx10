@@ -13,42 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: baseUrl
     },
     {
-      changeFrequency: 'weekly',
-      lastModified: new Date(),
-      priority: 0.8,
-      url: `${baseUrl}${ROUTES.PRODUCTS}`
-    },
-    {
-      changeFrequency: 'monthly',
-      lastModified: new Date(),
-      priority: 0.7,
-      url: `${baseUrl}${ROUTES.PRODUCT_POKER_GUIDE}`
-    },
-    {
-      changeFrequency: 'monthly',
-      lastModified: new Date(),
-      priority: 0.7,
-      url: `${baseUrl}${ROUTES.PRODUCT_POKER_COMBINATIONS}`
-    },
-    {
-      changeFrequency: 'monthly',
-      lastModified: new Date(),
-      priority: 0.7,
-      url: `${baseUrl}${ROUTES.PRODUCT_POKER_STRATEGY}`
-    },
-    {
-      changeFrequency: 'monthly',
-      lastModified: new Date(),
-      priority: 0.7,
-      url: `${baseUrl}${ROUTES.PRODUCT_SOLITAIRE}`
-    },
-    {
-      changeFrequency: 'monthly',
-      lastModified: new Date(),
-      priority: 0.6,
-      url: `${baseUrl}${ROUTES.FAQ}`
-    },
-    {
       changeFrequency: 'yearly',
       lastModified: new Date(),
       priority: 0.3,
