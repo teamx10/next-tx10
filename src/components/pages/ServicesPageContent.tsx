@@ -1,5 +1,4 @@
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
-import Link from 'next/link';
 
 import type { Locale } from '@/lib/i18n/config';
 
@@ -7,6 +6,7 @@ import { ServiceCard } from '@/components/sections/services/ServiceCard';
 import { ServicesStepper } from '@/components/sections/services/ServicesStepper';
 import { ROUTES } from '@/constants/routes';
 import { SERVICES } from '@/constants/services';
+import { Link } from '@/lib/i18n/navigation';
 
 interface ServicesPageContentProps {
   locale: Locale;

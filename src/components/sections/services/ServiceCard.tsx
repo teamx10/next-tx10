@@ -1,11 +1,11 @@
 import { Box, Chip, Typography } from '@mui/material';
-import Link from 'next/link';
 
 import type { Locale } from '@/lib/i18n/config';
 import type { Service } from '@/types/service';
 
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ROUTES } from '@/constants/routes';
+import { Link } from '@/lib/i18n/navigation';
 
 interface ServiceCardProps {
   learnMore: string;

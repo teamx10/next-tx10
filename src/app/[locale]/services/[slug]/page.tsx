@@ -51,6 +51,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
           cta: tServices('cta'),
           deliverable: tServices('deliverable'),
           features: tServices('features'),
+          phase: tServices('phase'),
           relatedCases: tServices('relatedCases')
         }}
         cases={relatedCases}
