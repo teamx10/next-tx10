@@ -36,7 +36,7 @@ export async function PhasesOverview() {
                     {t(`phases.phase${service.phase}Desc` as Parameters<typeof t>[0])}
                   </Typography>
                   <Typography color="text.disabled" sx={{ mt: 1 }} variant="caption">
-                    {service.deliverable}
+                    {t(`phases.phase${service.phase}Deliverable` as Parameters<typeof t>[0])}
                   </Typography>
                 </GlassCard>
               </Link>

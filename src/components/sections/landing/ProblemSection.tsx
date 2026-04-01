@@ -15,7 +15,7 @@ export async function ProblemSection() {
         <Stack spacing={2} sx={{ mt: 4 }}>
           {items.map(item => (
             <Stack alignItems="flex-start" direction="row" key={item} spacing={2}>
-              <Typography fontSize={24} lineHeight={1.4}>
+              <Typography aria-hidden="true" fontSize={24} lineHeight={1.4}>
                 ❌
               </Typography>
               <Typography variant="body1">{item}</Typography>

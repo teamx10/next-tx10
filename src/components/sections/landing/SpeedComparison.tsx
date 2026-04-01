@@ -1,25 +1,24 @@
 'use client';
 
-import { Box, Container, Stack, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography, useMediaQuery } from '@mui/material';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
 
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
-const BARS = [
-  { aiWidth: 100, label: 'Code generation', traditionalWidth: 30 },
-  { aiWidth: 90, label: 'Code review', traditionalWidth: 40 },
-  { aiWidth: 95, label: 'Test writing', traditionalWidth: 25 },
-  { aiWidth: 85, label: 'Documentation', traditionalWidth: 45 },
-  { aiWidth: 80, label: 'Bug fixing', traditionalWidth: 50 }
+type BarKey = 'bugFixing' | 'codeGeneration' | 'codeReview' | 'documentation' | 'testWriting';
+
+const BARS: { aiWidth: number; key: BarKey; traditionalWidth: number }[] = [
+  { aiWidth: 100, key: 'codeGeneration', traditionalWidth: 30 },
+  { aiWidth: 90, key: 'codeReview', traditionalWidth: 40 },
+  { aiWidth: 95, key: 'testWriting', traditionalWidth: 25 },
+  { aiWidth: 85, key: 'documentation', traditionalWidth: 45 },
+  { aiWidth: 80, key: 'bugFixing', traditionalWidth: 50 }
 ];
 
 export function SpeedComparison() {
   const t = useTranslations('landing');
   const [ref, isIntersecting] = useIntersectionObserver<HTMLDivElement>();
-  const [prefersReduced] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  );
+  const prefersReduced = useMediaQuery('(prefers-reduced-motion: reduce)', { noSsr: true });
 
   const animated = isIntersecting || prefersReduced;
 
@@ -41,9 +40,9 @@ export function SpeedComparison() {
         </Stack>
         <Stack spacing={3}>
           {BARS.map(bar => (
-            <Box key={bar.label}>
+            <Box key={bar.key}>
               <Typography variant="body2" gutterBottom>
-                {bar.label}
+                {t(`speed.bars.${bar.key}` as Parameters<typeof t>[0])}
               </Typography>
               <Stack spacing={1}>
                 <Box

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
     description: t('hero.subtitle'),
     keywords: ['AI consulting', 'TeamX10', 'AI adoption', 'developer productivity'],
     title: t('hero.title'),
-    url: '/'
+    url: locale === 'en' ? '/en' : '/'
   });
 }
 
