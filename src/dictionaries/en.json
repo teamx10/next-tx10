@@ -4,9 +4,59 @@
     "learnMore": "Learn More"
   },
   "landing": {
+    "cases": {
+      "title": "Client Case Studies",
+      "viewAll": "View all cases"
+    },
+    "cta": {
+      "button": "Book a Consultation",
+      "subtitle": "First step — free consultation",
+      "title": "Ready to bring AI to your business?"
+    },
     "hero": {
+      "cta": "Book a Call",
       "subtitle": "200-400% developer productivity growth",
       "title": "We bring AI into your business"
+    },
+    "phases": {
+      "phase1Desc": "Assess team and process readiness for AI",
+      "phase1Title": "AI Audit",
+      "phase2Desc": "Build an AI implementation roadmap",
+      "phase2Title": "AI Strategy",
+      "phase3Desc": "Integrate AI into development workflows",
+      "phase3Title": "AI Integration",
+      "phase4Desc": "Train your team and transfer knowledge",
+      "phase4Title": "AI Training",
+      "phase5Desc": "Measure and optimize AI results",
+      "phase5Title": "AI Optimization",
+      "subtitle": "From audit to systematic optimization",
+      "title": "5 phases of AI adoption"
+    },
+    "problem": {
+      "item1": "80% of developer time spent on routine tasks",
+      "item2": "Unstructured AI tool usage — no process",
+      "item3": "Competitors already adopting AI systematically",
+      "title": "Why your team isn't ready for AI transformation"
+    },
+    "proof": {
+      "commits": "1000+",
+      "commitsLabel": "AI commits",
+      "productivity": "10x",
+      "productivityLabel": "productivity",
+      "projects": "5+",
+      "projectsLabel": "projects",
+      "years": "20+",
+      "yearsLabel": "years experience"
+    },
+    "speed": {
+      "aiCaption": "With TeamX10 AI assistants",
+      "aiLabel": "With AI",
+      "title": "AI accelerates development dramatically",
+      "traditionalCaption": "Traditional development",
+      "traditionalLabel": "Without AI"
+    },
+    "trustedBy": {
+      "title": "Trusted by"
     }
   },
   "nav": {
