@@ -1,0 +1,19 @@
+{
+  "common": {
+    "bookCall": "Book a Call",
+    "learnMore": "Learn More"
+  },
+  "landing": {
+    "hero": {
+      "subtitle": "200-400% developer productivity growth",
+      "title": "We bring AI into your business"
+    }
+  },
+  "nav": {
+    "about": "About",
+    "cases": "Cases",
+    "contacts": "Contacts",
+    "home": "Home",
+    "services": "Services"
+  }
+}

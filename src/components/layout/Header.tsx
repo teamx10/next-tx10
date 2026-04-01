@@ -21,6 +21,7 @@ import { useState } from 'react';
 
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { ROUTES } from '@/constants/routes';
 
 export function Header() {
@@ -83,6 +84,7 @@ export function Header() {
           )}
 
           <Box sx={{ alignItems: 'center', display: 'flex', gap: 1 }}>
+            <LanguageSwitcher />
             <ThemeToggle />
           </Box>
         </Toolbar>

@@ -1,11 +1,9 @@
-import type { NextRequest } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
 
-import { NextResponse } from 'next/server';
+import { routing } from '@/lib/i18n/routing';
 
-export function middleware(request: NextRequest) {
-  return NextResponse.rewrite(new URL('/_closed', request.url));
-}
+export default createMiddleware(routing);
 
 export const config = {
-  matcher: '/((?!_next|favicon\\.ico).+)'
+  matcher: ['/((?!_next|.*\\..*).*)', '/']
 };
