@@ -1,6 +1,6 @@
-import { resolve } from 'path';
-
 import type { NextConfig } from 'next';
+
+import { resolve } from 'path';
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
