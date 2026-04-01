@@ -5,7 +5,7 @@
 | 4 | Pivot next-tx10: AI Consulting Marketing Site | story | todo | XXL | 2026-04-01 | 2026-04-01 |
 | 5 | [Cleanup] Remove poker/auth/payment — Task 1/9 | feature | todo | M | 2026-04-01 | 2026-04-01 |
 | 6 | [Design System] New palette + GlassCard + AnimatedGradient — Task 2/9 | feature | todo | M | 2026-04-01 | 2026-04-01 |
-| 7 | [i18n] next-intl, [locale] routes, dictionaries, language switcher — Task 3/9 | feature | todo | M | 2026-04-01 | 2026-04-01 |
+| 7 | [i18n] next-intl, [locale] routes, dictionaries, language switcher — Task 3/9 | feature | in-progress | M | 2026-04-01 | 2026-04-01 |
 | 8 | [Content Data] Types + constants (services, cases, nav, routes) — Task 4/9 | feature | todo | S | 2026-04-01 | 2026-04-01 |
 | 9 | [Landing Page] 8 section components — Task 5/9 | feature | todo | M | 2026-04-01 | 2026-04-01 |
 | 10 | [Services Pages] Overview + 5 service detail pages — Task 6/9 | feature | todo | M | 2026-04-01 | 2026-04-01 |

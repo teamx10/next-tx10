@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
-import { ThemeProviderWrapper } from '@/components/layout/ThemeProviderWrapper';
+import { getLocale } from 'next-intl/server';
+
+import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
 
 import './globals.css';
-import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
 
 const seoConfig = {
   description:
@@ -14,22 +16,17 @@ const seoConfig = {
 };
 
 export const metadata: Metadata = generateSEOMetadata(seoConfig);
-export const dynamic = 'force-dynamic';
 
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const locale = await getLocale();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link href="/favicon.ico" rel="icon" />
       </head>
-      <body>
-        <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
