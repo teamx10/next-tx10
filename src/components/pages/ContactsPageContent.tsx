@@ -27,7 +27,7 @@ export function ContactsPageContent({ t }: ContactsPageContentProps) {
       </Box>
 
       <Box sx={{ mb: 6 }}>
-        <CalendlyEmbed />
+        <CalendlyEmbed ariaLabel={t.calendlyAlt} />
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, textAlign: 'center' }}>

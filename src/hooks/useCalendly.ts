@@ -10,10 +10,15 @@ interface UseCalendlyResult {
 export function useCalendly(): UseCalendlyResult {
   const [isAvailable, setIsAvailable] = useState(false);
 
+  const url = process.env.NEXT_PUBLIC_CALENDLY_URL;
+
   useEffect(() => {
+    if (!url) return;
+
     const checkAvailability = () => {
       if (typeof window !== 'undefined' && 'Calendly' in window) {
         setIsAvailable(true);
+        clearInterval(interval);
       }
     };
 
@@ -24,11 +29,9 @@ export function useCalendly(): UseCalendlyResult {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [url]);
 
   const openCalendly = () => {
-    const url = process.env.NEXT_PUBLIC_CALENDLY_URL;
-
     if (!isAvailable || !url) return;
 
     type CalendlyWindow = Window & { Calendly: { initPopupWidget: (opts: { url: string }) => void } };

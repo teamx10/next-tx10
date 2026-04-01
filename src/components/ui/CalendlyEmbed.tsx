@@ -4,10 +4,11 @@ import { Box } from '@mui/material';
 import { useEffect, useRef } from 'react';
 
 interface CalendlyEmbedProps {
+  ariaLabel?: string;
   url?: string;
 }
 
-export function CalendlyEmbed({ url = process.env.NEXT_PUBLIC_CALENDLY_URL }: CalendlyEmbedProps) {
+export function CalendlyEmbed({ ariaLabel, url = process.env.NEXT_PUBLIC_CALENDLY_URL }: CalendlyEmbedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,7 +33,12 @@ export function CalendlyEmbed({ url = process.env.NEXT_PUBLIC_CALENDLY_URL }: Ca
     };
 
     if (existing) {
-      initWidget();
+      // Script tag exists but may still be loading — wait for load event if Calendly not yet available
+      if ('Calendly' in window) {
+        initWidget();
+      } else {
+        existing.addEventListener('load', initWidget, { once: true });
+      }
 
       return;
     }
@@ -45,5 +51,7 @@ export function CalendlyEmbed({ url = process.env.NEXT_PUBLIC_CALENDLY_URL }: Ca
     document.head.appendChild(script);
   }, [url]);
 
-  return <Box ref={containerRef} sx={{ minHeight: 700, width: '100%' }} />;
+  if (!url) return null;
+
+  return <Box aria-label={ariaLabel} ref={containerRef} sx={{ minHeight: 700, width: '100%' }} />;
 }
