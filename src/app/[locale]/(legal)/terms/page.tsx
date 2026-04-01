@@ -51,8 +51,8 @@ export default function TermsPage() {
             3. Products and Services
           </Typography>
           <Typography variant="body1" paragraph>
-            TeamX10 offers various poker training products and games. All purchases are final unless otherwise stated.
-            Refunds may be available under certain circumstances as outlined in our refund policy.
+            TeamX10 offers AI consulting and development acceleration services. All purchases are final unless otherwise
+            stated. Refunds may be available under certain circumstances as outlined in our refund policy.
           </Typography>
         </section>
 
