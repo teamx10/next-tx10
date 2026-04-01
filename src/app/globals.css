@@ -1,3 +1,23 @@
+:root {
+  --glass-blur: 12px;
+  --glass-bg-light: rgba(255, 255, 255, 0.7);
+  --glass-bg-dark: rgba(30, 41, 59, 0.7);
+  --glass-border-light: rgba(99, 102, 241, 0.15);
+  --glass-border-dark: rgba(255, 255, 255, 0.08);
+}
+
+@keyframes gradientDrift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-gradient {
+    animation: none !important;
+  }
+}
+
 html,
 body {
   max-width: 100vw;

@@ -3,7 +3,7 @@ import { createTheme, PaletteMode, ThemeOptions } from '@mui/material/styles';
 // Light mode color palette
 const lightPalette = {
   background: {
-    default: '#F5F5F5',
+    default: '#F8FAFC',
     paper: '#FFFFFF'
   },
   error: {
@@ -19,15 +19,15 @@ const lightPalette = {
   mode: 'light' as PaletteMode,
   primary: {
     contrastText: '#FFFFFF',
-    dark: '#388E3C',
-    light: '#81C784',
-    main: '#4CAF50' // Light green
+    dark: '#4F46E5',
+    light: '#A5B4FC',
+    main: '#6366F1' // Indigo-500
   },
   secondary: {
     contrastText: '#FFFFFF',
-    dark: '#00796B',
-    light: '#4DB6AC',
-    main: '#009688' // Teal
+    dark: '#7C3AED',
+    light: '#C4B5FD',
+    main: '#8B5CF6' // Violet-500
   },
   success: {
     dark: '#388E3C',
@@ -35,8 +35,8 @@ const lightPalette = {
     main: '#4CAF50'
   },
   text: {
-    primary: '#212121',
-    secondary: '#757575'
+    primary: '#1E293B',
+    secondary: '#64748B'
   },
   warning: {
     dark: '#F57C00',
@@ -48,8 +48,8 @@ const lightPalette = {
 // Dark mode color palette
 const darkPalette = {
   background: {
-    default: '#121212',
-    paper: '#1E1E1E'
+    default: '#0F172A',
+    paper: '#1E293B'
   },
   error: {
     dark: '#D32F2F',
@@ -63,16 +63,16 @@ const darkPalette = {
   },
   mode: 'dark' as PaletteMode,
   primary: {
-    contrastText: '#000000',
-    dark: '#388E3C',
-    light: '#A5D6A7',
-    main: '#66BB6A' // Lighter green for dark background
+    contrastText: '#FFFFFF',
+    dark: '#6366F1',
+    light: '#C7D2FE',
+    main: '#818CF8' // Indigo-400
   },
   secondary: {
-    contrastText: '#000000',
-    dark: '#00796B',
-    light: '#80DEEA',
-    main: '#4DD0E1' // Lighter teal for dark background
+    contrastText: '#FFFFFF',
+    dark: '#8B5CF6',
+    light: '#DDD6FE',
+    main: '#A78BFA' // Violet-400
   },
   success: {
     dark: '#388E3C',
@@ -80,8 +80,8 @@ const darkPalette = {
     main: '#66BB6A'
   },
   text: {
-    primary: '#FFFFFF',
-    secondary: '#B0B0B0'
+    primary: '#F1F5F9',
+    secondary: '#94A3B8'
   },
   warning: {
     dark: '#F57C00',
@@ -90,7 +90,7 @@ const darkPalette = {
   }
 };
 
-const getThemeOptions = (mode: 'light' | 'dark'): ThemeOptions => ({
+const getThemeOptions = (mode: 'dark' | 'light'): ThemeOptions => ({
   breakpoints: {
     values: {
       lg: 1280,
@@ -104,9 +104,7 @@ const getThemeOptions = (mode: 'light' | 'dark'): ThemeOptions => ({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: mode === 'dark'
-            ? '0 2px 4px rgba(0,0,0,0.3)'
-            : '0 2px 4px rgba(0,0,0,0.1)'
+          boxShadow: mode === 'dark' ? '0 2px 4px rgba(0,0,0,0.3)' : '0 2px 4px rgba(0,0,0,0.1)'
         }
       }
     },
@@ -114,13 +112,9 @@ const getThemeOptions = (mode: 'light' | 'dark'): ThemeOptions => ({
       styleOverrides: {
         contained: {
           '&:hover': {
-            boxShadow: mode === 'dark'
-              ? '0 4px 8px rgba(0,0,0,0.4)'
-              : '0 4px 8px rgba(0,0,0,0.15)'
+            boxShadow: mode === 'dark' ? '0 4px 8px rgba(0,0,0,0.4)' : '0 4px 8px rgba(0,0,0,0.15)'
           },
-          boxShadow: mode === 'dark'
-            ? '0 2px 4px rgba(0,0,0,0.3)'
-            : '0 2px 4px rgba(0,0,0,0.1)'
+          boxShadow: mode === 'dark' ? '0 2px 4px rgba(0,0,0,0.3)' : '0 2px 4px rgba(0,0,0,0.1)'
         },
         root: {
           borderRadius: 8,
@@ -132,10 +126,17 @@ const getThemeOptions = (mode: 'light' | 'dark'): ThemeOptions => ({
     MuiCard: {
       styleOverrides: {
         root: {
+          backdropFilter: 'blur(var(--glass-blur, 12px))',
+          background:
+            mode === 'dark'
+              ? 'var(--glass-bg-dark, rgba(30, 41, 59, 0.7))'
+              : 'var(--glass-bg-light, rgba(255, 255, 255, 0.7))',
+          border:
+            mode === 'dark'
+              ? '1px solid var(--glass-border-dark, rgba(255, 255, 255, 0.08))'
+              : '1px solid var(--glass-border-light, rgba(99, 102, 241, 0.15))',
           borderRadius: 12,
-          boxShadow: mode === 'dark'
-            ? '0 2px 8px rgba(0,0,0,0.4)'
-            : '0 2px 8px rgba(0,0,0,0.1)'
+          boxShadow: mode === 'dark' ? '0 4px 24px rgba(0,0,0,0.4)' : '0 4px 24px rgba(99, 102, 241, 0.08)'
         }
       }
     },
@@ -209,17 +210,24 @@ const getThemeOptions = (mode: 'light' | 'dark'): ThemeOptions => ({
 });
 
 // Export theme creator function
-export const createAppTheme = (mode: 'light' | 'dark') => createTheme(getThemeOptions(mode));
+export const createAppTheme = (mode: 'dark' | 'light') => createTheme(getThemeOptions(mode));
 
 // Gradient utilities that adapt to theme mode
-export const getGradients = (mode: 'light' | 'dark') => ({
-  background: mode === 'dark'
-    ? 'linear-gradient(135deg, #1E1E1E 0%, #2C2C2C 100%)'
-    : 'linear-gradient(135deg, #E8F5E9 0%, #E0F2F1 100%)',
-  primary: mode === 'dark'
-    ? 'linear-gradient(135deg, #66BB6A 0%, #4DD0E1 100%)'
-    : 'linear-gradient(135deg, #4CAF50 0%, #009688 100%)',
-  secondary: mode === 'dark'
-    ? 'linear-gradient(135deg, #A5D6A7 0%, #80DEEA 100%)'
-    : 'linear-gradient(135deg, #81C784 0%, #4DB6AC 100%)'
+export const getGradients = (mode: 'dark' | 'light') => ({
+  background:
+    mode === 'dark'
+      ? 'linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%)'
+      : 'linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 100%)',
+  glass:
+    mode === 'dark'
+      ? 'linear-gradient(135deg, rgba(129, 140, 248, 0.12) 0%, rgba(167, 139, 250, 0.12) 100%)'
+      : 'linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%)',
+  primary:
+    mode === 'dark'
+      ? 'linear-gradient(135deg, #818CF8 0%, #A78BFA 100%)'
+      : 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
+  secondary:
+    mode === 'dark'
+      ? 'linear-gradient(135deg, #A78BFA 0%, #C4B5FD 100%)'
+      : 'linear-gradient(135deg, #8B5CF6 0%, #A5B4FC 100%)'
 });

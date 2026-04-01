@@ -1,8 +1,9 @@
 'use client';
 
+import type { ReactNode } from 'react';
+
 import { createContext, useContext, useEffect, useState } from 'react';
 
-import type { ReactNode } from 'react';
 import type { ThemeContextValue, ThemeMode } from '@/types/theme';
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
@@ -10,15 +11,16 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 const STORAGE_KEY = 'theme-mode';
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [mode, setMode] = useState<ThemeMode>('dark');
+  const [mode, setMode] = useState<ThemeMode>(() => {
+    if (typeof window === 'undefined') return 'dark';
+    const stored = localStorage.getItem(STORAGE_KEY);
+
+    return stored === 'light' || stored === 'dark' ? stored : 'dark';
+  });
   const [mounted, setMounted] = useState(false);
 
-  // Load theme from localStorage on mount
   useEffect(() => {
-    const storedMode = localStorage.getItem(STORAGE_KEY) as ThemeMode | null;
-    if (storedMode === 'light' || storedMode === 'dark') {
-      setMode(storedMode);
-    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR hydration guard: fires once after client mount to prevent theme flash
     setMounted(true);
   }, []);
 
@@ -30,7 +32,7 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   }, [mode, mounted]);
 
   const toggleTheme = () => {
-    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
   };
 
   // Prevent flash of wrong theme by rendering nothing until mounted
@@ -38,11 +40,7 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
     return null;
   }
 
-  return (
-    <ThemeContext.Provider value={{ mode, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ mode, toggleTheme }}>{children}</ThemeContext.Provider>;
 };
 
 export const useThemeMode = (): ThemeContextValue => {
@@ -50,5 +48,6 @@ export const useThemeMode = (): ThemeContextValue => {
   if (context === undefined) {
     throw new Error('useThemeMode must be used within a ThemeContextProvider');
   }
+
   return context;
 };
