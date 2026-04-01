@@ -7,9 +7,9 @@ import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
 
 const seoConfig = {
   description:
-    'Master poker with our comprehensive guides, training programs, and games. Learn poker strategies, combinations, and improve your skills.',
-  keywords: ['poker', 'poker training', 'poker guide', 'poker strategy', 'poker combinations', 'solitaire'],
-  title: 'TeamX10 - Poker Training & Games',
+    'TeamX10 — AI consulting for Ukrainian and international companies. We help teams adopt AI in software development.',
+  keywords: ['AI consulting', 'TeamX10', 'artificial intelligence', 'software development', 'Ukraine'],
+  title: 'TeamX10 - AI Consulting',
   url: '/'
 };
 
