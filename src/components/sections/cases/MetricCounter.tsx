@@ -23,6 +23,7 @@ export function MetricCounter({ label, value }: MetricCounterProps) {
   const suffix = getSuffix(value);
   const [count, setCount] = useState(0);
   const animatedRef = useRef(false);
+  const frameRef = useRef<number>(0);
   const { isIntersecting, ref } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.3 });
 
   useEffect(() => {
@@ -31,22 +32,31 @@ export function MetricCounter({ label, value }: MetricCounterProps) {
     animatedRef.current = true;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const duration = prefersReducedMotion || target === 0 ? 0 : 1200;
+
+    if (prefersReducedMotion || target === 0) {
+      frameRef.current = requestAnimationFrame(() => setCount(target));
+
+      return () => cancelAnimationFrame(frameRef.current);
+    }
+
+    const duration = 1200;
     const startTime = performance.now();
 
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
-      const progress = duration === 0 ? 1 : Math.min(elapsed / duration, 1);
+      const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
 
       setCount(Math.round(eased * target));
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        frameRef.current = requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animate);
+    frameRef.current = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frameRef.current);
   }, [isIntersecting, target]);
 
   return (
