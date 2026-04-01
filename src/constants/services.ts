@@ -84,7 +84,7 @@ export const SERVICES: Service[] = [
   {
     deliverable: {
       en: 'Working Multi-Agent System',
-      uk: 'Працюючий мультиагентний систем'
+      uk: 'Працююча мультиагентна система'
     },
     description: {
       en: 'We design and deploy multi-agent systems where specialized AI agents collaborate to complete complex tasks autonomously.',

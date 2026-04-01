@@ -1,6 +1,6 @@
 import type { Locale } from './i18n';
 
-interface ServiceFeature {
+export interface ServiceFeature {
   description: Record<Locale, string>;
   icon: string;
   title: Record<Locale, string>;

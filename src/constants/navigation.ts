@@ -1,6 +1,6 @@
 import { ROUTES } from './routes';
 
-interface NavItem {
+export interface NavItem {
   href: string;
   labelKey: string;
 }
