@@ -1,27 +1,19 @@
-import { Box, Typography } from '@mui/material';
-
-import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
-
 export default function NotFound() {
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         alignItems: 'center',
         backgroundColor: '#121212',
+        color: '#9e9e9e',
         display: 'flex',
         flexDirection: 'column',
-        gap: 2,
+        gap: '16px',
         justifyContent: 'center',
         minHeight: '100vh'
       }}
     >
-      <TeamX10Logo color="orange" width={300} />
-      <Typography color="#9e9e9e" variant="h5">
-        Page not found
-      </Typography>
-      <Typography color="#757575" variant="body2">
-        This site is under construction
-      </Typography>
-    </Box>
+      <p style={{ fontSize: '1.25rem' }}>Page not found</p>
+      <p style={{ color: '#757575', fontSize: '0.875rem' }}>404</p>
+    </div>
   );
 }
