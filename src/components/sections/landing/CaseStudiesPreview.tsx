@@ -1,5 +1,7 @@
 import { Box, Container, Grid, Stack, Typography } from '@mui/material';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+
+import type { Locale } from '@/types/i18n';
 
 import { GlassCard } from '@/components/ui/GlassCard';
 import { CASE_STUDIES } from '@/constants/case-studies';
@@ -7,8 +9,9 @@ import { ROUTES } from '@/constants/routes';
 import { Link } from '@/lib/i18n/navigation';
 
 export async function CaseStudiesPreview() {
-  const t = await getTranslations('landing');
+  const [t, locale] = await Promise.all([getTranslations('landing'), getLocale()]);
   const featured = CASE_STUDIES.slice(0, 3);
+  const l = locale as Locale;
 
   return (
     <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
@@ -34,16 +37,16 @@ export async function CaseStudiesPreview() {
               >
                 <GlassCard sx={{ '&:hover': { boxShadow: 4 }, height: '100%' }}>
                   <Typography color="primary" fontWeight={700} variant="h5">
-                    {study.keyMetric}
+                    {study.metrics[0]?.value}
                   </Typography>
                   <Typography fontWeight={600} variant="h6" gutterBottom>
-                    {study.title}
+                    {study.title[l]}
                   </Typography>
                   <Typography color="text.secondary" variant="caption" gutterBottom>
                     {study.client}
                   </Typography>
                   <Typography color="text.secondary" sx={{ mt: 1 }} variant="body2">
-                    {study.description}
+                    {study.description[l]}
                   </Typography>
                 </GlassCard>
               </Link>
