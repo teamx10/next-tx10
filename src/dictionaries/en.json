@@ -1,4 +1,12 @@
 {
+  "about": {
+    "approach": "Our Approach",
+    "ctaTitle": "Ready to start?",
+    "story": "Our Story",
+    "subtitle": "We deliver AI solutions with human oversight — so your business grows faster.",
+    "title": "About Us",
+    "values": "Our Values"
+  },
   "common": {
     "bookCall": "Book a Call",
     "learnMore": "Learn More"
@@ -89,6 +97,13 @@
     "subtitle": "Real client results that demonstrate the power of AI-driven transformation.",
     "title": "Case Studies",
     "viewCase": "View case"
+  },
+  "contacts": {
+    "calendlyAlt": "Pick a time that works for you",
+    "email": "Email",
+    "subtitle": "Pick a time for a call or reach out to us directly.",
+    "telegram": "Telegram",
+    "title": "Contacts"
   },
   "services": {
     "cta": "Book a Free Consultation",
