@@ -78,6 +78,18 @@
     "home": "Home",
     "services": "Services"
   },
+  "cases": {
+    "challenge": "Challenge",
+    "cta": "Book a Free Consultation",
+    "insight": "Key Insight",
+    "metrics": "Key Metrics",
+    "relatedServices": "Related Services",
+    "results": "Results",
+    "solution": "Solution",
+    "subtitle": "Real client results that demonstrate the power of AI-driven transformation.",
+    "title": "Case Studies",
+    "viewCase": "View case"
+  },
   "services": {
     "cta": "Book a Free Consultation",
     "deliverable": "Key Deliverable",
