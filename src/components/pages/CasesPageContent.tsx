@@ -1,11 +1,10 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 
 import type { Locale } from '@/lib/i18n/config';
 
 import { CaseStudyCard } from '@/components/sections/cases/CaseStudyCard';
+import { CTAButton } from '@/components/ui/CTAButton';
 import { CASE_STUDIES } from '@/constants/case-studies';
-import { ROUTES } from '@/constants/routes';
-import { Link } from '@/lib/i18n/navigation';
 
 interface CasesPageContentProps {
   locale: Locale;
@@ -38,9 +37,7 @@ export function CasesPageContent({ locale, t }: CasesPageContentProps) {
       </Grid>
 
       <Box sx={{ mt: 8, textAlign: 'center' }}>
-        <Button component={Link} href={ROUTES.CONTACTS} size="large" variant="contained">
-          {t.cta}
-        </Button>
+        <CTAButton label={t.cta} size="large" />
       </Box>
     </Container>
   );

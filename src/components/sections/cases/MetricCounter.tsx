@@ -24,7 +24,7 @@ export function MetricCounter({ label, value }: MetricCounterProps) {
   const [count, setCount] = useState(0);
   const animatedRef = useRef(false);
   const frameRef = useRef<number>(0);
-  const { isIntersecting, ref } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.3 });
+  const [ref, isIntersecting] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.3 });
 
   useEffect(() => {
     if (!isIntersecting || animatedRef.current) return;

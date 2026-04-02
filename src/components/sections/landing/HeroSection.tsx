@@ -1,12 +1,11 @@
 'use client';
 
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useTranslations } from 'next-intl';
 
 import { AnimatedGradientBackground } from '@/components/ui/AnimatedGradientBackground';
+import { CTAButton } from '@/components/ui/CTAButton';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { ROUTES } from '@/constants/routes';
-import { Link } from '@/lib/i18n/navigation';
 
 export function HeroSection() {
   const t = useTranslations('landing');
@@ -28,9 +27,7 @@ export function HeroSection() {
         <Typography color="text.secondary" variant="body1" gutterBottom>
           {t('hero.subtitle')}
         </Typography>
-        <Button component={Link} href={ROUTES.CONTACTS} size="large" sx={{ mt: 2 }} variant="contained">
-          {t('hero.cta')}
-        </Button>
+        <CTAButton label={t('hero.cta')} size="large" sx={{ mt: 2 }} />
       </GlassCard>
     </AnimatedGradientBackground>
   );

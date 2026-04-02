@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Next.js 16 application for TeamX10, a poker training and games platform. Uses React 19, TypeScript, Material-UI v7, Firebase (auth + Firestore), and Stripe for payments.
+Next.js 16 application for TeamX10, an AI consulting agency for Ukrainian and international companies. Uses React 19, TypeScript, Material-UI v7, next-intl for i18n (Ukrainian/English), and Calendly for bookings.
 
 ## Development Commands
 
@@ -19,7 +19,7 @@ No test framework is currently configured.
 
 ## Site Status
 
-**The site is currently in maintenance mode.** `src/middleware.ts` rewrites all requests to `/_closed` (under-construction page). To re-open the site, remove or update the rewrite in `middleware.ts`.
+The site is live. Maintenance mode has been removed. `src/middleware.ts` handles locale routing via next-intl with `localePrefix: 'as-needed'` — Ukrainian is served at `/` (no prefix), English at `/en/*`.
 
 ## Architecture
 
@@ -27,49 +27,63 @@ No test framework is currently configured.
 
 ```
 src/
-├── app/              # Next.js App Router (pages + API routes)
-├── components/       # React components (layout/, pages/, products/, payment/, auth/, svg/, ui/)
+├── app/              # Next.js App Router
+│   ├── [locale]/     # All public pages (uk and en locales)
+│   │   ├── page.tsx         # Landing
+│   │   ├── services/        # Services list + [slug] detail
+│   │   ├── cases/           # Cases list + [slug] detail
+│   │   ├── about/           # About page
+│   │   ├── contacts/        # Contacts page
+│   │   └── (legal)/         # privacy, terms
+│   ├── layout.tsx    # Root layout (locale detection)
+│   ├── sitemap.ts    # Bilingual sitemap (uk + en for every page)
+│   └── robots.ts     # robots.txt (only /api/ disallowed)
+├── components/       # React components (layout/, pages/, sections/, svg/, ui/)
+├── constants/        # Static data (routes, services, case-studies, navigation)
 ├── contexts/         # React contexts (ThemeContext for dark/light mode)
-├── lib/              # Service configs (firebase/, stripe/, mui/)
-├── hooks/            # Custom hooks (useAuth, useFirestore, useStripe, useMediaQuery)
-├── types/            # TypeScript interfaces
-├── constants/        # Static data (routes, products, messages)
-└── utils/            # Helpers (seo, validation, format)
+├── dictionaries/     # i18n message files (en.json, uk.json)
+├── hooks/            # Custom hooks (useCalendly, useTheme, useIntersection)
+├── lib/              # Service configs (mui/, i18n/)
+├── types/            # TypeScript interfaces (Service, CaseStudy, NavItem…)
+└── utils/            # Helpers (seo.ts — locale-aware metadata + hreflang)
 ```
 
 ### Route Groups
 
-URL structure is independent of folder names due to Next.js route groups:
+All routes live under `[locale]` (uk is the default locale, en uses `/en/` prefix):
 
-- `(auth)` — sign-in (with process/success/failed/verify sub-routes), sign-up, sign-out
-- `(payment)` — select, process, success, failed
-- `(legal)` — privacy, terms
-- `products/` — product listing + individual product pages (poker-guide, poker-combinations, poker-strategy, solitaire)
-- `api/stripe/` — checkout-session and create-checkout-session API routes
+- `/` or `/uk/` — Landing page (HeroSection, PhasesOverview, CasesPreview, CTASection)
+- `/services` — Services list with stepper
+- `/services/[slug]` — Service detail (5 services: ai-audit, ai-basics, orchestration, automation, night-shift)
+- `/cases` — Case studies list
+- `/cases/[slug]` — Case study detail (4 cases: ai-development, ai-sdlc, enterprise-ai, ai-interviews)
+- `/about` — About TeamX10
+- `/contacts` — Contact form / Calendly embed
+- `/(legal)/privacy`, `/(legal)/terms` — Legal pages
 
 ### Key Patterns
 
-**Authentication**: Passwordless email link + Google sign-in (popup with redirect fallback). `lib/firebase/config.ts` exports `auth` and `db` as nullable — returns `null` if env vars are missing. `lib/firebase/auth.ts` throws at module level if Firebase is unconfigured (hard failure for auth-dependent code). Email link flow stores email in localStorage with 24h expiry.
+**i18n**: next-intl v4. Default locale: `uk` (no prefix). English uses `/en/` prefix. Translations in `src/dictionaries/en.json` and `src/dictionaries/uk.json`. Use `useTranslations('namespace')` in client components, `getTranslations('namespace')` in server components. `setRequestLocale(locale)` required in page/layout server components for static generation.
+
+**Calendly Integration**: `CTAButton` component (`components/ui/CTAButton.tsx`) opens a Calendly popup if `NEXT_PUBLIC_CALENDLY_URL` is set, otherwise falls back to `/contacts`. Use `CTAButton` for all call-to-action buttons — never use plain MUI Button linking to /contacts.
+
+**Glassmorphism UI**: `GlassCard` and `AnimatedGradientBackground` components from `ui/`. Used in hero, CTA sections, service/case cards.
 
 **Theme System**: `ThemeContextProvider` in `contexts/ThemeContext.tsx` wraps the app with dark/light mode state. `createAppTheme(mode)` in `lib/mui/theme.ts` generates the MUI theme. `getGradients(mode)` provides mode-aware gradient strings. The wrapper lives in `components/layout/ThemeProviderWrapper.tsx` which also renders Header/Footer.
 
-**Payment Flow**: Client calls `api/stripe/create-checkout-session` → gets Stripe session → redirects to Stripe-hosted checkout → returns to success/failed pages.
+**SEO**: `utils/seo.ts` exports:
+- `generateMetadata({ locale, path, title, description, ... })` — returns Next.js Metadata with hreflang alternates (`x-default`, `uk`, `en`)
+- `generateOrganizationStructuredData()` — returns schema.org Organization JSON-LD object
 
 **Routes**: All routes centralized in `constants/routes.ts` as `ROUTES` const object. Always use these instead of hardcoded strings.
 
-**Products**: Defined in `constants/products.ts` with lookup helpers `getProductBySlug()` and `getProductById()`.
+**Navigation**: `NAV_ITEMS` in `constants/navigation.ts` defines all 5 nav items. Header imports these and renders with `useTranslations('nav')`.
 
-**SEO**: `utils/seo.ts` generates metadata for all pages. Product pages use schema.org structured data.
-
-**Component Organization**: `pages/` contains page-specific content components (e.g., `HomePageContent`). Feature folders (`auth/`, `payment/`, `products/`) group domain components. `layout/` has Header, Footer, Navigation, MobileNavigation, ThemeToggle.
-
-**Auth Guard**: `components/auth/AuthGuard.tsx` protects routes — wraps children, redirects to sign-in when `requireAuth` is true and user is unauthenticated.
-
-**`useAuth` return shape**: `{ user, firebaseUser, isAuthenticated, loading, error }` — `user` is the simplified `User` type from `types/user.ts`, `firebaseUser` is the raw Firebase `User` object.
-
-**Rendering**: Root layout exports `dynamic = 'force-dynamic'` — the entire app is server-side rendered dynamically. Adding `export const dynamic = 'force-static'` to a page will not work without removing this from the layout.
+**Rendering**: Root layout uses `getLocale()` from next-intl — app is dynamically rendered. `[locale]/layout.tsx` uses `generateStaticParams()` for static locale params and `setRequestLocale(locale)` for static generation per page.
 
 **React Compiler**: `babel-plugin-react-compiler` is enabled. Do **not** add manual `React.memo`, `useMemo`, or `useCallback` for render optimization — the compiler handles this automatically. Only use these hooks for semantic (non-performance) reasons.
+
+**Constants**: Services defined in `constants/services.ts`, case studies in `constants/case-studies.ts`. Both are bilingual objects with `en` and `uk` keys.
 
 ## Code Style (enforced by ESLint + Prettier)
 
@@ -96,11 +110,9 @@ URL structure is independent of folder names due to Next.js route groups:
 
 ## Environment Variables
 
-**Firebase**: `NEXT_PUBLIC_FIREBASE_API_KEY`, `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, `NEXT_PUBLIC_FIREBASE_PROJECT_ID`, `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`, `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`, `NEXT_PUBLIC_FIREBASE_APP_ID`
-
-**Stripe**: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` (client), `STRIPE_SECRET_KEY` (server only)
-
 **Site**: `NEXT_PUBLIC_SITE_URL` (defaults to `https://teamx10.com`)
+
+**Calendly**: `NEXT_PUBLIC_CALENDLY_URL` — Calendly popup URL (e.g. `https://calendly.com/teamx10/30min`). If not set, CTA buttons fall back to `/contacts` page.
 
 ## Additional Rules
 
@@ -113,7 +125,6 @@ Project-specific rules live in `.claude/rules/`:
 - Next.js 16.1.6 with React Compiler (`babel-plugin-react-compiler`)
 - React 19.2.0
 - MUI 7.3.5 (`@mui/material`, `@emotion/react`, `@emotion/styled`)
-- Firebase 12.6.0
-- Stripe 19.3.1 / @stripe/stripe-js 8.5.1
+- next-intl 4.8.4 (i18n — Ukrainian default + English)
 - TypeScript 5.x (strict mode, noUnusedLocals, noUnusedParameters)
 - ESLint 9 flat config

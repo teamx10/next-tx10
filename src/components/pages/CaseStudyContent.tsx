@@ -1,10 +1,11 @@
-import { Box, Button, Chip, Container, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Box, Chip, Container, Divider, Grid, Stack, Typography } from '@mui/material';
 
 import type { Locale } from '@/lib/i18n/config';
 import type { CaseStudy } from '@/types/case-study';
 
 import { InsightQuote } from '@/components/sections/cases/InsightQuote';
 import { MetricCounter } from '@/components/sections/cases/MetricCounter';
+import { CTAButton } from '@/components/ui/CTAButton';
 import { ROUTES } from '@/constants/routes';
 import { SERVICES } from '@/constants/services';
 import { Link } from '@/lib/i18n/navigation';
@@ -122,9 +123,7 @@ export function CaseStudyContent({ caseStudy, locale, t }: CaseStudyContentProps
       </Box>
 
       <Box sx={{ textAlign: 'center' }}>
-        <Button component={Link} href={ROUTES.CONTACTS} size="large" variant="contained">
-          {t.cta}
-        </Button>
+        <CTAButton label={t.cta} size="large" />
       </Box>
     </Container>
   );
