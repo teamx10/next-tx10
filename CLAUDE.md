@@ -17,6 +17,33 @@ npm run lint      # ESLint 9 flat config with Prettier
 
 No test framework is currently configured.
 
+## Branch Strategy & Deploy Flow
+
+**Branches:**
+- `develop` — integration branch, all feature branches merge here
+- `main` — production only, Vercel auto-deploys on every push
+
+**Development flow:**
+```
+feature/xxx → develop → (when ready) → main + release
+```
+
+**Versioning:** follow [semver](https://semver.org) — `MAJOR.MINOR.PATCH`:
+- **patch** (`x.x.X`) — bugfixes, small tweaks
+- **minor** (`x.X.0`) — new features, backward-compatible
+- **major** (`X.0.0`) — breaking changes, large milestones
+
+**Deploy steps:**
+1. Merge `develop` → `main`
+2. Push `main` to origin
+3. Ask user for release type (patch / minor / major) or exact version
+4. Bump `"version"` in `package.json` to match the new tag
+5. Commit: `git commit -m "chore(release): vX.X.X"`
+6. Create GitHub release: `gh release create vX.X.X --target main --title "vX.X.X — <title>" --notes "..."`
+
+Vercel picks up the push to `main` and deploys automatically — no manual deploy step needed.
+
+**Never** merge feature branches directly to `main`. Always go through `develop` first.
 ## Site Status
 
 The site is live. Maintenance mode has been removed. `src/middleware.ts` handles locale routing via next-intl with `localePrefix: 'as-needed'` — Ukrainian is served at `/` (no prefix), English at `/en/*`.
