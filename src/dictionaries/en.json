@@ -171,6 +171,12 @@
       "title": "Agent Orchestration — Multi-Agent AI Systems"
     }
   },
+  "footer": {
+    "consulting": "AI Consulting. Developed in Ukraine.",
+    "copyright": "Developed in Ukraine.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use"
+  },
   "cases": {
     "challenge": "Challenge",
     "cta": "Book a Free Consultation",
