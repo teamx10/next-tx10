@@ -4,6 +4,8 @@ import { Box } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
 import { ThemeContextProvider, useThemeMode } from '@/contexts/ThemeContext';
 import { createAppTheme } from '@/lib/mui/theme';
 
@@ -25,9 +27,11 @@ const ThemeContent = ({ children }: ThemeProviderWrapperProps) => {
           minHeight: '100vh'
         }}
       >
+        <Header />
         <Box component="main" sx={{ flexGrow: 1 }}>
           {children}
         </Box>
+        <Footer />
       </Box>
     </ThemeProvider>
   );

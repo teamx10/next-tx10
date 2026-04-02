@@ -5,7 +5,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
   Box,
-  Button,
   Drawer,
   IconButton,
   List,
@@ -16,24 +15,27 @@ import {
   useMediaQuery,
   useTheme
 } from '@mui/material';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
+import { CTAButton } from '@/components/ui/CTAButton';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { NAV_ITEMS } from '@/constants/navigation';
 import { ROUTES } from '@/constants/routes';
+import { Link } from '@/lib/i18n/navigation';
 
 export function Header() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
+  const t = useTranslations('nav');
+  const tCommon = useTranslations('common');
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const navigationItems = [{ label: 'Home', path: ROUTES.HOME }];
 
   const drawer = (
     <Box sx={{ width: 250 }}>
@@ -47,14 +49,17 @@ export function Header() {
         </Box>
       </Box>
       <List>
-        {navigationItems.map(item => (
-          <ListItem key={item.path} disablePadding>
-            <ListItemButton component={Link} href={item.path} onClick={handleDrawerToggle}>
-              <ListItemText primary={item.label} />
+        {NAV_ITEMS.map(item => (
+          <ListItem key={item.href} disablePadding>
+            <ListItemButton component={Link} href={item.href} onClick={handleDrawerToggle}>
+              <ListItemText primary={t(item.labelKey.replace('nav.', ''))} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
+      <Box sx={{ p: 2 }}>
+        <CTAButton label={tCommon('bookCall')} size="large" fullWidth />
+      </Box>
     </Box>
   );
 
@@ -75,15 +80,20 @@ export function Header() {
 
           {!isMobile && (
             <Box sx={{ alignItems: 'center', display: 'flex', gap: 2 }}>
-              {navigationItems.map(item => (
-                <Button component={Link} href={item.path} key={item.path} sx={{ color: theme.palette.text.primary }}>
-                  {item.label}
-                </Button>
+              {NAV_ITEMS.map(item => (
+                <Link
+                  href={item.href}
+                  key={item.href}
+                  style={{ color: theme.palette.text.primary, textDecoration: 'none' }}
+                >
+                  {t(item.labelKey.replace('nav.', ''))}
+                </Link>
               ))}
             </Box>
           )}
 
           <Box sx={{ alignItems: 'center', display: 'flex', gap: 1 }}>
+            {!isMobile && <CTAButton label={tCommon('bookCall')} size="small" />}
             <LanguageSwitcher />
             <ThemeToggle />
           </Box>
