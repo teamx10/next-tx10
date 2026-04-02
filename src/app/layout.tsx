@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 import { getLocale } from 'next-intl/server';
 
-import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
+import { generateOrganizationStructuredData, generateMetadata as generateSEOMetadata } from '@/utils/seo';
 
 import './globals.css';
 
@@ -17,6 +17,8 @@ const seoConfig = {
 
 export const metadata: Metadata = generateSEOMetadata(seoConfig);
 
+const orgJsonLd = generateOrganizationStructuredData();
+
 export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const locale = await getLocale();
 
@@ -25,6 +27,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <link href="/favicon.ico" rel="icon" />
+        {/* Organization JSON-LD — static trusted data, not user input */}
+        <script dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} type="application/ld+json" />
       </head>
       <body>{children}</body>
     </html>

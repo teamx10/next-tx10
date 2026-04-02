@@ -11,4 +11,4 @@
 | 10 | [Services Pages] Overview + 5 service detail pages — Task 6/9 | feature | done | M | 2026-04-01 | 2026-04-01 |
 | 11 | [Cases Pages] Grid + 4 case study detail pages — Task 7/9 | feature | in-progress | M | 2026-04-01 | 2026-04-01 |
 | 12 | [About + Contacts + Calendly] About page, Contacts page, Calendly integration — Task 8/9 | feature | done | S | 2026-04-01 | 2026-04-02 |
-| 13 | [SEO + Launch] Sitemap, robots, hreflang, CLAUDE.md update, go live — Task 9/9 | feature | todo | S | 2026-04-01 | 2026-04-01 |
+| 13 | [SEO + Launch] Sitemap, robots, hreflang, CLAUDE.md update, go live — Task 9/9 | feature | done | S | 2026-04-01 | 2026-04-02 |

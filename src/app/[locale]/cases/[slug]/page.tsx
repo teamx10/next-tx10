@@ -7,6 +7,8 @@ import type { Locale } from '@/lib/i18n/config';
 
 import { CaseStudyContent } from '@/components/pages/CaseStudyContent';
 import { CASE_STUDIES, getCaseStudyBySlug } from '@/constants/case-studies';
+import { ROUTES } from '@/constants/routes';
+import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
 
 interface CaseStudyPageProps {
   params: Promise<{ locale: Locale; slug: string }>;
@@ -22,10 +24,15 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
 
   if (!caseStudy) return {};
 
-  return {
-    description: caseStudy.description[locale],
-    title: caseStudy.title[locale]
-  };
+  const tSeo = await getTranslations({ locale, namespace: 'seo' });
+  const seoKey = `cases_${slug}`;
+
+  return generateSEOMetadata({
+    description: tSeo(`${seoKey}.description` as never),
+    locale,
+    path: `${ROUTES.CASES}/${slug}`,
+    title: tSeo(`${seoKey}.title` as never)
+  });
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {

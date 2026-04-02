@@ -5,6 +5,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/lib/i18n/config';
 
 import { ServicesPageContent } from '@/components/pages/ServicesPageContent';
+import { ROUTES } from '@/constants/routes';
+import { generateMetadata as generateSEOMetadata } from '@/utils/seo';
 
 interface ServicesPageProps {
   params: Promise<{ locale: Locale }>;
@@ -12,12 +14,18 @@ interface ServicesPageProps {
 
 export async function generateMetadata({ params }: ServicesPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'services' });
+  const tSeo = await getTranslations({ locale, namespace: 'seo' });
 
-  return {
-    description: t('subtitle'),
-    title: t('title')
-  };
+  return generateSEOMetadata({
+    description: tSeo('services.description'),
+    keywords: tSeo('services.keywords')
+      .split(',')
+      .map(k => k.trim())
+      .filter(Boolean),
+    locale,
+    path: ROUTES.SERVICES,
+    title: tSeo('services.title')
+  });
 }
 
 export default async function ServicesPage({ params }: ServicesPageProps) {

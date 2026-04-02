@@ -4,6 +4,7 @@ import { generateMetadata } from '@/utils/seo';
 
 export const metadata = generateMetadata({
   description: 'Privacy Policy for TeamX10 services and products',
+  noindex: true,
   title: 'Privacy Policy',
   url: '/privacy'
 });

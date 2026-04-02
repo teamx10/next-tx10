@@ -4,6 +4,7 @@ import { generateMetadata } from '@/utils/seo';
 
 export const metadata = generateMetadata({
   description: 'Terms of Use for TeamX10 services and products',
+  noindex: true,
   title: 'Terms of Use',
   url: '/terms'
 });

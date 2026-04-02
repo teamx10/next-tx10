@@ -25,3 +25,12 @@
 - Next.js 16.1.6 shows warning: "The 'middleware' file convention is deprecated. Please use 'proxy' instead."
 - Kept `src/middleware.ts` because next-intl's `createMiddleware` export is designed for this file convention. Renaming to `proxy.ts` requires verifying next-intl v4 supports the new convention.
 - Decision: leave as `middleware.ts` for now; track as follow-up when next-intl officially documents proxy support.
+
+## SEO: Centralized dictionary namespace for metadata
+
+**Date**: 2026-04-02 | **Task**: #24
+
+- All SEO strings (title, description, keywords) live in `src/dictionaries/{uk,en}.json` under a top-level `"seo"` key with 14 sub-objects (one per page/route).
+- Pages use `getTranslations({ namespace: 'seo' })` and pass values to `generateSEOMetadata()` from `utils/seo.ts`.
+- Dynamic routes use `as never` cast for computed translation keys (`services_${slug}.title`). This is safe because all slugs are statically known from constants, but new slugs MUST have matching dictionary entries.
+- Security headers (5) added to `next.config.ts` globally; CSP deferred to a follow-up due to Calendly iframe and MUI emotion inline styles.
