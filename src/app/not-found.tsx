@@ -18,7 +18,6 @@ export default function NotFound() {
       <TeamX10Logo color="#7c6af7" width={200} />
       <p style={{ color: '#9e9e9e', fontSize: '1.125rem', margin: 0 }}>Page not found</p>
       <Link
-        href="/"
         style={{
           borderRadius: '8px',
           color: '#7c6af7',
@@ -26,6 +25,7 @@ export default function NotFound() {
           padding: '8px 20px',
           textDecoration: 'none'
         }}
+        href="/"
       >
         ← Back to home
       </Link>

@@ -24,14 +24,17 @@ import { CTAButton } from '@/components/ui/CTAButton';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { NAV_ITEMS } from '@/constants/navigation';
 import { ROUTES } from '@/constants/routes';
-import { Link } from '@/lib/i18n/navigation';
+import { Link, usePathname } from '@/lib/i18n/navigation';
 
 export function Header() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
   const t = useTranslations('nav');
   const tCommon = useTranslations('common');
+
+  const isActive = (href: string) => (href === ROUTES.HOME ? pathname === '/' : pathname.startsWith(href));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -51,7 +54,12 @@ export function Header() {
       <List>
         {NAV_ITEMS.map(item => (
           <ListItem key={item.href} disablePadding>
-            <ListItemButton component={Link} href={item.href} onClick={handleDrawerToggle}>
+            <ListItemButton
+              component={Link}
+              href={item.href}
+              onClick={handleDrawerToggle}
+              selected={isActive(item.href)}
+            >
               <ListItemText primary={t(item.labelKey.replace('nav.', ''))} />
             </ListItemButton>
           </ListItem>
@@ -82,9 +90,17 @@ export function Header() {
             <Box sx={{ alignItems: 'center', display: 'flex', gap: 2 }}>
               {NAV_ITEMS.map(item => (
                 <Link
+                  style={{
+                    borderBottom: isActive(item.href)
+                      ? `2px solid ${theme.palette.primary.main}`
+                      : '2px solid transparent',
+                    color: isActive(item.href) ? theme.palette.primary.main : theme.palette.text.primary,
+                    fontWeight: isActive(item.href) ? 700 : 400,
+                    paddingBottom: 4,
+                    textDecoration: 'none'
+                  }}
                   href={item.href}
                   key={item.href}
-                  style={{ color: theme.palette.text.primary, textDecoration: 'none' }}
                 >
                   {t(item.labelKey.replace('nav.', ''))}
                 </Link>

@@ -23,6 +23,8 @@ import type { Service } from '@/types/service';
 
 import { CTAButton } from '@/components/ui/CTAButton';
 import { GlassCard } from '@/components/ui/GlassCard';
+import { ROUTES } from '@/constants/routes';
+import { Link } from '@/lib/i18n/navigation';
 
 const FEATURE_ICONS: Record<string, SvgIconComponent | undefined> = {
   account_tree: AccountTreeIcon,
@@ -127,19 +129,27 @@ export function ServiceDetailContent({ cases, locale, service, t }: ServiceDetai
           <Grid spacing={3} container>
             {cases.map(caseStudy => (
               <Grid key={caseStudy.slug} size={{ md: 6, xs: 12 }}>
-                <GlassCard>
-                  <Typography fontWeight={600} variant="h6" gutterBottom>
-                    {caseStudy.title[locale]}
-                  </Typography>
-                  <Typography color="text.secondary" variant="body2">
-                    {caseStudy.description[locale]}
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 2 }}>
-                    {caseStudy.tags.map(tag => (
-                      <Chip key={tag} label={tag} size="small" variant="outlined" />
-                    ))}
-                  </Box>
-                </GlassCard>
+                <Link href={`${ROUTES.CASES}/${caseStudy.slug}`} style={{ textDecoration: 'none' }}>
+                  <GlassCard
+                    sx={{
+                      '&:hover': { borderColor: 'primary.main' },
+                      cursor: 'pointer',
+                      transition: 'border-color 0.2s ease'
+                    }}
+                  >
+                    <Typography fontWeight={600} variant="h6" gutterBottom>
+                      {caseStudy.title[locale]}
+                    </Typography>
+                    <Typography color="text.secondary" variant="body2">
+                      {caseStudy.description[locale]}
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 2 }}>
+                      {caseStudy.tags.map(tag => (
+                        <Chip key={tag} label={tag} size="small" variant="outlined" />
+                      ))}
+                    </Box>
+                  </GlassCard>
+                </Link>
               </Grid>
             ))}
           </Grid>
