@@ -4,7 +4,21 @@ export interface OrganizationStructuredData {
   '@context': string;
   '@type': string;
   description: string;
+  logo: string;
   name: string;
+  url: string;
+}
+
+export interface ServiceStructuredData {
+  '@context': string;
+  '@type': string;
+  description: string;
+  name: string;
+  provider: {
+    '@type': string;
+    name: string;
+    url: string;
+  };
   url: string;
 }
 
@@ -36,12 +50,12 @@ export function generateMetadata(config: SEOConfig): Metadata {
   } = config;
 
   const fullTitle = title.includes('TeamX10') ? title : `${title} | TeamX10`;
-  const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL;
-  const ogImage = image || `${SITE_URL}/images/tx10-logo-256.png`;
+  // Always pass locale-agnostic path (no /en prefix) — url is legacy, path is preferred
   const rawPath = path || url || '/';
-  // Strip /en prefix if caller passes a locale-prefixed path — we always work with locale-agnostic paths
   const canonicalPath = rawPath.startsWith('/en/') ? rawPath.slice(3) : rawPath === '/en' ? '/' : rawPath;
   const enPath = `/en${canonicalPath === '/' ? '' : canonicalPath}`;
+  const fullUrl = `${SITE_URL}${locale === 'en' ? enPath : canonicalPath}`;
+  const ogImage = image || `${SITE_URL}/images/og-default.png`;
 
   return {
     alternates: {
@@ -88,7 +102,30 @@ export function generateOrganizationStructuredData(description?: string): Organi
     description:
       description ||
       'TeamX10 — AI consulting for Ukrainian and international companies. We help teams adopt AI in software development.',
+    logo: `${SITE_URL}/images/tx10-logo-256.png`,
     name: 'TeamX10',
     url: SITE_URL
+  };
+}
+
+export function generateServiceStructuredData(config: {
+  description: string;
+  locale: string;
+  name: string;
+  slug: string;
+}): ServiceStructuredData {
+  const { description, locale, name, slug } = config;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    description,
+    name,
+    provider: {
+      '@type': 'Organization',
+      name: 'TeamX10',
+      url: SITE_URL
+    },
+    url: `${SITE_URL}${locale === 'en' ? '/en' : ''}/services/${slug}`
   };
 }

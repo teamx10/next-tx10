@@ -11,13 +11,14 @@ interface HomePageProps {
 
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'landing' });
+  const tSeo = await getTranslations({ locale, namespace: 'seo' });
 
   return generateSEOMetadata({
-    description: t('hero.subtitle'),
-    keywords: ['AI consulting', 'TeamX10', 'AI adoption', 'developer productivity'],
-    title: t('hero.title'),
-    url: locale === 'en' ? '/en' : '/'
+    description: tSeo('home.description'),
+    keywords: tSeo('home.keywords').split(', '),
+    locale,
+    path: '/',
+    title: tSeo('home.title')
   });
 }
 

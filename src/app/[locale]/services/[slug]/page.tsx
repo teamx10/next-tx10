@@ -7,7 +7,9 @@ import type { Locale } from '@/lib/i18n/config';
 
 import { ServiceDetailContent } from '@/components/pages/ServiceDetailContent';
 import { CASE_STUDIES } from '@/constants/case-studies';
+import { ROUTES } from '@/constants/routes';
 import { getServiceBySlug, SERVICES } from '@/constants/services';
+import { generateMetadata as generateSEOMetadata, generateServiceStructuredData } from '@/utils/seo';
 
 interface ServiceDetailPageProps {
   params: Promise<{ locale: Locale; slug: string }>;
@@ -23,10 +25,16 @@ export async function generateMetadata({ params }: ServiceDetailPageProps): Prom
 
   if (!service) return {};
 
-  return {
-    description: service.description[locale],
-    title: service.title[locale]
-  };
+  const tSeo = await getTranslations({ locale, namespace: 'seo' });
+  const seoKey = `services_${slug}`;
+
+  return generateSEOMetadata({
+    description: tSeo(`${seoKey}.description` as never),
+    keywords: tSeo(`${seoKey}.keywords` as never).split(', '),
+    locale,
+    path: `${ROUTES.SERVICES}/${slug}`,
+    title: tSeo(`${seoKey}.title` as never)
+  });
 }
 
 export default async function ServiceDetailPage({ params }: ServiceDetailPageProps) {
@@ -42,9 +50,17 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
   const tCommon = await getTranslations({ locale, namespace: 'common' });
 
   const relatedCases = CASE_STUDIES.slice(0, 2);
+  const jsonLd = generateServiceStructuredData({
+    description: service.description[locale],
+    locale,
+    name: service.title[locale],
+    slug: service.slug
+  });
 
   return (
     <main>
+      {/* JSON-LD for Service schema — content is static/trusted, not user input */}
+      <script dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} type="application/ld+json" />
       <ServiceDetailContent
         t={{
           bookCall: tCommon('bookCall'),

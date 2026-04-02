@@ -103,6 +103,74 @@
     "home": "Home",
     "services": "Services"
   },
+  "seo": {
+    "about": {
+      "description": "TeamX10 — AI consulting for Ukrainian and international companies. Founded by an engineer with 20+ years of experience. 200-400% productivity gains in engineering and operations.",
+      "keywords": "about TeamX10, AI consulting agency, AI consultants, TeamX10 team",
+      "title": "About TeamX10 — AI Consulting Agency"
+    },
+    "cases": {
+      "description": "Real AI transformation results: 2500+ commits, 99% AI-assisted code, 70% cycle time reduction. Case studies from startups to enterprise in Europe.",
+      "keywords": "AI case studies, AI transformation results, AI adoption cases, AI consulting results",
+      "title": "Case Studies — AI Transformation Results"
+    },
+    "cases_ai-development": {
+      "description": "How a team of 2 shipped 5 concurrent projects: 2500+ commits, 300K+ lines of production code. AI-assisted development case study by TeamX10.",
+      "title": "AI-Powered Development — 5 Projects with a Team of 2"
+    },
+    "cases_ai-interviews": {
+      "description": "Transforming technical interviews with AI: 75% prep time reduction, 7-tier grading system, 14 candidates screened consistently. HR automation case study.",
+      "title": "AI-Assisted Technical Interviews"
+    },
+    "cases_ai-sdlc": {
+      "description": "Complete SDLC automation: 21 slash commands, 8 agent roles, 100% phases automated. 70% cycle time reduction — multi-agent orchestration case study by TeamX10.",
+      "title": "AI SDLC Automation — 70% Cycle Time Reduction"
+    },
+    "cases_enterprise-ai": {
+      "description": "How Grid Dynamics went from 25% to 99% AI-assisted code: 1700+ commits, enterprise AI standards, training for 40+ engineers. Enterprise AI adoption case study.",
+      "title": "Enterprise AI Adoption — From 25% to 99%"
+    },
+    "contacts": {
+      "description": "Book a free AI adoption consultation. Reach out via Calendly, email, or Telegram. First step to AI transformation for your business.",
+      "keywords": "contact TeamX10, free AI consultation, book AI call, AI consulting contact",
+      "title": "Contact TeamX10 — Free AI Consultation"
+    },
+    "home": {
+      "description": "TeamX10 helps software teams adopt AI systematically. 200-400% developer productivity growth. AI audit, team training, agent orchestration, and process automation.",
+      "keywords": "AI consulting, AI for software teams, AI adoption, developer productivity, AI automation",
+      "title": "AI Consulting for Software Teams"
+    },
+    "services": {
+      "description": "5 phases of AI adoption for your team: audit, training, agent orchestration, process automation, autonomous AI workforce. From assessment to full autonomy.",
+      "keywords": "AI services, AI adoption, AI audit, AI training, agent orchestration, process automation",
+      "title": "AI Services — 5 Phases of AI Adoption"
+    },
+    "services_ai-audit": {
+      "description": "We assess your team, tools, and workflows to identify highest-leverage AI opportunities. Deliverable: AI Readiness Report with prioritized intervention plan.",
+      "keywords": "AI audit, AI readiness assessment, AI opportunities, workflow audit, AI for teams",
+      "title": "AI Audit — Team Readiness Assessment"
+    },
+    "services_ai-basics": {
+      "description": "Hands-on AI training for your team: prompt engineering, AI workflows, team playbook. We turn your team into confident, productive AI tool users.",
+      "keywords": "AI training, AI basics, prompt engineering, AI team playbook, AI onboarding",
+      "title": "AI Basics — Team Training for AI Tools"
+    },
+    "services_automation": {
+      "description": "Replace manual processes with intelligent production-grade automation pipelines. Process mapping, pipeline build, and ongoing operations support at scale.",
+      "keywords": "AI process automation, intelligent automation, AI pipelines, business automation",
+      "title": "Process Automation with AI"
+    },
+    "services_night-shift": {
+      "description": "Fully autonomous AI workforce operating 24/7: handles complex tasks, continuously learns and improves. No human supervision required for routine operations.",
+      "keywords": "autonomous AI team, AI 24/7, night shift AI, autonomous AI agents, continuous AI operations",
+      "title": "Night Shift — Autonomous AI Team 24/7"
+    },
+    "services_orchestration": {
+      "description": "We design and deploy multi-agent systems where specialized AI agents collaborate to complete complex tasks autonomously. Deliverable: working multi-agent system.",
+      "keywords": "agent orchestration, multi-agent systems, AI agents, autonomous AI systems, agent architecture",
+      "title": "Agent Orchestration — Multi-Agent AI Systems"
+    }
+  },
   "cases": {
     "challenge": "Challenge",
     "cta": "Book a Free Consultation",
