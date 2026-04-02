@@ -1,12 +1,99 @@
 {
+  "about": {
+    "approach": "Our Approach",
+    "approach_humanGates_description": "Every AI output passes through human review gates before reaching production. Speed without blind trust.",
+    "approach_humanGates_title": "Human Gates",
+    "approach_measurableRoi_description": "Every engagement is scoped to a measurable business outcome — productivity, cost, or revenue.",
+    "approach_measurableRoi_title": "Measurable ROI",
+    "approach_structureAi_description": "We use AI to surface insights, automate repetitive work, and accelerate delivery — with humans validating every critical decision.",
+    "approach_structureAi_title": "Structure + AI",
+    "ctaTitle": "Ready to start?",
+    "story": "Our Story",
+    "storyParagraph1": "TeamX10 was founded by Artem — a software engineer who spent years watching teams struggle to adopt AI tools effectively. The bottleneck was never the technology. It was the process: how teams integrate AI into existing workflows, how they validate outputs, and how they measure impact.",
+    "storyParagraph2": "We built TeamX10 to close that gap. Our approach combines battle-tested engineering practices with AI-native workflows — giving teams the speed of automation without losing control over quality.",
+    "storyParagraph3": "Today we work with startups and scale-ups across Europe, delivering 200-400% productivity gains in engineering, content, and operations.",
+    "subtitle": "We deliver AI solutions with human oversight — so your business grows faster.",
+    "title": "About Us",
+    "values": "Our Values",
+    "values_humanFirst_description": "AI is a force multiplier for your team, not a replacement for judgment.",
+    "values_humanFirst_title": "Human-first",
+    "values_pragmatism_description": "We move fast, but not at the expense of quality or security.",
+    "values_pragmatism_title": "Pragmatism",
+    "values_scalability_description": "Every solution is designed to grow with your business.",
+    "values_scalability_title": "Scalability",
+    "values_transparency_description": "We show our work — you always know what AI is doing and why.",
+    "values_transparency_title": "Transparency"
+  },
   "common": {
     "bookCall": "Book a Call",
     "learnMore": "Learn More"
   },
   "landing": {
+    "cases": {
+      "title": "Client Case Studies",
+      "viewAll": "View all cases"
+    },
+    "cta": {
+      "button": "Book a Consultation",
+      "subtitle": "First step — free consultation",
+      "title": "Ready to bring AI to your business?"
+    },
     "hero": {
+      "cta": "Book a Call",
       "subtitle": "200-400% developer productivity growth",
       "title": "We bring AI into your business"
+    },
+    "phases": {
+      "phase1Deliverable": "AI Readiness Report",
+      "phase1Desc": "Assess team and process readiness for AI",
+      "phase1Title": "AI Audit",
+      "phase2Deliverable": "AI Strategy Roadmap",
+      "phase2Desc": "Build an AI implementation roadmap",
+      "phase2Title": "AI Strategy",
+      "phase3Deliverable": "Working AI Integrations",
+      "phase3Desc": "Integrate AI into development workflows",
+      "phase3Title": "AI Integration",
+      "phase4Deliverable": "Trained Team",
+      "phase4Desc": "Train your team and transfer knowledge",
+      "phase4Title": "AI Training",
+      "phase5Deliverable": "Optimized AI Workflows",
+      "phase5Desc": "Measure and optimize AI results",
+      "phase5Title": "AI Optimization",
+      "subtitle": "From audit to systematic optimization",
+      "title": "5 phases of AI adoption"
+    },
+    "problem": {
+      "item1": "80% of developer time spent on routine tasks",
+      "item2": "Unstructured AI tool usage — no process",
+      "item3": "Competitors already adopting AI systematically",
+      "title": "Why your team isn't ready for AI transformation"
+    },
+    "proof": {
+      "commits": "1000+",
+      "commitsLabel": "AI commits",
+      "productivity": "10x",
+      "productivityLabel": "productivity",
+      "projects": "5+",
+      "projectsLabel": "projects",
+      "years": "20+",
+      "yearsLabel": "years of experience"
+    },
+    "speed": {
+      "aiCaption": "With TeamX10 AI assistants",
+      "aiLabel": "With AI",
+      "bars": {
+        "bugFixing": "Bug fixing",
+        "codeGeneration": "Code generation",
+        "codeReview": "Code review",
+        "documentation": "Documentation",
+        "testWriting": "Test writing"
+      },
+      "title": "AI accelerates development dramatically",
+      "traditionalCaption": "Traditional development",
+      "traditionalLabel": "Without AI"
+    },
+    "trustedBy": {
+      "title": "Trusted by"
     }
   },
   "nav": {
@@ -27,6 +114,13 @@
     "subtitle": "Real client results that demonstrate the power of AI-driven transformation.",
     "title": "Case Studies",
     "viewCase": "View case"
+  },
+  "contacts": {
+    "calendlyAlt": "Pick a time that works for you",
+    "email": "Email",
+    "subtitle": "Pick a time for a call or reach out to us directly.",
+    "telegram": "Telegram",
+    "title": "Contacts"
   },
   "services": {
     "cta": "Book a Free Consultation",
