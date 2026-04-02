@@ -3,6 +3,7 @@
 import { Box, Container, Link, Typography } from '@mui/material';
 
 import { CalendlyEmbed } from '@/components/ui/CalendlyEmbed';
+import { CONTACT_EMAIL, TELEGRAM_HANDLE, TELEGRAM_URL } from '@/constants/contacts';
 
 interface ContactsPageContentProps {
   t: {
@@ -33,14 +34,14 @@ export function ContactsPageContent({ t }: ContactsPageContentProps) {
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, textAlign: 'center' }}>
         <Typography color="text.secondary" variant="body2">
           {t.email}:{' '}
-          <Link href="mailto:hello@teamx10.com" underline="hover">
-            hello@teamx10.com
+          <Link href={`mailto:${CONTACT_EMAIL}`} underline="hover">
+            {CONTACT_EMAIL}
           </Link>
         </Typography>
         <Typography color="text.secondary" variant="body2">
           {t.telegram}:{' '}
-          <Link href="https://t.me/teamx10" rel="noopener noreferrer" target="_blank" underline="hover">
-            @teamx10
+          <Link href={TELEGRAM_URL} rel="noopener noreferrer" target="_blank" underline="hover">
+            {TELEGRAM_HANDLE}
           </Link>
         </Typography>
       </Box>
