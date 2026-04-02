@@ -18,15 +18,11 @@ export async function CaseStudiesPreview() {
       <Container maxWidth="lg">
         <Stack alignItems="center" direction="row" justifyContent="space-between" sx={{ mb: 5 }}>
           <Typography variant="h4">{t('cases.title')}</Typography>
-          <Typography
-            color="primary"
-            component={Link}
-            href={ROUTES.CASES}
-            sx={{ '&:hover': { textDecoration: 'underline' }, textDecoration: 'none' }}
-            variant="body1"
-          >
-            {t('cases.viewAll')} →
-          </Typography>
+          <Link href={ROUTES.CASES} style={{ textDecoration: 'none' }}>
+            <Typography color="primary" sx={{ '&:hover': { textDecoration: 'underline' } }} variant="body1">
+              {t('cases.viewAll')} →
+            </Typography>
+          </Link>
         </Stack>
         <Grid columns={{ md: 3, sm: 1, xs: 1 }} spacing={3} container>
           {featured.map(study => (
