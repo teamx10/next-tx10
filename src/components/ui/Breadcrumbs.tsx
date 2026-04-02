@@ -2,18 +2,17 @@
 
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Container, Breadcrumbs as MuiBreadcrumbs, Typography } from '@mui/material';
-import { useLocale, useTranslations } from 'next-intl';
-
-import type { Locale } from '@/lib/i18n/config';
+import { useTranslations } from 'next-intl';
 
 import { CASE_STUDIES } from '@/constants/case-studies';
 import { ROUTES } from '@/constants/routes';
 import { SERVICES } from '@/constants/services';
+import { useLocale } from '@/hooks/useLocale';
 import { Link, usePathname } from '@/lib/i18n/navigation';
 
 export function Breadcrumbs() {
   const pathname = usePathname();
-  const locale = useLocale() as Locale;
+  const { locale } = useLocale();
   const tNav = useTranslations('nav');
   const tFooter = useTranslations('footer');
 
@@ -51,8 +50,8 @@ export function Breadcrumbs() {
   });
 
   return (
-    <Container maxWidth="lg" sx={{ py: 1 }}>
-      <MuiBreadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
+    <Container component="nav" maxWidth="lg" sx={{ py: 1 }}>
+      <MuiBreadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
         <Link href={ROUTES.HOME} style={{ color: 'inherit', textDecoration: 'none' }}>
           <Typography color="text.secondary" variant="body2">
             {tNav('home')}
@@ -62,7 +61,7 @@ export function Breadcrumbs() {
           const isLast = index === crumbs.length - 1;
 
           return isLast ? (
-            <Typography color="text.primary" key={crumb.href} variant="body2">
+            <Typography aria-current="page" color="text.primary" key={crumb.href} variant="body2">
               {crumb.label}
             </Typography>
           ) : (
