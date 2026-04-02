@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ThemeContextProvider, useThemeMode } from '@/contexts/ThemeContext';
 import { createAppTheme } from '@/lib/mui/theme';
 
@@ -28,6 +29,7 @@ const ThemeContent = ({ children }: ThemeProviderWrapperProps) => {
         }}
       >
         <Header />
+        <Breadcrumbs />
         <Box component="main" sx={{ flexGrow: 1 }}>
           {children}
         </Box>
