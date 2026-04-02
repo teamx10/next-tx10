@@ -1,12 +1,11 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 
 import type { Locale } from '@/lib/i18n/config';
 
 import { ServiceCard } from '@/components/sections/services/ServiceCard';
 import { ServicesStepper } from '@/components/sections/services/ServicesStepper';
-import { ROUTES } from '@/constants/routes';
+import { CTAButton } from '@/components/ui/CTAButton';
 import { SERVICES } from '@/constants/services';
-import { Link } from '@/lib/i18n/navigation';
 
 interface ServicesPageContentProps {
   locale: Locale;
@@ -46,9 +45,7 @@ export function ServicesPageContent({ locale, t }: ServicesPageContentProps) {
       </Grid>
 
       <Box sx={{ mt: 8, textAlign: 'center' }}>
-        <Button component={Link} href={ROUTES.CONTACTS} size="large" variant="contained">
-          {t.cta}
-        </Button>
+        <CTAButton label={t.cta} size="large" />
       </Box>
     </Container>
   );

@@ -15,15 +15,14 @@ import PeopleIcon from '@mui/icons-material/People';
 import SchoolIcon from '@mui/icons-material/School';
 import SearchIcon from '@mui/icons-material/Search';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import { Box, Button, Chip, Container, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Box, Chip, Container, Divider, Grid, Stack, Typography } from '@mui/material';
 
 import type { Locale } from '@/lib/i18n/config';
 import type { CaseStudy } from '@/types/case-study';
 import type { Service } from '@/types/service';
 
+import { CTAButton } from '@/components/ui/CTAButton';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { ROUTES } from '@/constants/routes';
-import { Link } from '@/lib/i18n/navigation';
 
 const FEATURE_ICONS: Record<string, SvgIconComponent | undefined> = {
   account_tree: AccountTreeIcon,
@@ -115,9 +114,7 @@ export function ServiceDetailContent({ cases, locale, service, t }: ServiceDetai
             </Typography>
           </GlassCard>
 
-          <Button component={Link} href={ROUTES.CONTACTS} size="large" variant="contained" fullWidth>
-            {t.cta}
-          </Button>
+          <CTAButton label={t.cta} size="large" fullWidth />
         </Grid>
       </Grid>
 

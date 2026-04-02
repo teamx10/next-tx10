@@ -1,26 +1,54 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+
+export interface OrganizationStructuredData {
+  '@context': string;
+  '@type': string;
+  description: string;
+  name: string;
+  url: string;
+}
 
 export interface SEOConfig {
   description: string;
   image?: string;
   keywords?: string[];
+  locale?: string;
   noindex?: boolean;
+  path?: string;
   title: string;
   type?: 'article' | 'website';
   url?: string;
 }
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://teamx10.com';
+
 export function generateMetadata(config: SEOConfig): Metadata {
-  const { description, image, keywords = [], noindex = false, title, type = 'website', url } = config;
+  const {
+    description,
+    image,
+    keywords = [],
+    locale = 'uk',
+    noindex = false,
+    path,
+    title,
+    type = 'website',
+    url
+  } = config;
 
   const fullTitle = title.includes('TeamX10') ? title : `${title} | TeamX10`;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://teamx10.com';
-  const fullUrl = url ? `${siteUrl}${url}` : siteUrl;
-  const ogImage = image || `${siteUrl}/images/tx10-logo-256.png`;
+  const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL;
+  const ogImage = image || `${SITE_URL}/images/tx10-logo-256.png`;
+  const canonicalPath = path || url || '/';
+  const enPath = `/en${canonicalPath === '/' ? '' : canonicalPath}`;
 
   return {
     alternates: {
-      canonical: fullUrl
+      canonical: `${SITE_URL}${canonicalPath}`,
+      languages: {
+        en: `${SITE_URL}${enPath}`,
+        uk: `${SITE_URL}${canonicalPath}`,
+        'x-default': `${SITE_URL}${canonicalPath}`
+      }
     },
     description,
     keywords: keywords.length > 0 ? keywords.join(', ') : undefined,
@@ -34,6 +62,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
           width: 1200
         }
       ],
+      locale,
       siteName: 'TeamX10',
       title: fullTitle,
       type,
@@ -47,5 +76,17 @@ export function generateMetadata(config: SEOConfig): Metadata {
       images: [ogImage],
       title: fullTitle
     }
+  };
+}
+
+export function generateOrganizationStructuredData(description?: string): OrganizationStructuredData {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    description:
+      description ||
+      'TeamX10 — AI consulting for Ukrainian and international companies. We help teams adopt AI in software development.',
+    name: 'TeamX10',
+    url: SITE_URL
   };
 }

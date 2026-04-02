@@ -1,13 +1,14 @@
 'use client';
 
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { Box, Container, Link as MuiLink, Stack, Typography } from '@mui/material';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import { Box, Container, IconButton, Link as MuiLink, Stack, Tooltip, Typography } from '@mui/material';
 import Link from 'next/link';
 
-import { Tx10Logo } from '@/components/svg/Tx10Logo';
+import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
 import { ROUTES } from '@/constants/routes';
 
-const APP_VERSION = 'v1.1.3';
+const CONTACT_EMAIL = 'hello@teamx10.com';
+const TELEGRAM_URL = 'https://t.me/teamx10';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -31,25 +32,16 @@ export function Footer() {
           spacing={2}
         >
           <Box>
-            <Typography color="text.secondary" variant="body2">
-              {currentYear} © Developed by TeamX10 in Ukraine{' '}
-              <span aria-label="yellow heart" role="img">
-                💛
-              </span>
-              <span aria-label="blue heart" role="img">
-                💙
-              </span>
+            <Link href={ROUTES.HOME} style={{ display: 'inline-flex', textDecoration: 'none' }}>
+              <TeamX10Logo color="orange" width={160} />
+            </Link>
+            <Typography color="text.secondary" sx={{ mt: 1 }} variant="body2">
+              AI Consulting. Developed in Ukraine.
             </Typography>
-            <Stack direction="row" spacing={2} sx={{ mt: 1 }}>
-              <MuiLink
-                color="text.secondary"
-                component={Link}
-                href={ROUTES.LEGAL.TERMS}
-                underline="hover"
-                variant="body2"
-              >
-                Terms of Use
-              </MuiLink>
+          </Box>
+
+          <Stack alignItems={{ sm: 'flex-end', xs: 'flex-start' }} spacing={1}>
+            <Stack direction="row" spacing={1}>
               <MuiLink
                 color="text.secondary"
                 component={Link}
@@ -59,18 +51,41 @@ export function Footer() {
               >
                 Privacy Policy
               </MuiLink>
+              <MuiLink
+                color="text.secondary"
+                component={Link}
+                href={ROUTES.LEGAL.TERMS}
+                underline="hover"
+                variant="body2"
+              >
+                Terms of Use
+              </MuiLink>
             </Stack>
-          </Box>
-          <Box sx={{ alignItems: 'center', display: 'flex', gap: 1 }}>
-            <ThumbUpIcon sx={{ color: 'text.secondary', fontSize: 20 }} />
-            <Typography color="text.secondary" variant="body2">
-              {APP_VERSION}
-            </Typography>
-          </Box>
+
+            <Stack alignItems="center" direction="row" spacing={0.5}>
+              <Tooltip title="Telegram">
+                <IconButton
+                  aria-label="Telegram"
+                  component="a"
+                  href={TELEGRAM_URL}
+                  rel="noopener noreferrer"
+                  size="small"
+                  sx={{ color: 'text.secondary' }}
+                  target="_blank"
+                >
+                  <TelegramIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+              <MuiLink color="text.secondary" href={`mailto:${CONTACT_EMAIL}`} underline="hover" variant="body2">
+                {CONTACT_EMAIL}
+              </MuiLink>
+            </Stack>
+          </Stack>
         </Stack>
-        <Box sx={{ mt: 2, textAlign: 'center' }}>
-          <Tx10Logo size={128} />
-        </Box>
+
+        <Typography color="text.secondary" sx={{ mt: 3, textAlign: 'center' }} variant="body2">
+          {`© ${currentYear} TeamX10. Developed in Ukraine. 💛💙`}
+        </Typography>
       </Container>
     </Box>
   );
