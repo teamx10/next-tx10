@@ -15,7 +15,10 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
 
   return generateSEOMetadata({
     description: tSeo('home.description'),
-    keywords: tSeo('home.keywords').split(', '),
+    keywords: tSeo('home.keywords')
+      .split(',')
+      .map(k => k.trim())
+      .filter(Boolean),
     locale,
     path: '/',
     title: tSeo('home.title')

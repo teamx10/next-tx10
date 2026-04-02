@@ -30,7 +30,10 @@ export async function generateMetadata({ params }: ServiceDetailPageProps): Prom
 
   return generateSEOMetadata({
     description: tSeo(`${seoKey}.description` as never),
-    keywords: tSeo(`${seoKey}.keywords` as never).split(', '),
+    keywords: tSeo(`${seoKey}.keywords` as never)
+      .split(',')
+      .map(k => k.trim())
+      .filter(Boolean),
     locale,
     path: `${ROUTES.SERVICES}/${slug}`,
     title: tSeo(`${seoKey}.title` as never)

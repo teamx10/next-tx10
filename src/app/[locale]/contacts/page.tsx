@@ -18,7 +18,10 @@ export async function generateMetadata({ params }: ContactsPageProps): Promise<M
 
   return generateSEOMetadata({
     description: tSeo('contacts.description'),
-    keywords: tSeo('contacts.keywords').split(', '),
+    keywords: tSeo('contacts.keywords')
+      .split(',')
+      .map(k => k.trim())
+      .filter(Boolean),
     locale,
     path: ROUTES.CONTACTS,
     title: tSeo('contacts.title')
