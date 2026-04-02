@@ -7,13 +7,28 @@
 }
 
 @keyframes gradientDrift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 50% 0%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position: 50% 100%; }
   100% { background-position: 0% 50%; }
 }
 
+@keyframes gradientTextShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+  50%       { box-shadow: 0 0 40px rgba(139, 92, 246, 0.5), 0 0 60px rgba(99, 102, 241, 0.2); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animated-gradient {
+  .animated-gradient,
+  .cta-pulse,
+  .gradient-text {
     animation: none !important;
   }
 }
