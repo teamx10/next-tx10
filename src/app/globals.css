@@ -27,6 +27,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .animated-gradient,
+  .cta-pulse,
   .gradient-text {
     animation: none !important;
   }

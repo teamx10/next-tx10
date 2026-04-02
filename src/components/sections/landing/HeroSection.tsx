@@ -40,7 +40,12 @@ export function HeroSection() {
         <Typography color="text.secondary" variant="body1" gutterBottom>
           {t('hero.subtitle')}
         </Typography>
-        <CTAButton label={t('hero.cta')} size="large" sx={{ animation: 'ctaPulse 3s ease-in-out infinite', mt: 2 }} />
+        <CTAButton
+          className="cta-pulse"
+          label={t('hero.cta')}
+          size="large"
+          sx={{ animation: 'ctaPulse 3s ease-in-out infinite', mt: 2 }}
+        />
       </GlassCard>
     </AnimatedGradientBackground>
   );
