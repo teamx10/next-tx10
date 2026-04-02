@@ -38,7 +38,9 @@ export function generateMetadata(config: SEOConfig): Metadata {
   const fullTitle = title.includes('TeamX10') ? title : `${title} | TeamX10`;
   const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL;
   const ogImage = image || `${SITE_URL}/images/tx10-logo-256.png`;
-  const canonicalPath = path || url || '/';
+  const rawPath = path || url || '/';
+  // Strip /en prefix if caller passes a locale-prefixed path — we always work with locale-agnostic paths
+  const canonicalPath = rawPath.startsWith('/en/') ? rawPath.slice(3) : rawPath === '/en' ? '/' : rawPath;
   const enPath = `/en${canonicalPath === '/' ? '' : canonicalPath}`;
 
   return {

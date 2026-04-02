@@ -31,6 +31,7 @@ export function Header() {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
   const t = useTranslations('nav');
+  const tCommon = useTranslations('common');
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -57,7 +58,7 @@ export function Header() {
         ))}
       </List>
       <Box sx={{ p: 2 }}>
-        <CTAButton size="large" fullWidth />
+        <CTAButton label={tCommon('bookCall')} size="large" fullWidth />
       </Box>
     </Box>
   );
@@ -92,7 +93,7 @@ export function Header() {
           )}
 
           <Box sx={{ alignItems: 'center', display: 'flex', gap: 1 }}>
-            {!isMobile && <CTAButton size="small" />}
+            {!isMobile && <CTAButton label={tCommon('bookCall')} size="small" />}
             <LanguageSwitcher />
             <ThemeToggle />
           </Box>

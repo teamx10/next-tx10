@@ -19,7 +19,7 @@ No test framework is currently configured.
 
 ## Site Status
 
-The site is live. Maintenance mode has been removed. `src/middleware.ts` handles locale routing (redirects `/` to `/uk`, passes through `/en/*`).
+The site is live. Maintenance mode has been removed. `src/middleware.ts` handles locale routing via next-intl with `localePrefix: 'as-needed'` — Ukrainian is served at `/` (no prefix), English at `/en/*`.
 
 ## Architecture
 

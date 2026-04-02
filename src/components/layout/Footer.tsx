@@ -2,10 +2,10 @@
 
 import TelegramIcon from '@mui/icons-material/Telegram';
 import { Box, Container, IconButton, Link as MuiLink, Stack, Tooltip, Typography } from '@mui/material';
-import Link from 'next/link';
 
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
 import { ROUTES } from '@/constants/routes';
+import { Link } from '@/lib/i18n/navigation';
 
 const CONTACT_EMAIL = 'hello@teamx10.com';
 const TELEGRAM_URL = 'https://t.me/teamx10';
