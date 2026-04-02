@@ -71,3 +71,6 @@ plans/
 
 # txorca worktrees (ephemeral, not versioned)
 .worktrees/
+
+# Claude Code local settings
+.claude/settings.json
