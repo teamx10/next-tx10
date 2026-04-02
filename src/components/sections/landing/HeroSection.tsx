@@ -21,13 +21,26 @@ export function HeroSection() {
       }}
     >
       <GlassCard sx={{ maxWidth: 700, textAlign: 'center' }}>
-        <Typography component="h1" variant="h2" gutterBottom>
+        <Typography
+          sx={{
+            animation: 'gradientTextShift 6s ease infinite',
+            background: 'linear-gradient(90deg, #FFFFFF 0%, #C7D2FE 25%, #A78BFA 50%, #C7D2FE 75%, #FFFFFF 100%)',
+            backgroundClip: 'text',
+            backgroundSize: '200% 200%',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}
+          className="gradient-text"
+          component="h1"
+          variant="h2"
+          gutterBottom
+        >
           {t('hero.title')}
         </Typography>
         <Typography color="text.secondary" variant="body1" gutterBottom>
           {t('hero.subtitle')}
         </Typography>
-        <CTAButton label={t('hero.cta')} size="large" sx={{ mt: 2 }} />
+        <CTAButton label={t('hero.cta')} size="large" sx={{ animation: 'ctaPulse 3s ease-in-out infinite', mt: 2 }} />
       </GlassCard>
     </AnimatedGradientBackground>
   );
