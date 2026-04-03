@@ -56,6 +56,12 @@
       "subtitle": "Real results from AI-first engineering teams worldwide",
       "title": "What the Industry Says"
     },
+    "maturity": {
+      "cta": "Find out how to reach the next level",
+      "subtitle": "Where is your team on the AI adoption curve?",
+      "thisIsMyLevel": "This is my level",
+      "title": "AI Maturity Model"
+    },
     "phases": {
       "phase1Deliverable": "AI Readiness Report",
       "phase1Desc": "Assess team and process readiness for AI",
