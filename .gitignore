@@ -68,3 +68,9 @@ agents/temp/
 agents/init-state.md
 agents/memory.md
 plans/
+
+# txorca worktrees (ephemeral, not versioned)
+.worktrees/
+
+# Claude Code local settings
+.claude/settings.json

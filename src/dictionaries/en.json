@@ -1,0 +1,222 @@
+{
+  "about": {
+    "approach": "Our Approach",
+    "approach_humanGates_description": "Every AI output passes through human review gates before reaching production. Speed without blind trust.",
+    "approach_humanGates_title": "Human Gates",
+    "approach_measurableRoi_description": "Every engagement is scoped to a measurable business outcome — productivity, cost, or revenue.",
+    "approach_measurableRoi_title": "Measurable ROI",
+    "approach_structureAi_description": "We use AI to surface insights, automate repetitive work, and accelerate delivery — with humans validating every critical decision.",
+    "approach_structureAi_title": "Structure + AI",
+    "ctaTitle": "Ready to start?",
+    "story": "Our Story",
+    "storyParagraph1": "TeamX10 is a team of experienced software engineers, project managers, and business analysts who have spent years helping companies adopt AI tools effectively. The bottleneck was never the technology — it was the process: how teams integrate AI into existing workflows, how they validate outputs, and how they measure real impact.",
+    "storyParagraph2": "We built TeamX10 to close that gap. Our team combines deep software engineering expertise with hands-on AI implementation experience — giving companies the speed of automation without losing control over quality and predictability.",
+    "storyParagraph3": "Today we work with startups and enterprises across Ukraine and Europe, delivering 200–400% productivity gains in engineering, content, and operations. We've been building software long enough to know what works — and now we bring that discipline to AI.",
+    "subtitle": "We deliver AI solutions with human oversight — so your business grows faster.",
+    "title": "About Us",
+    "values": "Our Values",
+    "values_humanFirst_description": "AI is a force multiplier for your team, not a replacement for judgment.",
+    "values_humanFirst_title": "Human-first",
+    "values_pragmatism_description": "We move fast, but not at the expense of quality or security.",
+    "values_pragmatism_title": "Pragmatism",
+    "values_scalability_description": "Every solution is designed to grow with your business.",
+    "values_scalability_title": "Scalability",
+    "values_transparency_description": "We show our work — you always know what AI is doing and why.",
+    "values_transparency_title": "Transparency"
+  },
+  "common": {
+    "bookCall": "Book a Call",
+    "learnMore": "Learn More"
+  },
+  "landing": {
+    "cases": {
+      "title": "Client Case Studies",
+      "viewAll": "View all cases"
+    },
+    "cta": {
+      "button": "Book a Consultation",
+      "subtitle": "First step — free consultation",
+      "title": "Ready to bring AI to your business?"
+    },
+    "hero": {
+      "cta": "Book a Call",
+      "subtitle": "200-400% developer productivity growth",
+      "title": "We bring AI into your business"
+    },
+    "industry": {
+      "metric1Label": "throughput increase with AI-first engineering",
+      "metric1Value": "170%",
+      "metric2Label": "day from idea to working prototype",
+      "metric2Value": "1",
+      "metric3Label": "of work shifts from coding to validation",
+      "metric3Value": "80%",
+      "metric4Label": "faster with double funnel model",
+      "metric4Value": "2x",
+      "source": "Source: VentureBeat, 2026",
+      "subtitle": "Real results from AI-first engineering teams worldwide",
+      "title": "What the Industry Says"
+    },
+    "phases": {
+      "phase1Deliverable": "AI Readiness Report",
+      "phase1Desc": "Assess team and process readiness for AI",
+      "phase1Title": "AI Audit",
+      "phase2Deliverable": "AI Strategy Roadmap",
+      "phase2Desc": "Build an AI implementation roadmap",
+      "phase2Title": "AI Strategy",
+      "phase3Deliverable": "Working AI Integrations",
+      "phase3Desc": "Integrate AI into development workflows",
+      "phase3Title": "AI Integration",
+      "phase4Deliverable": "Trained Team",
+      "phase4Desc": "Train your team and transfer knowledge",
+      "phase4Title": "AI Training",
+      "phase5Deliverable": "Optimized AI Workflows",
+      "phase5Desc": "Measure and optimize AI results",
+      "phase5Title": "AI Optimization",
+      "subtitle": "From audit to systematic optimization",
+      "title": "5 phases of AI adoption"
+    },
+    "problem": {
+      "item1": "80% of developer time spent on routine tasks",
+      "item2": "Unstructured AI tool usage — no process",
+      "item3": "Competitors already adopting AI systematically",
+      "title": "Why your team isn't ready for AI transformation"
+    },
+    "proof": {
+      "commits": "1000+",
+      "commitsLabel": "AI commits",
+      "productivity": "10x",
+      "productivityLabel": "productivity",
+      "projects": "5+",
+      "projectsLabel": "projects",
+      "years": "20+",
+      "yearsLabel": "years of experience"
+    },
+    "speed": {
+      "aiCaption": "With TeamX10 AI assistants",
+      "aiLabel": "With AI",
+      "bars": {
+        "bugFixing": "Bug fixing",
+        "codeGeneration": "Code generation",
+        "codeReview": "Code review",
+        "documentation": "Documentation",
+        "testWriting": "Test writing"
+      },
+      "title": "AI accelerates development dramatically",
+      "traditionalCaption": "Traditional development",
+      "traditionalLabel": "Without AI"
+    },
+    "trustedBy": {
+      "title": "Trusted by"
+    }
+  },
+  "nav": {
+    "about": "About",
+    "cases": "Cases",
+    "contacts": "Contacts",
+    "home": "Home",
+    "services": "Services"
+  },
+  "seo": {
+    "about": {
+      "description": "TeamX10 — AI consulting for Ukrainian and international companies. Founded by an engineer with 20+ years of experience. 200-400% productivity gains in engineering and operations.",
+      "keywords": "about TeamX10, AI consulting agency, AI consultants, TeamX10 team",
+      "title": "About TeamX10 — AI Consulting Agency"
+    },
+    "cases": {
+      "description": "Real AI transformation results: 2500+ commits, 99% AI-assisted code, 70% cycle time reduction. Case studies from startups to enterprise in Europe.",
+      "keywords": "AI case studies, AI transformation results, AI adoption cases, AI consulting results",
+      "title": "Case Studies — AI Transformation Results"
+    },
+    "cases_ai-development": {
+      "description": "How a team of 2 shipped 5 concurrent projects: 2500+ commits, 300K+ lines of production code. AI-assisted development case study by TeamX10.",
+      "title": "AI-Powered Development — 5 Projects with a Team of 2"
+    },
+    "cases_ai-interviews": {
+      "description": "Transforming technical interviews with AI: 75% prep time reduction, 7-tier grading system, 14 candidates screened consistently. HR automation case study.",
+      "title": "AI-Assisted Technical Interviews"
+    },
+    "cases_ai-sdlc": {
+      "description": "Complete SDLC automation: 21 slash commands, 8 agent roles, 100% phases automated. 70% cycle time reduction — multi-agent orchestration case study by TeamX10.",
+      "title": "AI SDLC Automation — 70% Cycle Time Reduction"
+    },
+    "cases_enterprise-ai": {
+      "description": "How Grid Dynamics went from 25% to 99% AI-assisted code: 1700+ commits, enterprise AI standards, training for 40+ engineers. Enterprise AI adoption case study.",
+      "title": "Enterprise AI Adoption — From 25% to 99%"
+    },
+    "contacts": {
+      "description": "Book a free AI adoption consultation. Reach out via Calendly, email, or Telegram. First step to AI transformation for your business.",
+      "keywords": "contact TeamX10, free AI consultation, book AI call, AI consulting contact",
+      "title": "Contact TeamX10 — Free AI Consultation"
+    },
+    "home": {
+      "description": "TeamX10 helps software teams adopt AI systematically. 200-400% developer productivity growth. AI audit, team training, agent orchestration, and process automation.",
+      "keywords": "AI consulting, AI for software teams, AI adoption, developer productivity, AI automation",
+      "title": "AI Consulting for Software Teams"
+    },
+    "services": {
+      "description": "5 phases of AI adoption for your team: audit, training, agent orchestration, process automation, autonomous AI workforce. From assessment to full autonomy.",
+      "keywords": "AI services, AI adoption, AI audit, AI training, agent orchestration, process automation",
+      "title": "AI Services — 5 Phases of AI Adoption"
+    },
+    "services_ai-audit": {
+      "description": "We assess your team, tools, and workflows to identify highest-leverage AI opportunities. Deliverable: AI Readiness Report with prioritized intervention plan.",
+      "keywords": "AI audit, AI readiness assessment, AI opportunities, workflow audit, AI for teams",
+      "title": "AI Audit — Team Readiness Assessment"
+    },
+    "services_ai-basics": {
+      "description": "Hands-on AI training for your team: prompt engineering, AI workflows, team playbook. We turn your team into confident, productive AI tool users.",
+      "keywords": "AI training, AI basics, prompt engineering, AI team playbook, AI onboarding",
+      "title": "AI Basics — Team Training for AI Tools"
+    },
+    "services_automation": {
+      "description": "Replace manual processes with intelligent production-grade automation pipelines. Process mapping, pipeline build, and ongoing operations support at scale.",
+      "keywords": "AI process automation, intelligent automation, AI pipelines, business automation",
+      "title": "Process Automation with AI"
+    },
+    "services_night-shift": {
+      "description": "Fully autonomous AI workforce operating 24/7: handles complex tasks, continuously learns and improves. No human supervision required for routine operations.",
+      "keywords": "autonomous AI team, AI 24/7, night shift AI, autonomous AI agents, continuous AI operations",
+      "title": "Night Shift — Autonomous AI Team 24/7"
+    },
+    "services_orchestration": {
+      "description": "We design and deploy multi-agent systems where specialized AI agents collaborate to complete complex tasks autonomously. Deliverable: working multi-agent system.",
+      "keywords": "agent orchestration, multi-agent systems, AI agents, autonomous AI systems, agent architecture",
+      "title": "Agent Orchestration — Multi-Agent AI Systems"
+    }
+  },
+  "footer": {
+    "consulting": "AI Consulting. Developed in Ukraine.",
+    "copyright": "Developed in Ukraine.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use"
+  },
+  "cases": {
+    "challenge": "Challenge",
+    "cta": "Book a Free Consultation",
+    "insight": "Key Insight",
+    "metrics": "Key Metrics",
+    "relatedServices": "Related Services",
+    "results": "Results",
+    "solution": "Solution",
+    "subtitle": "Real client results that demonstrate the power of AI-driven transformation.",
+    "title": "Case Studies",
+    "viewCase": "View case"
+  },
+  "contacts": {
+    "calendlyAlt": "Pick a time that works for you",
+    "email": "Email",
+    "subtitle": "Pick a time for a call or reach out to us directly.",
+    "telegram": "Telegram",
+    "title": "Contacts"
+  },
+  "services": {
+    "cta": "Book a Free Consultation",
+    "deliverable": "Key Deliverable",
+    "features": "What's Included",
+    "phase": "Phase",
+    "phases": "Our 5-Phase Engagement",
+    "relatedCases": "Related Case Studies",
+    "subtitle": "We guide you through every phase of AI adoption — from audit to autonomous operation.",
+    "title": "Services"
+  }
+}

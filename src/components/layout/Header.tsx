@@ -5,7 +5,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
   Box,
-  Button,
   Drawer,
   IconButton,
   List,
@@ -16,29 +15,30 @@ import {
   useMediaQuery,
   useTheme
 } from '@mui/material';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
+import { CTAButton } from '@/components/ui/CTAButton';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { NAV_ITEMS } from '@/constants/navigation';
 import { ROUTES } from '@/constants/routes';
-import { useAuth } from '@/hooks/useAuth';
+import { Link, usePathname } from '@/lib/i18n/navigation';
 
 export function Header() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { isAuthenticated, user } = useAuth();
+  const pathname = usePathname();
+  const t = useTranslations('nav');
+  const tCommon = useTranslations('common');
+
+  const isActive = (href: string) => (href === ROUTES.HOME ? pathname === '/' : pathname.startsWith(href));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const navigationItems = [
-    { label: 'Home', path: ROUTES.HOME },
-    { label: 'Products', path: ROUTES.PRODUCTS },
-    { label: 'FAQ', path: ROUTES.FAQ }
-  ];
 
   const drawer = (
     <Box sx={{ width: 250 }}>
@@ -52,41 +52,22 @@ export function Header() {
         </Box>
       </Box>
       <List>
-        {navigationItems.map(item => (
-          <ListItem key={item.path} disablePadding>
-            <ListItemButton component={Link} href={item.path} onClick={handleDrawerToggle}>
-              <ListItemText primary={item.label} />
+        {NAV_ITEMS.map(item => (
+          <ListItem key={item.href} disablePadding>
+            <ListItemButton
+              component={Link}
+              href={item.href}
+              onClick={handleDrawerToggle}
+              selected={isActive(item.href)}
+            >
+              <ListItemText primary={t(item.labelKey.replace('nav.', ''))} />
             </ListItemButton>
           </ListItem>
         ))}
-        {isAuthenticated ? (
-          <>
-            <ListItem disablePadding>
-              <ListItemButton component={Link} href={ROUTES.AUTH.SIGN_OUT} onClick={handleDrawerToggle}>
-                <ListItemText primary="Sign Out" />
-              </ListItemButton>
-            </ListItem>
-            {user?.email && (
-              <ListItem disablePadding>
-                <ListItemText primary={user.email} secondary="Signed in" sx={{ px: 2, py: 1 }} />
-              </ListItem>
-            )}
-          </>
-        ) : (
-          <>
-            <ListItem disablePadding>
-              <ListItemButton component={Link} href={ROUTES.AUTH.SIGN_IN} onClick={handleDrawerToggle}>
-                <ListItemText primary="Sign In" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton component={Link} href={ROUTES.AUTH.SIGN_UP} onClick={handleDrawerToggle}>
-                <ListItemText primary="Sign Up" />
-              </ListItemButton>
-            </ListItem>
-          </>
-        )}
       </List>
+      <Box sx={{ p: 2 }}>
+        <CTAButton label={tCommon('bookCall')} size="large" fullWidth />
+      </Box>
     </Box>
   );
 
@@ -107,46 +88,29 @@ export function Header() {
 
           {!isMobile && (
             <Box sx={{ alignItems: 'center', display: 'flex', gap: 2 }}>
-              {navigationItems.map(item => (
-                <Button component={Link} href={item.path} key={item.path} sx={{ color: theme.palette.text.primary }}>
-                  {item.label}
-                </Button>
+              {NAV_ITEMS.map(item => (
+                <Link
+                  style={{
+                    borderBottom: isActive(item.href)
+                      ? `2px solid ${theme.palette.primary.main}`
+                      : '2px solid transparent',
+                    color: isActive(item.href) ? theme.palette.primary.main : theme.palette.text.primary,
+                    fontWeight: isActive(item.href) ? 700 : 400,
+                    paddingBottom: 4,
+                    textDecoration: 'none'
+                  }}
+                  href={item.href}
+                  key={item.href}
+                >
+                  {t(item.labelKey.replace('nav.', ''))}
+                </Link>
               ))}
             </Box>
           )}
 
           <Box sx={{ alignItems: 'center', display: 'flex', gap: 1 }}>
-            {!isMobile && (
-              <>
-                {isAuthenticated ? (
-                  <>
-                    {user?.email && (
-                      <Box
-                        sx={{
-                          color: theme.palette.text.secondary,
-                          fontSize: '0.875rem',
-                          mr: 2
-                        }}
-                      >
-                        {user.email}
-                      </Box>
-                    )}
-                    <Button component={Link} href={ROUTES.AUTH.SIGN_OUT} size="small" variant="outlined">
-                      Sign Out
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <Button component={Link} href={ROUTES.AUTH.SIGN_IN} size="small" variant="outlined">
-                      Sign In
-                    </Button>
-                    <Button component={Link} href={ROUTES.AUTH.SIGN_UP} size="small" variant="contained">
-                      Sign Up
-                    </Button>
-                  </>
-                )}
-              </>
-            )}
+            {!isMobile && <CTAButton label={tCommon('bookCall')} size="small" />}
+            <LanguageSwitcher />
             <ThemeToggle />
           </Box>
         </Toolbar>

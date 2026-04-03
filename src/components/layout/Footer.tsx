@@ -1,16 +1,20 @@
 'use client';
 
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { Box, Container, Link as MuiLink, Stack, Typography } from '@mui/material';
-import Link from 'next/link';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import { Box, Container, Grid, IconButton, Link as MuiLink, Stack, Tooltip, Typography } from '@mui/material';
+import { useTranslations } from 'next-intl';
 
-import { Tx10Logo } from '@/components/svg/Tx10Logo';
+import { TeamX10Logo } from '@/components/svg/TeamX10Logo';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { CONTACT_EMAIL, TELEGRAM_URL } from '@/constants/contacts';
+import { NAV_ITEMS } from '@/constants/navigation';
 import { ROUTES } from '@/constants/routes';
-
-const APP_VERSION = 'v1.1.3';
+import { Link } from '@/lib/i18n/navigation';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const t = useTranslations('footer');
+  const tNav = useTranslations('nav');
 
   return (
     <Box
@@ -24,56 +28,81 @@ export function Footer() {
       component="footer"
     >
       <Container maxWidth="lg">
-        <Stack
-          alignItems={{ sm: 'center', xs: 'flex-start' }}
-          direction={{ sm: 'row', xs: 'column' }}
-          justifyContent="space-between"
-          spacing={2}
-        >
-          <Box>
-            <Typography color="text.secondary" variant="body2">
-              {currentYear} © Developed by TeamX10 in Ukraine{' '}
-              <span aria-label="yellow heart" role="img">
-                💛
-              </span>
-              <span aria-label="blue heart" role="img">
-                💙
-              </span>
+        <Grid spacing={3} container>
+          <Grid size={{ md: 4, xs: 12 }}>
+            <Link href={ROUTES.HOME} style={{ display: 'inline-flex', textDecoration: 'none' }}>
+              <TeamX10Logo color="orange" width={160} />
+            </Link>
+            <Typography color="text.secondary" sx={{ mt: 1 }} variant="body2">
+              {t('consulting')}
             </Typography>
-            <Stack direction="row" spacing={2} sx={{ mt: 1 }}>
-              <MuiLink
-                color="text.secondary"
-                component={Link}
-                href={ROUTES.LEGAL.TERMS}
-                underline="hover"
-                variant="body2"
-              >
-                Terms of Use
-              </MuiLink>
-              <MuiLink
-                color="text.secondary"
-                component={Link}
-                href={ROUTES.LEGAL.PRIVACY}
-                underline="hover"
-                variant="body2"
-              >
-                Privacy Policy
-              </MuiLink>
-              <MuiLink color="text.secondary" component={Link} href={ROUTES.FAQ} underline="hover" variant="body2">
-                FAQ
-              </MuiLink>
+          </Grid>
+
+          <Grid size={{ md: 4, xs: 12 }}>
+            <Stack spacing={0.5}>
+              {NAV_ITEMS.map(item => (
+                <MuiLink
+                  color="text.secondary"
+                  component={Link}
+                  href={item.href}
+                  key={item.href}
+                  underline="hover"
+                  variant="body2"
+                >
+                  {tNav(item.labelKey.replace('nav.', ''))}
+                </MuiLink>
+              ))}
             </Stack>
-          </Box>
-          <Box sx={{ alignItems: 'center', display: 'flex', gap: 1 }}>
-            <ThumbUpIcon sx={{ color: 'text.secondary', fontSize: 20 }} />
-            <Typography color="text.secondary" variant="body2">
-              {APP_VERSION}
-            </Typography>
-          </Box>
-        </Stack>
-        <Box sx={{ mt: 2, textAlign: 'center' }}>
-          <Tx10Logo size={128} />
-        </Box>
+          </Grid>
+
+          <Grid size={{ md: 4, xs: 12 }}>
+            <Stack alignItems={{ md: 'flex-end', xs: 'flex-start' }} spacing={1}>
+              <Stack alignItems="center" direction="row" spacing={0.5}>
+                <Tooltip title="Telegram">
+                  <IconButton
+                    aria-label="Telegram"
+                    component="a"
+                    href={TELEGRAM_URL}
+                    rel="noopener noreferrer"
+                    size="small"
+                    sx={{ color: 'text.secondary' }}
+                    target="_blank"
+                  >
+                    <TelegramIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+                <MuiLink color="text.secondary" href={`mailto:${CONTACT_EMAIL}`} underline="hover" variant="body2">
+                  {CONTACT_EMAIL}
+                </MuiLink>
+              </Stack>
+              <LanguageSwitcher />
+              <Stack direction="row" spacing={1}>
+                <MuiLink
+                  color="text.secondary"
+                  component={Link}
+                  href={ROUTES.LEGAL.PRIVACY}
+                  underline="hover"
+                  variant="body2"
+                >
+                  {t('privacyPolicy')}
+                </MuiLink>
+                <MuiLink
+                  color="text.secondary"
+                  component={Link}
+                  href={ROUTES.LEGAL.TERMS}
+                  underline="hover"
+                  variant="body2"
+                >
+                  {t('termsOfUse')}
+                </MuiLink>
+              </Stack>
+            </Stack>
+          </Grid>
+        </Grid>
+
+        <Typography color="text.secondary" sx={{ mt: 3, textAlign: 'center' }} variant="body2">
+          {`© ${currentYear} TeamX10. ${t('copyright')} 💛💙`}
+        </Typography>
       </Container>
     </Box>
   );

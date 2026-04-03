@@ -44,7 +44,6 @@ feature/xxx → develop → (when ready) → main + release
 Vercel picks up the push to `main` and deploys automatically — no manual deploy step needed.
 
 **Never** merge feature branches directly to `main`. Always go through `develop` first.
-
 ## Site Status
 
 The site is live. Maintenance mode has been removed. `src/middleware.ts` handles locale routing via next-intl with `localePrefix: 'as-needed'` — Ukrainian is served at `/` (no prefix), English at `/en/*`.
