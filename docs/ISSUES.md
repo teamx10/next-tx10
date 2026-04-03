@@ -14,3 +14,4 @@
 | 13 | [SEO + Launch] Sitemap, robots, hreflang, CLAUDE.md update, go live — Task 9/9 | feature | done | S | 2026-04-01 | 2026-04-02 |
 | 26 | feat: UI polish quick wins — clickable cases, active nav, contact info, about page | feature | in-progress | M | 2026-04-02 | 2026-04-02 |
 | 28 | feat: hero section animated gradient — background, text shimmer, CTA glow | feature | in-progress | S | 2026-04-02 | 2026-04-02 |
+| 33 | feat: Add AI Maturity Model section to landing page | feature | in-progress | M | 2026-04-03 | 2026-04-03 |

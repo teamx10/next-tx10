@@ -1,3 +1,4 @@
+import { AIMaturitySection } from '@/components/sections/landing/AIMaturitySection';
 import { CaseStudiesPreview } from '@/components/sections/landing/CaseStudiesPreview';
 import { CTASection } from '@/components/sections/landing/CTASection';
 import { HeroSection } from '@/components/sections/landing/HeroSection';
@@ -16,6 +17,7 @@ export function LandingPageContent() {
       <TrustedBySection />
       <ProblemSection />
       <IndustryInsights />
+      <AIMaturitySection />
       <PhasesOverview />
       <CaseStudiesPreview />
       <SpeedComparison />
