@@ -1,6 +1,8 @@
+import { AIMaturitySection } from '@/components/sections/landing/AIMaturitySection';
 import { CaseStudiesPreview } from '@/components/sections/landing/CaseStudiesPreview';
 import { CTASection } from '@/components/sections/landing/CTASection';
 import { HeroSection } from '@/components/sections/landing/HeroSection';
+import { IndustryInsights } from '@/components/sections/landing/IndustryInsights';
 import { PhasesOverview } from '@/components/sections/landing/PhasesOverview';
 import { ProblemSection } from '@/components/sections/landing/ProblemSection';
 import { ProofBar } from '@/components/sections/landing/ProofBar';
@@ -14,6 +16,8 @@ export function LandingPageContent() {
       <ProofBar />
       <TrustedBySection />
       <ProblemSection />
+      <IndustryInsights />
+      <AIMaturitySection />
       <PhasesOverview />
       <CaseStudiesPreview />
       <SpeedComparison />
