@@ -18,7 +18,7 @@ export function AIMaturityCard({ ctaLabel, level, locale }: AIMaturityCardProps)
       <Stack direction="row" spacing={2}>
         <Box sx={{ alignItems: 'center', display: 'flex', flexShrink: 0, width: 32 }}>
           <Typography color="primary" fontWeight={700} variant="h5">
-            {level.level}
+            {`L${level.level}`}
           </Typography>
         </Box>
         <Stack flex={1} spacing={0.5}>

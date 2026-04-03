@@ -1,19 +1,18 @@
 'use client';
 
 import { Box, Container, Stack, Typography, useMediaQuery } from '@mui/material';
-import { useLocale, useTranslations } from 'next-intl';
-
-import type { Locale } from '@/types/i18n';
+import { useTranslations } from 'next-intl';
 
 import { CTAButton } from '@/components/ui/CTAButton';
 import { AI_MATURITY_LEVELS } from '@/constants/ai-maturity';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+import { useLocale } from '@/hooks/useLocale';
 
 import { AIMaturityCard } from './AIMaturityCard';
 
 export function AIMaturitySection() {
   const t = useTranslations('landing');
-  const locale = useLocale() as Locale;
+  const { locale } = useLocale();
   const [ref, isIntersecting] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 });
   const prefersReduced = useMediaQuery('(prefers-reduced-motion: reduce)', { noSsr: true });
 
@@ -44,8 +43,7 @@ export function AIMaturitySection() {
             {AI_MATURITY_LEVELS.map((level, index) => (
               <Box
                 sx={{
-                  display: 'flex',
-                  flexDirection: { md: index % 2 === 0 ? 'row' : 'row-reverse', xs: 'column' },
+                  alignSelf: { md: index % 2 === 0 ? 'flex-start' : 'flex-end', xs: 'stretch' },
                   opacity: animated ? 1 : 0,
                   transform: animated ? 'none' : 'translateY(20px)',
                   transition: prefersReduced

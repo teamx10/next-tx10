@@ -16,8 +16,8 @@ export function LandingPageContent() {
       <ProofBar />
       <TrustedBySection />
       <ProblemSection />
-      <AIMaturitySection />
       <IndustryInsights />
+      <AIMaturitySection />
       <PhasesOverview />
       <CaseStudiesPreview />
       <SpeedComparison />
