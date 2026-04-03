@@ -43,6 +43,19 @@
       "subtitle": "200-400% developer productivity growth",
       "title": "We bring AI into your business"
     },
+    "industry": {
+      "metric1Label": "throughput increase with AI-first engineering",
+      "metric1Value": "170%",
+      "metric2Label": "day from idea to working prototype",
+      "metric2Value": "1",
+      "metric3Label": "of work shifts from coding to validation",
+      "metric3Value": "80%",
+      "metric4Label": "faster with double funnel model",
+      "metric4Value": "2x",
+      "source": "Source: VentureBeat, 2026",
+      "subtitle": "Real results from AI-first engineering teams worldwide",
+      "title": "What the Industry Says"
+    },
     "phases": {
       "phase1Deliverable": "AI Readiness Report",
       "phase1Desc": "Assess team and process readiness for AI",
