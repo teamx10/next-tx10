@@ -14,7 +14,18 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  headers: () => Promise.resolve([{ headers: securityHeaders, source: '/(.*)' }]),
+  headers: () =>
+    Promise.resolve([
+      { headers: securityHeaders, source: '/(.*)' },
+      {
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+        source: '/records'
+      },
+      {
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+        source: '/records/:path*'
+      }
+    ]),
   reactCompiler: true,
   turbopack: {
     root: resolve(__dirname)
